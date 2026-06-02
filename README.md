@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CRO Dashboard
 
-## Getting Started
+A Vercel-hosted, Airtable-style CRO test management dashboard for Performance Golf Zone.
 
-First, run the development server:
+Pages:
+- **Prioritized** (`/`) — backlog ranked by the 10-criterion framework score
+- **In Progress** (`/in-progress`) — tests currently running, inline-editable
+- **Monthly Recap** (`/recap`) — auto-stats from closed tests + your narrative
+- **Submit Idea** (`/submit`) — public form, scores against the framework
+
+Stack: Next.js 16, Vercel Postgres (Neon), Drizzle ORM, Tailwind v4.
+
+## Deploy (one-time)
+
+1. **Import on Vercel**
+   - Go to https://vercel.com/new → import `daniellepg/cro-dashboard`.
+   - Framework is auto-detected (Next.js). Click **Deploy** (the first build will fail because there's no DB yet — that's fine).
+2. **Add a Postgres database**
+   - In the new project: **Storage → Create Database → Neon (Vercel Postgres)**.
+   - Vercel auto-injects `POSTGRES_URL` and friends as env vars.
+3. **Run the schema migration**
+   - Pull env locally: `vercel env pull .env.local` (or copy `POSTGRES_URL` from Vercel → Settings → Environment Variables into `.env.local`).
+   - Run: `npm install && npm run db:push`
+4. **Redeploy** — Vercel project → Deployments → ⋯ → Redeploy.
+5. **(Optional) Password-protect** — Vercel project → Settings → **Deployment Protection** → enable password.
+
+## Local dev
 
 ```bash
+npm install
+cp .env.example .env.local   # fill POSTGRES_URL
+npm run db:push              # apply schema
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Framework scoring
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Each idea is scored 0–10 by checking which of these apply:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Above the fold?
+2. Noticed within 5s?
+3. Adding / removing element?
+4. Aims to increase motivation?
+5. Running on high-traffic page?
+6. Issue found via user testing?
+7. Issue found via qual. feedback?
+8. Insights via analytics?
+9. Supported by mouse / eye tracking / heat maps?
+10. Ease of implementation?
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Higher score = higher priority.
