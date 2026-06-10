@@ -9,54 +9,53 @@ function formatDate(ms?: string | null) {
 }
 
 export function TaskTable({ tasks }: { tasks: ClickUpTask[] }) {
-  // Only show parent tasks (subtasks have " | " in their name pattern: "Step | TestName")
   const parents = tasks.filter((t) => !t.name.includes(" | "));
 
   if (parents.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-slate-700 p-12 text-center text-slate-400">
+      <div className="rounded-lg border border-dashed border-white/[0.1] p-12 text-center text-[#8b95a7]">
         No tasks in this status right now.
       </div>
     );
   }
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-slate-800">
+    <div className="overflow-x-auto rounded-lg border border-white/[0.08]">
       <table className="w-full text-sm">
-        <thead className="bg-slate-900/60 text-slate-400 text-left">
+        <thead className="bg-white/[0.03] text-[#8b95a7] text-left">
           <tr>
-            <th className="px-4 py-2.5 font-medium">Test</th>
-            <th className="px-4 py-2.5 font-medium w-24">Funnel</th>
-            <th className="px-4 py-2.5 font-medium w-40">Owner</th>
-            <th className="px-4 py-2.5 font-medium w-28">Due</th>
-            <th className="px-4 py-2.5 font-medium w-12" />
+            <th className="px-4 py-3 font-medium text-[10px] tracking-[0.18em] uppercase">Test</th>
+            <th className="px-4 py-3 font-medium w-24 text-[10px] tracking-[0.18em] uppercase">Funnel</th>
+            <th className="px-4 py-3 font-medium w-40 text-[10px] tracking-[0.18em] uppercase">Owner</th>
+            <th className="px-4 py-3 font-medium w-28 text-[10px] tracking-[0.18em] uppercase">Due</th>
+            <th className="px-4 py-3 font-medium w-12" />
           </tr>
         </thead>
         <tbody>
           {parents.map((t) => {
             const funnel = funnelFromName(t.name);
             return (
-              <tr key={t.id} className="border-t border-slate-800 hover:bg-slate-900/40">
-                <td className="px-4 py-2.5 font-medium">{t.name}</td>
-                <td className="px-4 py-2.5">
+              <tr key={t.id} className="border-t border-white/[0.06] hover:bg-white/[0.02]">
+                <td className="px-4 py-3 font-medium">{t.name}</td>
+                <td className="px-4 py-3">
                   {funnel ? (
-                    <span className="inline-block px-2 py-0.5 rounded bg-slate-800 text-xs">
+                    <span className="inline-block px-2 py-0.5 rounded border border-[#c9a55e]/30 bg-[#c9a55e]/10 text-[#c9a55e] text-xs font-medium">
                       {funnel}
                     </span>
                   ) : (
-                    <span className="text-slate-500 text-xs">—</span>
+                    <span className="text-[#5a6478] text-xs">—</span>
                   )}
                 </td>
-                <td className="px-4 py-2.5 text-slate-300">
+                <td className="px-4 py-3 text-[#8b95a7]">
                   {t.assignees?.[0]?.username ?? "—"}
                 </td>
-                <td className="px-4 py-2.5 text-slate-300">{formatDate(t.due_date)}</td>
-                <td className="px-4 py-2.5">
+                <td className="px-4 py-3 text-[#8b95a7]">{formatDate(t.due_date)}</td>
+                <td className="px-4 py-3">
                   <a
                     href={t.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-slate-400 hover:text-amber-300"
+                    className="text-[#5a6478] hover:text-[#c9a55e]"
                     title="Open in ClickUp"
                   >
                     ↗

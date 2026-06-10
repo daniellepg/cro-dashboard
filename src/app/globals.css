@@ -1,5 +1,28 @@
 @import "tailwindcss";
 
+:root {
+  --pg-bg: #0a0e14;
+  --pg-bg-elev: #121821;
+  --pg-border: rgba(255, 255, 255, 0.08);
+  --pg-text: #f4f5f7;
+  --pg-text-muted: #8b95a7;
+  --pg-gold: #c9a55e;
+  --pg-gold-soft: rgba(201, 165, 94, 0.12);
+}
+
+@theme inline {
+  --color-pg-bg: var(--pg-bg);
+  --color-pg-bg-elev: var(--pg-bg-elev);
+  --color-pg-border: var(--pg-border);
+  --color-pg-text: var(--pg-text);
+  --color-pg-text-muted: var(--pg-text-muted);
+  --color-pg-gold: var(--pg-gold);
+  --color-pg-gold-soft: var(--pg-gold-soft);
+}
+
 body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
 }

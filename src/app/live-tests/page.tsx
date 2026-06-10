@@ -14,18 +14,17 @@ export default async function LiveTestsPage() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold">Live Tests</h1>
-        <p className="text-sm text-slate-400 mt-1">
-          From ClickUp · CRO Projects list · status =&nbsp;
-          <span className="font-mono text-emerald-400">live</span>
+      <div className="mb-8">
+        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-2">
+          01 · Pipeline
+        </div>
+        <h1 className="text-3xl font-semibold tracking-tight">Live Tests</h1>
+        <p className="text-sm text-[#8b95a7] mt-1.5">
+          From ClickUp · CRO Projects · status =&nbsp;
+          <span className="font-mono text-[#c9a55e]">live</span>
         </p>
       </div>
-      {error ? (
-        <ErrorBox message={error} />
-      ) : (
-        <TaskTable tasks={tasks} />
-      )}
+      {error ? <ErrorBox message={error} /> : <TaskTable tasks={tasks} />}
     </div>
   );
 }
@@ -35,11 +34,6 @@ function ErrorBox({ message }: { message: string }) {
     <div className="rounded-lg border border-rose-500/40 bg-rose-500/10 p-4">
       <div className="font-medium text-rose-300">Couldn&apos;t load from ClickUp</div>
       <pre className="text-xs text-rose-200/80 mt-2 whitespace-pre-wrap">{message}</pre>
-      <p className="text-xs text-slate-400 mt-3">
-        Set <code className="bg-slate-800 px-1 rounded">CLICKUP_TOKEN</code> in your Vercel project
-        env vars (Settings → Environment Variables). Use a personal token from ClickUp → Settings →
-        Apps.
-      </p>
     </div>
   );
 }

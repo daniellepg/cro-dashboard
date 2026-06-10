@@ -14,11 +14,14 @@ export default async function InitializedTestsPage() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold">Initialized Tests</h1>
-        <p className="text-sm text-slate-400 mt-1">
-          From ClickUp · CRO Projects list · status =&nbsp;
-          <span className="font-mono text-sky-400">initialized</span>
+      <div className="mb-8">
+        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-2">
+          02 · Pipeline
+        </div>
+        <h1 className="text-3xl font-semibold tracking-tight">Initialized Tests</h1>
+        <p className="text-sm text-[#8b95a7] mt-1.5">
+          From ClickUp · CRO Projects · status =&nbsp;
+          <span className="font-mono text-[#c9a55e]">initialized</span>
         </p>
       </div>
       {error ? (

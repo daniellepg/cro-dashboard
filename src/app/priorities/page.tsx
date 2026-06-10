@@ -4,7 +4,6 @@ import { PrioritiesBoard } from "@/components/priorities-board";
 
 export const dynamic = "force-dynamic";
 
-// Statuses we consider "in the pipeline but not yet live"
 const PIPELINE_STATUSES = ["backlog", "intake", "cro dev", "dev sprint", "qa", "analytics"];
 
 export default async function PrioritiesPage() {
@@ -16,10 +15,8 @@ export default async function PrioritiesPage() {
     error = e instanceof Error ? e.message : String(e);
   }
 
-  // Keep parent tasks only
   const parents = tasks.filter((t) => !t.name.includes(" | "));
 
-  // Bucket by funnel
   const byFunnel: Record<FunnelCode | "OTHER", typeof parents> = Object.fromEntries(
     [...FUNNELS.map((f) => f.code), "OTHER"].map((c) => [c, [] as typeof parents]),
   ) as Record<FunnelCode | "OTHER", typeof parents>;
@@ -32,10 +29,13 @@ export default async function PrioritiesPage() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-semibold">Testing Priorities</h1>
-        <p className="text-sm text-slate-400 mt-1">
-          Backlog of tests in pipeline · grouped by funnel · pulled live from ClickUp
+      <div className="mb-8">
+        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-2">
+          06 · Backlog
+        </div>
+        <h1 className="text-3xl font-semibold tracking-tight">Testing Priorities</h1>
+        <p className="text-sm text-[#8b95a7] mt-1.5">
+          Tests in pipeline, grouped by funnel · live from ClickUp
         </p>
       </div>
       {error ? (

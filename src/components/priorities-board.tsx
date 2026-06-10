@@ -7,18 +7,20 @@ import { FUNNELS, type FunnelCode } from "@/lib/funnels";
 type ByFunnel = Record<FunnelCode | "OTHER", ClickUpTask[]>;
 
 const STATUS_COLORS: Record<string, string> = {
-  backlog: "bg-slate-700/40 text-slate-200",
-  intake: "bg-violet-500/20 text-violet-300",
-  "cro dev": "bg-amber-500/20 text-amber-300",
-  "dev sprint": "bg-amber-500/20 text-amber-300",
-  qa: "bg-sky-500/20 text-sky-300",
-  analytics: "bg-emerald-500/20 text-emerald-300",
+  backlog: "bg-white/[0.06] text-[#8b95a7]",
+  intake: "bg-violet-500/15 text-violet-300",
+  "cro dev": "bg-[#c9a55e]/15 text-[#c9a55e]",
+  "dev sprint": "bg-[#c9a55e]/15 text-[#c9a55e]",
+  qa: "bg-sky-500/15 text-sky-300",
+  analytics: "bg-emerald-500/15 text-emerald-300",
 };
 
 function statusPill(status: string) {
-  const cls = STATUS_COLORS[status] ?? "bg-slate-700/40 text-slate-200";
+  const cls = STATUS_COLORS[status] ?? "bg-white/[0.06] text-[#8b95a7]";
   return (
-    <span className={`text-[10px] uppercase tracking-wide px-1.5 py-0.5 rounded ${cls}`}>
+    <span
+      className={`text-[9px] tracking-[0.15em] uppercase font-semibold px-1.5 py-0.5 rounded ${cls}`}
+    >
       {status}
     </span>
   );
@@ -44,8 +46,7 @@ export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
 
   return (
     <div>
-      {/* Funnel toggle pills */}
-      <div className="flex flex-wrap gap-1.5 mb-6">
+      <div className="flex flex-wrap gap-1.5 mb-8">
         {allCodes.map((code) => {
           const active = selected === code;
           const n = counts[code] ?? 0;
@@ -53,10 +54,10 @@ export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
             <button
               key={code}
               onClick={() => setSelected(code)}
-              className={`px-3 py-1.5 rounded-md text-sm border transition-colors ${
+              className={`px-3 py-1.5 rounded-md text-sm border transition-colors font-medium ${
                 active
-                  ? "bg-amber-400 text-slate-950 border-amber-400 font-medium"
-                  : "bg-slate-900 text-slate-300 border-slate-700 hover:border-slate-500"
+                  ? "bg-[#c9a55e] text-[#0a0e14] border-[#c9a55e]"
+                  : "bg-white/[0.03] text-[#8b95a7] border-white/10 hover:border-[#c9a55e]/40 hover:text-[#f4f5f7]"
               }`}
             >
               {code} <span className="opacity-60 ml-1">{n}</span>
@@ -65,35 +66,38 @@ export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
         })}
       </div>
 
-      {/* Funnel sections */}
       <div className="space-y-8">
         {visibleFunnels.map((code) => {
           const tasks = byFunnel[code];
           if (!tasks.length) return null;
           return (
             <section key={code}>
-              <h2 className="text-lg font-medium mb-2">
-                {code} <span className="text-slate-500 text-sm">({tasks.length})</span>
+              <h2 className="text-lg font-medium mb-3">
+                {code}
+                <span className="text-[#5a6478] text-sm ml-2">({tasks.length})</span>
               </h2>
-              <div className="rounded-lg border border-slate-800 overflow-hidden">
+              <div className="rounded-lg border border-white/[0.08] overflow-hidden">
                 <table className="w-full text-sm">
                   <tbody>
                     {tasks.map((t) => (
-                      <tr key={t.id} className="border-t border-slate-800 hover:bg-slate-900/40">
-                        <td className="px-4 py-2.5">
+                      <tr
+                        key={t.id}
+                        className="border-t border-white/[0.06] hover:bg-white/[0.02]"
+                      >
+                        <td className="px-4 py-3">
                           <a
                             href={t.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-medium hover:text-amber-300"
+                            className="font-medium hover:text-[#c9a55e]"
                           >
                             {t.name}
                           </a>
                         </td>
-                        <td className="px-4 py-2.5 w-32 text-right">
+                        <td className="px-4 py-3 w-32 text-right">
                           {statusPill(t.status.status)}
                         </td>
-                        <td className="px-4 py-2.5 w-40 text-slate-400 text-xs">
+                        <td className="px-4 py-3 w-40 text-[#8b95a7] text-xs">
                           {t.assignees?.[0]?.username ?? "—"}
                         </td>
                       </tr>
