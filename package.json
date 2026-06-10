@@ -5,9 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "db:generate": "drizzle-kit generate",
-    "db:push": "drizzle-kit push"
+    "start": "next start"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
