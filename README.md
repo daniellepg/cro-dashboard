@@ -1,51 +1,46 @@
-# CRO Dashboard
+# CRO Dashboard — Performance Golf Zone
 
-A Vercel-hosted, Airtable-style CRO test management dashboard for Performance Golf Zone.
+Cover-page dashboard for the CRO team. Six tiles → six detail views.
 
-Pages:
-- **Prioritized** (`/`) — backlog ranked by the 10-criterion framework score
-- **In Progress** (`/in-progress`) — tests currently running, inline-editable
-- **Monthly Recap** (`/recap`) — auto-stats from closed tests + your narrative
-- **Submit Idea** (`/submit`) — public form, scores against the framework
+## Tiles
 
-Stack: Next.js 16, Vercel Postgres (Neon), Drizzle ORM, Tailwind v4.
+| Tile | Source | Status |
+|---|---|---|
+| **Live Tests** | ClickUp · CRO Projects list · status = `live` | ✅ Wired |
+| **Initialized Tests** | ClickUp · status = `initialized` | ✅ Wired |
+| **Submit an Idea** | External ClickUp form | ✅ Wired |
+| **WoW Data by Funnel** | Domo (top 8 funnels) | ⏳ Stub — needs Domo creds |
+| **Key KPIs** | Domo + ClickUp (8 KPIs by month) | ⏳ Stub — needs Domo creds |
+| **Testing Priorities** | ClickUp pipeline · toggle by funnel | ✅ Wired |
 
-## Deploy (one-time)
+## Top 8 funnels
 
-1. **Import on Vercel**
-   - Go to https://vercel.com/new → import `daniellepg/cro-dashboard`.
-   - Framework is auto-detected (Next.js). Click **Deploy** (the first build will fail because there's no DB yet — that's fine).
-2. **Add a Postgres database**
-   - In the new project: **Storage → Create Database → Neon (Vercel Postgres)**.
-   - Vercel auto-injects `POSTGRES_URL` and friends as env vars.
-3. **Run the schema migration**
-   - Pull env locally: `vercel env pull .env.local` (or copy `POSTGRES_URL` from Vercel → Settings → Environment Variables into `.env.local`).
-   - Run: `npm install && npm run db:push`
-4. **Redeploy** — Vercel project → Deployments → ⋯ → Redeploy.
-5. **(Optional) Password-protect** — Vercel project → Settings → **Deployment Protection** → enable password.
+Physical: **357** (Shopify + CC), **RS1** (Shopify), **SF2** (Shopify), **SSP** (Shopify + CC)
+Digital: **WPSS**, **OSSF**, **SSTS**, **PG1** (all CC)
+
+## Deploy
+
+1. **Import on Vercel** → https://vercel.com/new → pick `daniellepg/cro-dashboard` → Deploy.
+2. **Add env vars** (Vercel project → Settings → Environment Variables):
+   - `CLICKUP_TOKEN` — ClickUp personal token (Settings → Apps → API Token in ClickUp)
+   - `DOMO_CLIENT_ID` and `DOMO_CLIENT_SECRET` — when ready for funnel data
+3. **Redeploy** to pick up env vars.
+4. **(Optional)** Settings → Deployment Protection → password-protect.
 
 ## Local dev
 
 ```bash
 npm install
-cp .env.example .env.local   # fill POSTGRES_URL
-npm run db:push              # apply schema
+cp .env.example .env.local   # fill in CLICKUP_TOKEN
 npm run dev
 ```
 
-## Framework scoring
+## Stack
 
-Each idea is scored 0–10 by checking which of these apply:
+Next.js 16 (App Router) · Tailwind v4 · ClickUp REST API · Domo API (pending)
 
-1. Above the fold?
-2. Noticed within 5s?
-3. Adding / removing element?
-4. Aims to increase motivation?
-5. Running on high-traffic page?
-6. Issue found via user testing?
-7. Issue found via qual. feedback?
-8. Insights via analytics?
-9. Supported by mouse / eye tracking / heat maps?
-10. Ease of implementation?
+## Where data comes from
 
-Higher score = higher priority.
+- **ClickUp list:** Growth → CRO → CRO Projects (`901413548373`)
+- **Funnel detection:** parsed from the task name (e.g. "357 Media…" → `357`)
+- **Parent tasks only:** subtasks like `Pre-Launch QA | 357 …` are filtered out
