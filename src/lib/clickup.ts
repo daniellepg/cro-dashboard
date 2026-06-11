@@ -1,7 +1,8 @@
 // ClickUp API client (server-side)
 // Requires CLICKUP_TOKEN env var (personal token starts with "pk_")
 
-const CRO_LIST_ID = "901413548373"; // Growth → CRO → CRO Projects
+const WORKSPACE_ID = "9014714949";
+const FOLDER_ID    = "90147276572"; // performancegolf.clickup.com/…/v/b/f/90147276572
 const API = "https://api.clickup.com/api/v2";
 
 export type ClickUpTask = {
@@ -38,11 +39,12 @@ export async function fetchTasks(opts: TaskFetchOpts = {}): Promise<ClickUpTask[
   while (true) {
     const params = new URLSearchParams();
     params.set("page", String(page));
+    params.append("folder_ids[]", FOLDER_ID);
     if (opts.subtasks ?? true) params.set("subtasks", "true");
     if (opts.includeClosed) params.set("include_closed", "true");
     (opts.statuses ?? []).forEach((s) => params.append("statuses[]", s));
 
-    const url = `${API}/list/${CRO_LIST_ID}/task?${params.toString()}`;
+    const url = `${API}/team/${WORKSPACE_ID}/task?${params.toString()}`;
     const res = await fetch(url, {
       headers: { Authorization: token, "Content-Type": "application/json" },
       next: { revalidate: 60 }, // 1-minute cache

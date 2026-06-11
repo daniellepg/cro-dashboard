@@ -4,7 +4,7 @@ import { PrioritiesBoard } from "@/components/priorities-board";
 
 export const dynamic = "force-dynamic";
 
-const PIPELINE_STATUSES = ["initialized"];
+const PIPELINE_STATUSES = ["initialized", "cro creative", "cro dev"];
 
 export default async function PrioritiesPage() {
   let tasks: Awaited<ReturnType<typeof fetchTasks>> = [];
@@ -35,7 +35,7 @@ export default async function PrioritiesPage() {
         </div>
         <h1 className="text-3xl font-semibold tracking-tight">Testing Priorities</h1>
         <p className="text-sm text-[#8b95a7] mt-1.5">
-          Initialized tests, grouped by funnel · live from ClickUp · excludes backlog &amp; blocked
+          Initialized · CRO Creative · CRO Dev · live from ClickUp · excludes backlog &amp; blocked
         </p>
       </div>
       {error ? (
