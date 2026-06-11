@@ -4,7 +4,7 @@ import { PrioritiesBoard } from "@/components/priorities-board";
 
 export const dynamic = "force-dynamic";
 
-const PIPELINE_STATUSES = ["backlog", "intake", "cro dev", "dev sprint", "qa", "analytics"];
+const PIPELINE_STATUSES = ["initialized"];
 
 export default async function PrioritiesPage() {
   let tasks: Awaited<ReturnType<typeof fetchTasks>> = [];
@@ -35,7 +35,7 @@ export default async function PrioritiesPage() {
         </div>
         <h1 className="text-3xl font-semibold tracking-tight">Testing Priorities</h1>
         <p className="text-sm text-[#8b95a7] mt-1.5">
-          Tests in pipeline, grouped by funnel · live from ClickUp
+          Initialized tests, grouped by funnel · live from ClickUp · excludes backlog &amp; blocked
         </p>
       </div>
       {error ? (
