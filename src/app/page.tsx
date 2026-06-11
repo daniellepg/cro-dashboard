@@ -72,6 +72,7 @@ export default async function CoverPage() {
     },
     { href: "/priorities", title: "Testing Priorities", subtitle: "Backlog by funnel" },
     { href: "/scorecards", title: "Scorecards", subtitle: "Per-test readouts" },
+    { href: "/bandwidth", title: "Test Bandwidth", subtitle: "MDE & capacity by page" },
   ];
 
   const data: Tile[] = [
@@ -105,7 +106,7 @@ export default async function CoverPage() {
       {/* Testing section */}
       <section className="mb-10">
         <SectionHeader label="Testing" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {testing.map((t) => (
             <TileCard key={t.href} t={t} />
           ))}
