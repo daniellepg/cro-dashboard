@@ -1,20 +1,14 @@
-import { readFileSync } from "fs";
-import path from "path";
 import { notFound } from "next/navigation";
 import type { MbrData, Theme, TestResult, KpiCard } from "@/lib/mbr";
 
-export async function generateStaticParams() {
-  return [{ month: "2026-06" }];
-}
+import jun2026 from "@/data/mbr/2026-06.json";
 
-function getMbrData(month: string): MbrData | null {
-  try {
-    const filePath = path.join(process.cwd(), "src/data/mbr", `${month}.json`);
-    const raw = readFileSync(filePath, "utf-8");
-    return JSON.parse(raw) as MbrData;
-  } catch {
-    return null;
-  }
+const DATA_MAP: Record<string, MbrData> = {
+  "2026-06": jun2026 as MbrData,
+};
+
+export async function generateStaticParams() {
+  return Object.keys(DATA_MAP).map((month) => ({ month }));
 }
 
 const fmt = {
@@ -145,7 +139,7 @@ function TestsTable({ tests }: { tests: TestResult[] }) {
 }
 
 export default function MbrDetailPage({ params }: { params: { month: string } }) {
-  const mbr = getMbrData(params.month);
+  const mbr = DATA_MAP[params.month];
   if (!mbr) notFound();
 
   const wins = mbr.tests_concluded.filter((t) => t.outcome === "WIN").length;
