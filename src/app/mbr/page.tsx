@@ -208,6 +208,12 @@ export default function MbrPage() {
           ))}
         </div>
         <FunnelTable rows={mbr.physical_funnels_current} />
+        {mbr.physical_funnels_prior.length > 0 && (
+          <div className="mt-4">
+            <div className="mb-2 text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">{mbr.comparison_month}</div>
+            <FunnelTable rows={mbr.physical_funnels_prior} />
+          </div>
+        )}
         <ul className="mt-4 space-y-2">
           {mbr.physical_takeaways.map((t, i) => (
             <li key={i} className="text-xs text-[#8b95a7] flex gap-2">
@@ -236,6 +242,12 @@ export default function MbrPage() {
           ))}
         </div>
         <FunnelTable rows={mbr.digital_funnels_current} />
+        {mbr.digital_funnels_prior.length > 0 && (
+          <div className="mt-4">
+            <div className="mb-2 text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">{mbr.comparison_month}</div>
+            <FunnelTable rows={mbr.digital_funnels_prior} />
+          </div>
+        )}
         <ul className="mt-4 space-y-2">
           {mbr.digital_takeaways.map((t, i) => (
             <li key={i} className="text-xs text-[#8b95a7] flex gap-2">

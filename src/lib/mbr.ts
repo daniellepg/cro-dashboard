@@ -55,6 +55,7 @@ export type MbrData = {
     aov_change: string;
   };
   physical_funnels_current: FunnelRow[];
+  physical_funnels_prior: FunnelRow[];
   physical_takeaways: string[];
   digital_rollup: {
     total_revenue: string;
@@ -67,6 +68,7 @@ export type MbrData = {
     aov_change: string;
   };
   digital_funnels_current: FunnelRow[];
+  digital_funnels_prior: FunnelRow[];
   digital_takeaways: string[];
   goals: {
     tests_launched: number;
