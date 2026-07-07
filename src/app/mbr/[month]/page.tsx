@@ -138,8 +138,9 @@ function TestsTable({ tests }: { tests: TestResult[] }) {
   );
 }
 
-export default function MbrDetailPage({ params }: { params: { month: string } }) {
-  const mbr = DATA_MAP[params.month];
+export default async function MbrDetailPage({ params }: { params: Promise<{ month: string }> }) {
+  const { month } = await params;
+  const mbr = DATA_MAP[month];
   if (!mbr) notFound();
 
   const wins = mbr.tests_concluded.filter((t) => t.outcome === "WIN").length;
