@@ -131,7 +131,9 @@
     "Removed misleading checkout text that implied customers were getting a subscription when they were actually starting a free trial.",
     "8 tests launched in June — above our monthly goal of 7."
   ],
-  "challenges": [],
+  "challenges": [
+    "Free trial tracking is unreliable — the definition has changed multiple times, making it impossible to get a clean total count or a trustworthy trial-to-paid conversion rate. Need a single agreed-upon definition locked in before we can measure the PG1 v3 launch properly."
+  ],
   "generated_at": "2026-07-07T00:00:00Z",
   "data_source": "DOMO (Orders with Acq Spend 2.0) + ClickUp"
 }
