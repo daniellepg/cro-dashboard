@@ -132,7 +132,8 @@
     "8 tests launched in June — above our monthly goal of 7."
   ],
   "challenges": [
-    "Free trial tracking is unreliable — the definition has changed multiple times, making it impossible to get a clean total count or a trustworthy trial-to-paid conversion rate. Need a single agreed-upon definition locked in before we can measure the PG1 v3 launch properly."
+    "Free trial tracking is unreliable — the definition has changed multiple times, making it impossible to get a clean total count or a trustworthy trial-to-paid conversion rate. Need a single agreed-upon definition locked in before we can measure the PG1 v3 launch properly.",
+    "Trial-to-paid conversion rate is not yet measurable by platform — CoC and Shopify handle trials differently, and we can't compare them apples-to-apples until reporting is separated and standardized per platform."
   ],
   "generated_at": "2026-07-07T00:00:00Z",
   "data_source": "DOMO (Orders with Acq Spend 2.0) + ClickUp"
