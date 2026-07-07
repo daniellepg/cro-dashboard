@@ -1,7 +1,7 @@
 export const CRITERIA = [
   { key: "aboveFold",          label: "Above the fold?",                                     short: "Fold",    max: 1, type: "bool"  },
   { key: "noticed5s",          label: "Noticeable within 5 sec?",                            short: "5-sec",   max: 2, type: "bool2" },
-  { key: "addRemoveElement",   label: "Adding or removing an element?",                      short: "+/− El",  max: 2, type: "bool2" },
+  { key: "addRemoveElement",   label: "Adding or removing an element?",                      short: "+/− Element",  max: 2, type: "bool2" },
   { key: "increaseMotivation", label: "Designed to increase user motivation?",               short: "Motiv",   max: 1, type: "bool"  },
   { key: "highTraffic",        label: "Running on high traffic page(s)?",                    short: "Traffic", max: 1, type: "bool"  },
   { key: "userTesting",        label: "Issue found via user testing?",                       short: "UX Test", max: 1, type: "bool"  },

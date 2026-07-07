@@ -80,6 +80,10 @@ export default async function CoverPage() {
     { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board" },
   ];
 
+  const reporting: Tile[] = [
+    { href: "/mbr", title: "Monthly Business Review", subtitle: "Paid media · funnels · experimentation" },
+  ];
+
   return (
     <div>
       {/* Header + top CTA */}
@@ -114,10 +118,20 @@ export default async function CoverPage() {
       </section>
 
       {/* Data section */}
-      <section>
+      <section className="mb-10">
         <SectionHeader label="Data" />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {data.map((t) => (
+            <TileCard key={t.href} t={t} />
+          ))}
+        </div>
+      </section>
+
+      {/* Reporting section */}
+      <section>
+        <SectionHeader label="Reporting" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {reporting.map((t) => (
             <TileCard key={t.href} t={t} />
           ))}
         </div>
