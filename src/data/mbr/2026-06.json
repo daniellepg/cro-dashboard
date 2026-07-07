@@ -1,0 +1,137 @@
+{
+  "month": "June 2026",
+  "comparison_month": "June 2025",
+  "headline": "Net ROAS surged from 44% → 111% (+67 pts) on 46% less spend — we stopped buying unprofitable volume and the business got dramatically more efficient.",
+  "headline_kpis": [
+    { "label": "Ad Spend", "current": "$4.15M", "prior": "$7.70M", "change": "▼ 46.1%", "direction": "down", "good": true },
+    { "label": "Net Revenue", "current": "+$449K", "prior": "−$4.30M", "change": "▲ $4.75M", "direction": "up", "good": true },
+    { "label": "Net ROAS", "current": "110.81%", "prior": "44.17%", "change": "▲ 67 pts", "direction": "up", "good": true },
+    { "label": "AOV", "current": "$377.52", "prior": "$259.15", "change": "▲ 45.7%", "direction": "up", "good": true },
+    { "label": "Orders", "current": "17,761", "prior": "31,084", "change": "▼ 42.9%", "direction": "down", "good": false },
+    { "label": "Refund Rate", "current": "6.8%", "prior": "32.2%", "change": "▼ 25.4 pts", "direction": "down", "good": true }
+  ],
+  "sales_yoy": {
+    "total":    { "current": 17761, "prior": 31084, "change": "−42.9%", "direction": "down" },
+    "physical": { "current": 9850,  "prior": 12200, "change": "−19.3%", "direction": "down" },
+    "digital":  { "current": 7911,  "prior": 18884, "change": "−58.1%", "direction": "down" }
+  },
+  "physical_rollup": {
+    "total_revenue": "$3.72M", "prior_revenue": "$3.16M", "revenue_change": "+17.7%",
+    "fe_sales": 9850, "prior_fe_sales": 12200,
+    "aov": "$377.66", "prior_aov": "$259.02", "aov_change": "+45.8%"
+  },
+  "physical_funnels_current": [
+    { "funnel": "RS1",   "fe_sales": 4120, "revenue": 1648000, "aov": 400.00, "visitors": null, "op_cvr": null },
+    { "funnel": "357",   "fe_sales": 2980, "revenue": 1072800, "aov": 360.00, "visitors": null, "op_cvr": null },
+    { "funnel": "SF2",   "fe_sales": 1430, "revenue": 500500,  "aov": 350.00, "visitors": null, "op_cvr": null },
+    { "funnel": "ONE.1", "fe_sales": 810,  "revenue": 226800,  "aov": 280.00, "visitors": null, "op_cvr": null },
+    { "funnel": "359",   "fe_sales": 340,  "revenue": 142800,  "aov": 420.00, "visitors": null, "op_cvr": null },
+    { "funnel": "DF1",   "fe_sales": 170,  "revenue": 129100,  "aov": 759.41, "visitors": null, "op_cvr": null }
+  ],
+  "physical_funnels_prior": [
+    { "funnel": "357",   "fe_sales": 5800, "revenue": 1508000, "aov": 260.00, "visitors": null, "op_cvr": null },
+    { "funnel": "SF1",   "fe_sales": 4100, "revenue": 1025000, "aov": 250.00, "visitors": null, "op_cvr": null },
+    { "funnel": "THR",   "fe_sales": 1100, "revenue": 247500,  "aov": 225.00, "visitors": null, "op_cvr": null },
+    { "funnel": "CLST",  "fe_sales": 820,  "revenue": 172200,  "aov": 210.00, "visitors": null, "op_cvr": null },
+    { "funnel": "SQP",   "fe_sales": 240,  "revenue": 136800,  "aov": 570.00, "visitors": null, "op_cvr": null },
+    { "funnel": "SQSE",  "fe_sales": 100,  "revenue": 50000,   "aov": 500.00, "visitors": null, "op_cvr": null },
+    { "funnel": "TOW",   "fe_calls": 40,   "fe_sales": 40,     "revenue": 20000, "aov": 500.00, "visitors": null, "op_cvr": null }
+  ],
+  "physical_takeaways": [
+    "RS1 is the new anchor — $1.65M (44% of physical) at $400 AOV. Didn't exist in the June 2025 mix.",
+    "Revenue up +18% on 19% fewer sales — AOV jumped +46% ($259 → $378). We're selling less but earning more per order.",
+    "SF1 is offline ('ooo and never coming back') — 4,100 sales last June, zero this June. RS1 and SF2 absorbed that load.",
+    "DF1 at $759 AOV signals high-ticket physical is a real channel — worth watching as it scales.",
+    "Concentration risk is shifting: RS1 + 357 = 73% of physical revenue. RS1 is now the single biggest risk if it slows."
+  ],
+  "digital_rollup": {
+    "total_revenue": "$3.72M", "prior_revenue": "$4.88M", "revenue_change": "−23.8%",
+    "fe_sales": 7911, "prior_fe_sales": 18884,
+    "aov": "$470.23", "prior_aov": "$258.43", "aov_change": "+81.9%"
+  },
+  "digital_funnels_current": [
+    { "funnel": "HTKT",  "fe_sales": 89,   "revenue": 729088, "aov": 8192.00, "visitors": null, "op_cvr": null },
+    { "funnel": "WPSS",  "fe_sales": 2940, "revenue": 1058400, "aov": 360.00, "visitors": null, "op_cvr": null },
+    { "funnel": "OSSF",  "fe_sales": 2180, "revenue": 436000, "aov": 200.00, "visitors": null, "op_cvr": null },
+    { "funnel": "SSTS",  "fe_sales": 1420, "revenue": 426000, "aov": 300.00, "visitors": null, "op_cvr": null },
+    { "funnel": "SRSW",  "fe_sales": 840,  "revenue": 235200, "aov": 280.00, "visitors": null, "op_cvr": null },
+    { "funnel": "PSS",   "fe_sales": 442,  "revenue": 839800, "aov": 1900.00, "visitors": null, "op_cvr": null }
+  ],
+  "digital_funnels_prior": [
+    { "funnel": "SSTS",  "fe_sales": 6200, "revenue": 1116000, "aov": 180.00, "visitors": null, "op_cvr": null },
+    { "funnel": "SSG2",  "fe_sales": 5800, "revenue": 812000,  "aov": 140.00, "visitors": null, "op_cvr": null },
+    { "funnel": "PSS",   "fe_sales": 3100, "revenue": 1240000, "aov": 400.00, "visitors": null, "op_cvr": null },
+    { "funnel": "OSSF",  "fe_sales": 2400, "revenue": 384000,  "aov": 160.00, "visitors": null, "op_cvr": null },
+    { "funnel": "Apple", "fe_sales": 900,  "revenue": 810000,  "aov": 900.00, "visitors": null, "op_cvr": null },
+    { "funnel": "SSDP",  "fe_sales": 340,  "revenue": 238000,  "aov": 700.00, "visitors": null, "op_cvr": null },
+    { "funnel": "SRSW",  "fe_sales": 144,  "revenue": 28800,   "aov": 200.00, "visitors": null, "op_cvr": null }
+  ],
+  "digital_takeaways": [
+    "AOV exploded +82% ($258 → $470) but volume dropped 58% — digital is doing less with far higher ticket prices.",
+    "HTKT is the AOV wildcard: 89 sales at $8,192 AOV adds $729K. This is phone-close / high-ticket motion — a different business than the funnel traffic below it.",
+    "PSS at $1,900 AOV and 442 sales is now the most efficient digital funnel on a revenue-per-unit basis (ex-HTKT).",
+    "SSTS dropped from 6,200 → 1,420 sales (−77%) but revenue held better due to higher pricing — confirm mix shift vs. volume loss.",
+    "SSG2 (5,800 sales in June 2025) is being rewritten — that 812K in prior revenue has not been replaced yet."
+  ],
+  "goals": {
+    "tests_launched": 7,
+    "win_rate": "30%",
+    "coc_aov": "TBD",
+    "rebuy_aov": "$3.65"
+  },
+  "actual": {
+    "tests_launched": 8,
+    "win_rate": "TBD",
+    "coc_aov": "TBD",
+    "rebuy_aov": "TBD"
+  },
+  "tests_concluded": [
+    { "id": "TBD-01", "name": "Test 1 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
+    { "id": "TBD-02", "name": "Test 2 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
+    { "id": "TBD-03", "name": "Test 3 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
+    { "id": "TBD-04", "name": "Test 4 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
+    { "id": "TBD-05", "name": "Test 5 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
+    { "id": "TBD-06", "name": "Test 6 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
+    { "id": "TBD-07", "name": "Test 7 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
+    { "id": "TBD-08", "name": "Test 8 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" }
+  ],
+  "tests_in_progress": [
+    { "id": "LIVE-01", "name": "Live test 1", "key_kpi": "CVR", "next_steps": "Monitor & Report" },
+    { "id": "LIVE-02", "name": "Live test 2", "key_kpi": "CVR", "next_steps": "Monitor & Report" },
+    { "id": "LIVE-03", "name": "Live test 3", "key_kpi": "AOV", "next_steps": "Monitor & Report" },
+    { "id": "LIVE-04", "name": "Live test 4", "key_kpi": "CVR", "next_steps": "Monitor & Report" },
+    { "id": "LIVE-05", "name": "Live test 5", "key_kpi": "Revenue", "next_steps": "Monitor & Report" },
+    { "id": "LIVE-06", "name": "Live test 6", "key_kpi": "CVR", "next_steps": "Monitor & Report" }
+  ],
+  "themes": [
+    {
+      "number": 1,
+      "title": "Efficiency over volume — the business chose margin",
+      "outcome": "WIN",
+      "narrative": "Spend dropped 46% and orders dropped 43%, but Net ROAS jumped from 44% to 111% and refund rate collapsed from 32% to 7%. The shift away from high-volume, high-refund digital funnels (led by SSG2 being retired) drove the biggest efficiency gain in recent memory.",
+      "takeaway": "Protect this efficiency — don't let spend creep back into low-quality volume."
+    },
+    {
+      "number": 2,
+      "title": "AOV is the growth lever that's working",
+      "outcome": "WIN",
+      "narrative": "Physical AOV: +46% ($259 → $378). Digital AOV: +82% ($258 → $470). Higher-ticket funnels (RS1 at $400, PSS at $1,900, HTKT at $8,192) are replacing the commodity volume. The business is moving upmarket.",
+      "takeaway": "Double down on high-AOV funnels. Any new test should have an AOV hypothesis."
+    },
+    {
+      "number": 3,
+      "title": "PG1 v3 on Shopify is the structural bet",
+      "outcome": "WIN",
+      "narrative": "Moving PG1 to Shopify and introducing a 7-day no-subscription free trial removes the forced continuity model that created refund exposure. Removing misleading checkout text (implying subscription when it was a free trial) addresses a trust and compliance issue at the highest-volume point in the funnel.",
+      "takeaway": "Free trial clarity at checkout is a CRO win and a retention investment — measure trial-to-paid conversion as the north star."
+    }
+  ],
+  "triumphs": [
+    "Launched PG1 v3 on Shopify with a 7-day no-sub free trial — moving off forced continuity toward an opt-in model.",
+    "Removed misleading checkout text that implied customers were getting a subscription when they were actually starting a free trial.",
+    "8 tests launched in June — above our monthly goal of 7."
+  ],
+  "challenges": [],
+  "generated_at": "2026-07-07T00:00:00Z",
+  "data_source": "DOMO (Orders with Acq Spend 2.0) + ClickUp"
+}

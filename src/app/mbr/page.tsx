@@ -1,25 +1,24 @@
-import type { MbrData, Theme, TestResult, KpiCard } from "@/lib/mbr";
-import data from "@/data/mbr/latest.json";
+import Link from "next/link";
 
-const mbr = data as MbrData;
-
-const fmt = {
-  currency: (n: number) =>
-    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n),
-  number: (n: number) => new Intl.NumberFormat("en-US").format(n),
+type MbrMonth = {
+  slug: string;
+  label: string;
+  subtitle: string;
+  available: boolean;
 };
 
-const OUTCOME_STYLES: Record<string, string> = {
-  WIN: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
-  LOSS: "text-red-400 bg-red-400/10 border-red-400/20",
-  MIXED: "text-amber-400 bg-amber-400/10 border-amber-400/20",
-  FLAT: "text-[#8b95a7] bg-white/[0.04] border-white/[0.08]",
-  IN_PROGRESS: "text-blue-400 bg-blue-400/10 border-blue-400/20",
-};
+const MONTHS: MbrMonth[] = [
+  { slug: "2026-01", label: "January 2026",  subtitle: "Jan 2026 vs Jan 2025",  available: false },
+  { slug: "2026-02", label: "February 2026", subtitle: "Feb 2026 vs Feb 2025",  available: false },
+  { slug: "2026-03", label: "March 2026",    subtitle: "Mar 2026 vs Mar 2025",  available: false },
+  { slug: "2026-04", label: "April 2026",    subtitle: "Apr 2026 vs Apr 2025",  available: false },
+  { slug: "2026-05", label: "May 2026",      subtitle: "May 2026 vs May 2025",  available: false },
+  { slug: "2026-06", label: "June 2026",     subtitle: "Jun 2026 vs Jun 2025",  available: true  },
+];
 
 function SectionHeader({ label }: { label: string }) {
   return (
-    <div className="flex items-center gap-3 mb-5">
+    <div className="flex items-center gap-3 mb-6">
       <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold whitespace-nowrap">
         {label}
       </div>
@@ -28,333 +27,54 @@ function SectionHeader({ label }: { label: string }) {
   );
 }
 
-function KpiTile({ k }: { k: KpiCard }) {
-  const changeColor = k.good
-    ? k.direction === "up" ? "text-emerald-400" : "text-emerald-400"
-    : k.direction === "up" ? "text-red-400" : "text-red-400";
-
-  return (
-    <div className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-4">
-      <div className="text-[10px] uppercase tracking-[0.18em] text-[#8b95a7] leading-snug mb-1">{k.label}</div>
-      {k.sub && <div className="text-[10px] text-[#5a6478] mb-2">{k.sub}</div>}
-      <div className="text-2xl font-semibold tracking-tight text-[#f4f5f7]">{k.current}</div>
-      <div className="flex items-center gap-2 mt-1.5">
-        <span className={`text-xs font-medium ${changeColor}`}>{k.change}</span>
-        <span className="text-[10px] text-[#5a6478]">vs {k.prior}</span>
-      </div>
-    </div>
-  );
-}
-
-function OutcomeBadge({ outcome }: { outcome: string }) {
-  return (
-    <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded border ${OUTCOME_STYLES[outcome] ?? OUTCOME_STYLES.FLAT}`}>
-      {outcome.replace("_", " ")}
-    </span>
-  );
-}
-
-function ThemeCard({ t }: { t: Theme }) {
-  return (
-    <div className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-5">
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-[#5a6478] font-mono">{String(t.number).padStart(2, "0")}</span>
-          <h3 className="text-sm font-medium leading-snug">{t.title}</h3>
-        </div>
-        <OutcomeBadge outcome={t.outcome} />
-      </div>
-      <p className="text-xs text-[#8b95a7] leading-relaxed mb-3">{t.narrative}</p>
-      <div className="border-t border-white/[0.06] pt-3">
-        <span className="text-[10px] uppercase tracking-widest text-[#c9a55e] font-semibold">Takeaway </span>
-        <span className="text-xs text-[#8b95a7]">{t.takeaway}</span>
-      </div>
-    </div>
-  );
-}
-
-function FunnelTable({ rows }: { rows: MbrData["physical_funnels_current"] }) {
-  return (
-    <div className="overflow-x-auto rounded-lg border border-white/[0.08]">
-      <table className="w-full text-xs">
-        <thead>
-          <tr className="border-b border-white/[0.06]">
-            {["Funnel", "FE Sales", "Revenue", "AOV", "Visitors", "OP CVR"].map((h) => (
-              <th key={h} className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#5a6478] font-medium">
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r, i) => (
-            <tr key={i} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
-              <td className="px-4 py-3 font-medium uppercase tracking-wide text-[#f4f5f7]">{r.funnel}</td>
-              <td className="px-4 py-3 text-[#8b95a7]">{fmt.number(r.fe_sales)}</td>
-              <td className="px-4 py-3 text-[#c9a55e] font-medium">{fmt.currency(r.revenue)}</td>
-              <td className="px-4 py-3 text-[#8b95a7]">{fmt.currency(r.aov)}</td>
-              <td className="px-4 py-3 text-[#8b95a7]">{r.visitors != null ? fmt.number(r.visitors) : "—"}</td>
-              <td className="px-4 py-3 text-[#8b95a7]">{r.op_cvr ?? "—"}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function TestsTable({ tests }: { tests: TestResult[] }) {
-  return (
-    <div className="overflow-x-auto rounded-lg border border-white/[0.08]">
-      <table className="w-full text-xs">
-        <thead>
-          <tr className="border-b border-white/[0.06]">
-            {["Exp ID", "Test", "Outcome", "Primary Metric", "Revenue Stat", "Stat Sig"].map((h) => (
-              <th key={h} className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#5a6478] font-medium">
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {tests.map((t) => (
-            <tr key={t.id} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
-              <td className="px-4 py-3 font-mono text-[#5a6478]">{t.id}</td>
-              <td className="px-4 py-3 text-[#f4f5f7] max-w-xs">{t.name}</td>
-              <td className="px-4 py-3"><OutcomeBadge outcome={t.outcome} /></td>
-              <td className="px-4 py-3 text-[#8b95a7]">{t.primary_metric ?? "—"}</td>
-              <td className="px-4 py-3 text-[#8b95a7]">{t.revenue_stat ?? "—"}</td>
-              <td className="px-4 py-3 text-[#8b95a7]">{t.stat_sig ?? "—"}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-export default function MbrPage() {
-  const wins = mbr.tests_concluded.filter((t) => t.outcome === "WIN").length;
-  const total = mbr.tests_concluded.length;
-
-  return (
-    <div className="space-y-12 pb-16">
-
-      {/* Header */}
-      <div>
-        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-2">
-          07 · Monthly Business Review
-        </div>
-        <div className="flex items-end justify-between gap-4">
-          <h1 className="text-3xl font-semibold tracking-tight">
-            {mbr.month}
-            <span className="text-[#5a6478] font-normal"> vs {mbr.comparison_month}</span>
-          </h1>
-          <div className="text-[10px] text-[#5a6478] tracking-wider uppercase text-right">
-            Source: {mbr.data_source}
-          </div>
-        </div>
-        <p className="text-sm text-[#8b95a7] mt-2 max-w-3xl leading-relaxed">{mbr.headline}</p>
-      </div>
-
-      {/* Headline KPIs */}
-      <section>
-        <SectionHeader label="Paid Media Performance" />
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-          {mbr.headline_kpis.map((k) => (
-            <KpiTile key={k.label} k={k} />
-          ))}
-        </div>
-      </section>
-
-      {/* Sales YoY */}
-      <section>
-        <SectionHeader label="Sales Year-over-Year" />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {(["total", "physical", "digital"] as const).map((key) => {
-            const s = mbr.sales_yoy[key];
-            const isUp = s.direction === "up";
-            return (
-              <div key={key} className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-5">
-                <div className="text-[10px] uppercase tracking-[0.22em] text-[#8b95a7] font-semibold mb-3">
-                  {key === "total" ? "Total Sales" : key === "physical" ? "Physical Sales" : "Digital Sales"}
-                </div>
-                <div className="text-3xl font-semibold tracking-tight text-[#f4f5f7]">{fmt.number(s.current)}</div>
-                <div className="flex items-center gap-2 mt-2">
-                  <span className={`text-sm font-medium ${isUp ? "text-emerald-400" : "text-red-400"}`}>{s.change}</span>
-                  <span className="text-xs text-[#5a6478]">vs {fmt.number(s.prior)}</span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Physical Products */}
-      <section>
-        <SectionHeader label="Physical Products" />
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-          {[
-            { label: "Total Revenue", value: mbr.physical_rollup.total_revenue, change: mbr.physical_rollup.revenue_change },
-            { label: "FE Sales", value: fmt.number(mbr.physical_rollup.fe_sales), change: `vs ${fmt.number(mbr.physical_rollup.prior_fe_sales)}` },
-            { label: "Blended AOV", value: mbr.physical_rollup.aov, change: mbr.physical_rollup.aov_change },
-            { label: "Prior Revenue", value: mbr.physical_rollup.prior_revenue, change: mbr.comparison_month },
-          ].map((item) => (
-            <div key={item.label} className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
-              <div className="text-[10px] uppercase tracking-[0.18em] text-[#5a6478] mb-1">{item.label}</div>
-              <div className="text-xl font-semibold text-[#c9a55e]">{item.value}</div>
-              <div className="text-[10px] text-[#5a6478] mt-1">{item.change}</div>
-            </div>
-          ))}
-        </div>
-        <FunnelTable rows={mbr.physical_funnels_current} />
-        {mbr.physical_funnels_prior.length > 0 && (
-          <div className="mt-4">
-            <div className="mb-2 text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">{mbr.comparison_month}</div>
-            <FunnelTable rows={mbr.physical_funnels_prior} />
-          </div>
+function MbrTile({ m }: { m: MbrMonth }) {
+  const inner = (
+    <div className={`group relative h-44 rounded-lg border p-5 transition-all ${
+      m.available
+        ? "border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent hover:border-[#c9a55e]/40 hover:from-[#c9a55e]/[0.06]"
+        : "border-white/[0.04] bg-white/[0.01] opacity-50 cursor-not-allowed"
+    }`}>
+      <div className="text-base font-medium text-[#f4f5f7]">{m.label}</div>
+      <div className="text-xs text-[#8b95a7] mt-0.5">{m.subtitle}</div>
+      <div className="absolute bottom-5 left-5">
+        {m.available ? (
+          <span className="text-[10px] uppercase tracking-[0.18em] text-emerald-400 font-semibold">Available</span>
+        ) : (
+          <span className="text-[10px] uppercase tracking-[0.18em] text-[#5a6478]">Not generated</span>
         )}
-        <ul className="mt-4 space-y-2">
-          {mbr.physical_takeaways.map((t, i) => (
-            <li key={i} className="text-xs text-[#8b95a7] flex gap-2">
-              <span className="text-[#c9a55e] mt-0.5">·</span>
-              <span>{t}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      </div>
+      {m.available && (
+        <div className="absolute bottom-5 right-5 text-[#5a6478] group-hover:text-[#c9a55e] transition-colors">→</div>
+      )}
+    </div>
+  );
 
-      {/* Digital Products */}
-      <section>
-        <SectionHeader label="Digital Products" />
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-          {[
-            { label: "Total Revenue", value: mbr.digital_rollup.total_revenue, change: mbr.digital_rollup.revenue_change },
-            { label: "FE Sales", value: fmt.number(mbr.digital_rollup.fe_sales), change: `vs ${fmt.number(mbr.digital_rollup.prior_fe_sales)}` },
-            { label: "Blended AOV", value: mbr.digital_rollup.aov, change: mbr.digital_rollup.aov_change },
-            { label: "Prior Revenue", value: mbr.digital_rollup.prior_revenue, change: mbr.comparison_month },
-          ].map((item) => (
-            <div key={item.label} className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
-              <div className="text-[10px] uppercase tracking-[0.18em] text-[#5a6478] mb-1">{item.label}</div>
-              <div className="text-xl font-semibold text-[#c9a55e]">{item.value}</div>
-              <div className="text-[10px] text-[#5a6478] mt-1">{item.change}</div>
-            </div>
-          ))}
+  return m.available ? (
+    <Link href={`/mbr/${m.slug}`}>{inner}</Link>
+  ) : (
+    <div>{inner}</div>
+  );
+}
+
+export default function MbrIndexPage() {
+  return (
+    <div>
+      <div className="mb-10">
+        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-3">
+          Reporting
         </div>
-        <FunnelTable rows={mbr.digital_funnels_current} />
-        {mbr.digital_funnels_prior.length > 0 && (
-          <div className="mt-4">
-            <div className="mb-2 text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">{mbr.comparison_month}</div>
-            <FunnelTable rows={mbr.digital_funnels_prior} />
-          </div>
-        )}
-        <ul className="mt-4 space-y-2">
-          {mbr.digital_takeaways.map((t, i) => (
-            <li key={i} className="text-xs text-[#8b95a7] flex gap-2">
-              <span className="text-[#c9a55e] mt-0.5">·</span>
-              <span>{t}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+        <h1 className="text-4xl font-semibold tracking-tight">Monthly Business Reviews</h1>
+        <p className="text-[#8b95a7] mt-2 max-w-xl">
+          Paid media performance, funnel breakdowns, and experimentation results — one report per month.
+        </p>
+      </div>
 
-      {/* Experimentation */}
-      <section>
-        <SectionHeader label="Experimentation" />
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-          {[
-            { label: "Tests Launched", goal: String(mbr.goals.tests_launched), actual: String(mbr.actual.tests_launched) },
-            { label: "Win Rate", goal: mbr.goals.win_rate, actual: mbr.actual.win_rate },
-            { label: "CoC AOV", goal: mbr.goals.coc_aov, actual: mbr.actual.coc_aov },
-            { label: "Rebuy AOV Contribution", goal: mbr.goals.rebuy_aov, actual: mbr.actual.rebuy_aov },
-          ].map((item) => (
-            <div key={item.label} className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
-              <div className="text-[10px] uppercase tracking-[0.18em] text-[#5a6478] mb-2">{item.label}</div>
-              <div className="flex items-end gap-3">
-                <div>
-                  <div className="text-[10px] text-[#5a6478] mb-0.5">Goal</div>
-                  <div className="text-base font-medium text-[#8b95a7]">{item.goal}</div>
-                </div>
-                <div>
-                  <div className="text-[10px] text-[#5a6478] mb-0.5">Actual</div>
-                  <div className="text-base font-semibold text-[#c9a55e]">{item.actual}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mb-2 text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">
-          Tests Concluded — {total} reviewed · {wins} wins
-        </div>
-        <TestsTable tests={mbr.tests_concluded} />
-
-        {mbr.tests_in_progress.length > 0 && (
-          <div className="mt-5">
-            <div className="mb-2 text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">Tests In Progress</div>
-            <div className="rounded-lg border border-white/[0.08] divide-y divide-white/[0.04]">
-              {mbr.tests_in_progress.map((t) => (
-                <div key={t.id} className="px-4 py-3 flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] text-[#5a6478]">{t.id}</span>
-                    <span className="text-xs text-[#f4f5f7]">{t.name}</span>
-                  </div>
-                  <div className="flex items-center gap-4 text-[10px] text-[#5a6478] whitespace-nowrap">
-                    <span>KPI: {t.key_kpi}</span>
-                    <span>{t.next_steps}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </section>
-
-      {/* Themes */}
-      <section>
-        <SectionHeader label="Themes & Takeaways" />
-        <div className="space-y-3">
-          {mbr.themes.map((t) => (
-            <ThemeCard key={t.number} t={t} />
-          ))}
-        </div>
-        <div className="mt-5 rounded-lg border border-[#c9a55e]/20 bg-[#c9a55e]/[0.04] p-4">
-          <div className="text-[10px] uppercase tracking-widest text-[#c9a55e] font-semibold mb-1">Meta Pattern</div>
-          <p className="text-xs text-[#8b95a7] leading-relaxed">
-            March wins came from removing friction and adding trust. Losses came from adding friction (negative scarcity) or optimizing intermediate metrics (video engagement) instead of conversion. The roadmap should lean toward more selection/flow simplification and trust-signal placements.
-          </p>
-        </div>
-      </section>
-
-      {/* Triumphs & Challenges */}
-      <section>
-        <SectionHeader label="Triumphs & Challenges" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="rounded-lg border border-emerald-400/20 bg-emerald-400/[0.03] p-5">
-            <div className="text-[10px] uppercase tracking-widest text-emerald-400 font-semibold mb-3">Triumphs</div>
-            <ul className="space-y-2">
-              {mbr.triumphs.map((t, i) => (
-                <li key={i} className="text-xs text-[#8b95a7] flex gap-2">
-                  <span className="text-emerald-400 mt-0.5">✓</span>
-                  <span>{t}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="rounded-lg border border-red-400/20 bg-red-400/[0.03] p-5">
-            <div className="text-[10px] uppercase tracking-widest text-red-400 font-semibold mb-3">Challenges</div>
-            <ul className="space-y-2">
-              {mbr.challenges.map((c, i) => (
-                <li key={i} className="text-xs text-[#8b95a7] flex gap-2">
-                  <span className="text-red-400 mt-0.5">·</span>
-                  <span>{c}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
+      <SectionHeader label="2026" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {MONTHS.map((m) => (
+          <MbrTile key={m.slug} m={m} />
+        ))}
+      </div>
     </div>
   );
 }
