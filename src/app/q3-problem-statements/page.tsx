@@ -159,7 +159,7 @@ export default function Q3ProblemStatementsPage() {
                   <td
                     key={tile}
                     className="border border-white/[0.08] p-0 align-top"
-                    style={{ height: "88px" }}
+                    style={{ height: "160px" }}
                   >
                     <textarea
                       value={grid[rowIdx][colIdx]}
