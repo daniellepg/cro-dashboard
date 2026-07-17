@@ -86,10 +86,10 @@ export function CroKpiGrid({ sc }: { sc: CroScorecard }) {
     },
     {
       label: "Est. $ Impact — Shipped Winners",
-      value: "~$187K/mo",
-      detail: "0546 (357 CoC Var B) · CVR lift est. from RPV data",
-      status: "neutral",
-      source: "Katherine's scorecard · verify CVR lift",
+      value: "—",
+      detail: "Pending Katherine's scorecard · CVR lift verification needed",
+      status: "pending",
+      source: "Katherine's scorecard",
       sourceHref: SCORECARD_URL,
     },
     {
