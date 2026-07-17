@@ -9,6 +9,8 @@ const PATRICK_CLICKUP =
 type TileProps = {
   label: string;
   value: string;
+  subvalue?: string;
+  sublabel?: string;
   goal?: string;
   detail?: string;
   status?: "above" | "below" | "pending" | "neutral";
@@ -16,7 +18,7 @@ type TileProps = {
   sourceHref?: string;
 };
 
-function Tile({ label, value, goal, detail, status, source, sourceHref }: TileProps) {
+function Tile({ label, value, subvalue, sublabel, goal, detail, status, source, sourceHref }: TileProps) {
   const valueColor =
     status === "above"   ? "text-emerald-400" :
     status === "below"   ? "text-red-400"      :
@@ -34,6 +36,12 @@ function Tile({ label, value, goal, detail, status, source, sourceHref }: TilePr
       <div className="text-[10px] uppercase tracking-[0.18em] text-[#8b95a7] leading-snug">{label}</div>
       {goal && <div className="text-[10px] text-[#5a6478]">{goal}</div>}
       <div className={`text-3xl font-semibold tracking-tight ${valueColor}`}>{value}</div>
+      {subvalue && (
+        <div className="flex items-baseline gap-2">
+          <span className="text-lg font-semibold text-[#f4f5f7]">{subvalue}</span>
+          {sublabel && <span className="text-[10px] text-[#5a6478]">{sublabel}</span>}
+        </div>
+      )}
       {detail && <div className="text-[10px] text-[#8b95a7]">{detail}</div>}
       {badge}
       <div className="mt-auto pt-2 border-t border-white/[0.04]">
@@ -114,7 +122,9 @@ export function CroKpiGrid({ sc }: { sc: CroScorecard }) {
     {
       label: "Rebuy Contribution to AOV",
       value: sc.rebuy_aov_contribution.value ?? "—",
-      detail: sc.rebuy_aov_contribution.note,
+      subvalue: "$53,488",
+      sublabel: "rebuy revenue · 1.95% of total",
+      detail: "351 rebuy orders of 11,106 total (3.16%) · AOV $242.38 → $247.20 w/ Rebuy",
       status: "neutral",
       source: "Rebuy dashboard · Jun 2026",
     },
