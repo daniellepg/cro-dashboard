@@ -626,92 +626,113 @@ function PricingModelSection({ data }: { data: PricingModelAnalysis }) {
 }
 
 function PricingJourneyChart({ versions }: { versions: PricingModelVersion[] }) {
-  const XS = [80, 190, 300, 390];
+  // X positions per version
+  const XS = [90, 200, 310, 410];
   const vColors = ["#5a6478", "#8b95a7", "#f87171", "#34d399"];
-  const vLabels = versions.map((v) => v.version);
 
-  const roasVals  = versions.map((v) => parseFloat(v.net_roas));
-  const cvrVals   = versions.map((v) => parseFloat(v.cvr));
-  const aovVals   = versions.map((v) => parseFloat((v.aov ?? "$0").replace(/[$,]/g, "")));
-  const trialVals = versions.map((v) => v.pg1_trials);
+  // Raw values
+  const roasVals = versions.map((v) => parseFloat(v.net_roas));
+  const cvrVals  = versions.map((v) => parseFloat(v.cvr));
+  const aovVals  = versions.map((v) => parseFloat((v.aov ?? "$0").replace(/[$,]/g, "")));
+
+  // Index everything to V1 (index 1) = 100
+  function idx(vals: number[]) { return vals.map((v) => (v / vals[1]) * 100); }
+  const roasIdx  = idx(roasVals);
+  const cvrIdx   = idx(cvrVals);
+  const aovIdx   = idx(aovVals);
 
   const METRICS = [
-    { label: "Net ROAS", color: "#c9a55e", vals: roasVals,  fmt: (v: number) => `${v.toFixed(0)}%` },
-    { label: "CVR",      color: "#60a5fa", vals: cvrVals,   fmt: (v: number) => `${v.toFixed(2)}%` },
-    { label: "AOV",      color: "#34d399", vals: aovVals,   fmt: (v: number) => `$${v.toFixed(0)}` },
-    { label: "Trials",   color: "#a78bfa", vals: trialVals, fmt: (v: number) => v >= 1000 ? `${(v/1000).toFixed(1)}K` : `${v}` },
+    { label: "Net ROAS", color: "#c9a55e", idx: roasIdx, raw: roasVals,  fmt: (v: number) => `${v.toFixed(0)}%` },
+    { label: "CVR",      color: "#60a5fa", idx: cvrIdx,  raw: cvrVals,   fmt: (v: number) => `${v.toFixed(2)}%` },
+    { label: "AOV",      color: "#34d399", idx: aovIdx,  raw: aovVals,   fmt: (v: number) => `$${v.toFixed(0)}` },
   ];
 
-  const Y_TOP = 30, Y_BOT = 185;
+  // Trials shown as callout, not on the indexed axis (scale is too different)
+  const trialVals = versions.map((v) => v.pg1_trials);
 
-  function normY(vals: number[], v: number) {
-    const mn = Math.min(...vals), mx = Math.max(...vals);
-    if (mn === mx) return (Y_TOP + Y_BOT) / 2;
-    return Y_BOT - ((v - mn) / (mx - mn)) * (Y_BOT - Y_TOP);
+  // Y axis: index range 72–128, mapped to y=180 (low) → y=28 (high)
+  const Y_MIN = 72, Y_MAX = 128, Y_BOT = 182, Y_TOP = 28;
+  function toY(idxVal: number) {
+    return Y_BOT - ((Math.max(Y_MIN, Math.min(Y_MAX, idxVal)) - Y_MIN) / (Y_MAX - Y_MIN)) * (Y_BOT - Y_TOP);
   }
+  const baselineY = toY(100);
 
   return (
     <div className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.02] to-transparent p-4 flex flex-col gap-3">
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-4 flex-wrap">
         <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">Metrics by Pricing Era</div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-wrap">
           {METRICS.map((m) => (
             <div key={m.label} className="flex items-center gap-1.5">
-              <div className="w-3 h-0.5 rounded-full" style={{ backgroundColor: m.color }} />
+              <div className="w-4 h-0.5 rounded-full" style={{ backgroundColor: m.color }} />
               <span className="text-[9px] uppercase tracking-wider" style={{ color: m.color }}>{m.label}</span>
             </div>
           ))}
+          <div className="text-[9px] text-[#5a6478]">· all indexed to V1 = 100</div>
         </div>
       </div>
-      <svg viewBox="0 0 470 215" xmlns="http://www.w3.org/2000/svg" className="w-full">
+
+      <svg viewBox="0 0 480 215" xmlns="http://www.w3.org/2000/svg" className="w-full">
 
         {/* Version column labels */}
-        {vLabels.map((lbl, i) => (
-          <text key={lbl} x={XS[i]} y="14" textAnchor="middle" fill={vColors[i]} fontSize="9" fontWeight="700" fontFamily="sans-serif">{lbl}</text>
+        {versions.map((v, i) => (
+          <text key={v.version} x={XS[i]} y="14" textAnchor="middle" fill={vColors[i]} fontSize="9" fontWeight="700" fontFamily="sans-serif">{v.version}</text>
         ))}
 
-        {/* V0 stripe */}
-        <rect x="56" y="20" width="68" height={Y_BOT - 20 + 8} fill="#5a6478" opacity="0.04" rx="2" />
-        <text x="90" y={Y_BOT + 16} textAnchor="middle" fill="#5a6478" fontSize="7" fontFamily="sans-serif" opacity="0.45">baseline</text>
+        {/* V0 shaded baseline zone */}
+        <rect x="60" y="20" width="74" height={Y_BOT - 20 + 8} fill="#5a6478" opacity="0.04" rx="2" />
+        <text x="97" y={Y_BOT + 14} textAnchor="middle" fill="#5a6478" fontSize="6.5" opacity="0.4">forced continuity</text>
 
-        {/* Subtle vertical grid at each version */}
+        {/* V1 baseline at 100 */}
+        <line x1="60" y1={baselineY} x2="450" y2={baselineY} stroke="#5a6478" strokeWidth="0.8" strokeDasharray="4 3" opacity="0.35" />
+        <text x="454" y={baselineY + 3} fill="#5a6478" fontSize="6.5" opacity="0.45">100</text>
+
+        {/* Vertical grid lines */}
         {XS.map((x) => (
-          <line key={x} x1={x} y1="20" x2={x} y2={Y_BOT + 4} stroke="#2a3042" strokeWidth="0.5" strokeDasharray="2 3" opacity="0.35" />
+          <line key={x} x1={x} y1="20" x2={x} y2={Y_BOT + 4} stroke="#2a3042" strokeWidth="0.5" strokeDasharray="2 4" opacity="0.3" />
         ))}
 
-        {/* Each metric line */}
+        {/* Each metric */}
         {METRICS.map((m) => {
-          const ys = m.vals.map((v) => normY(m.vals, v));
+          const ys = m.idx.map((v) => toY(v));
           return (
             <g key={m.label}>
-              {/* dashed V0→V1 */}
-              <line x1={XS[0]} y1={ys[0]} x2={XS[1]} y2={ys[1]} stroke={m.color} strokeWidth="1" strokeDasharray="3 2" opacity="0.35" />
-              {/* solid V1→V2→V3 */}
+              {/* V0→V1 dashed */}
+              <line x1={XS[0]} y1={ys[0]} x2={XS[1]} y2={ys[1]} stroke={m.color} strokeWidth="1.2" strokeDasharray="3 2" opacity="0.3" />
+              {/* V1→V2→V3 solid */}
               <polyline
-                points={XS.slice(1).map((x, i) => `${x},${ys[i + 1]}`).join(" ")}
-                fill="none" stroke={m.color} strokeWidth="1.8" opacity="0.75"
+                points={[1, 2, 3].map((i) => `${XS[i]},${ys[i]}`).join(" ")}
+                fill="none" stroke={m.color} strokeWidth="2" opacity="0.8"
               />
-              {/* dots + value labels */}
-              {XS.map((x, i) => (
+              {/* Dots + raw value labels */}
+              {versions.map((_, i) => (
                 <g key={i}>
-                  <circle cx={x} cy={ys[i]} r="3.5" fill={m.color} opacity={i === 0 ? 0.4 : 1} />
+                  <circle cx={XS[i]} cy={ys[i]} r="4" fill={m.color} opacity={i === 0 ? 0.35 : 1} />
                   <text
-                    x={x}
-                    y={ys[i] - 7}
+                    x={XS[i]}
+                    y={ys[i] - 9}
                     textAnchor="middle"
                     fill={m.color}
-                    fontSize="7"
+                    fontSize="7.5"
                     fontFamily="monospace"
                     fontWeight="600"
-                    opacity={i === 0 ? 0.45 : 1}
+                    opacity={i === 0 ? 0.4 : 1}
                   >
-                    {m.fmt(m.vals[i])}
+                    {m.fmt(m.raw[i])}
                   </text>
                 </g>
               ))}
             </g>
           );
         })}
+
+        {/* Trials callout row at bottom */}
+        <text x="60" y={Y_BOT + 28} fill="#a78bfa" fontSize="6.5" fontFamily="sans-serif" fontWeight="600">PG1 TRIALS</text>
+        {versions.map((_, i) => (
+          <text key={i} x={XS[i]} y={Y_BOT + 28} textAnchor="middle" fill={i === 0 ? "#5a6478" : i === 2 ? "#f87171" : i === 3 ? "#34d399" : "#8b95a7"} fontSize="7" fontFamily="monospace" fontWeight="600">
+            {trialVals[i] >= 1000 ? `${(trialVals[i] / 1000).toFixed(1)}K` : trialVals[i]}
+          </text>
+        ))}
       </svg>
     </div>
   );
