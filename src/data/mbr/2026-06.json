@@ -231,11 +231,11 @@
     }
   ],
   "physical_takeaways": [
-    "RS1 is the new anchor \u2014 didn't exist in June 2025. It's now the largest physical funnel by revenue.",
-    "357 held volume relatively well: 6,449 sales in June 2025, current data pending. AOV up vs. prior year ($245 \u2192 est. $360).",
-    "SF1 is offline \u2014 3,064 FE sales and $889K in June 2025, zero this June. RS1 and SF2 absorbed that load.",
-    "AOV story is real: prior year blended AOV was $237. Current year estimated at $378 \u2014 a 60% jump driven by RS1 and mix shift away from SQSE/SQP.",
-    "SQSE/SQP/TOW/THR accounted for 3,460 sales in June 2025. Effectively deprecated this year \u2014 that volume has not been replaced 1:1."
+    "RS1 is the new anchor \u2014 a new product that didn't exist in June 2025. It's now the largest physical funnel by revenue.",
+    "357 held volume well. AOV increased from $245 to est. $360 following a price increase from $199 to $249.",
+    "SF1 is offline \u2014 3,064 FE sales and $889K in June 2025, zero this June. SF2 was built as its replacement and has absorbed that load.",
+    "AOV story is real: prior year blended AOV was $237. Current year estimated at $378 \u2014 a 60% jump driven by RS1 and the 357 price increase.",
+    "SQSE/SQP/TOW/THR accounted for 3,460 sales in June 2025. These funnels were taken offline because they could not hit Net ROAS targets \u2014 the volume loss is intentional, not structural."
   ],
   "digital_rollup": {
     "total_revenue": "\u26a0 Pending (PSS missing)",
@@ -338,6 +338,122 @@
     "SRSW scaled from 53 to 339 FE sales (+540%), revenue from $4K to $31K. Small base but strong growth trajectory.",
     "PSS June 2026 data pending \u2014 June 2025 PSS was 858 sales / $116K. Need to pull 2026 numbers to complete the rollup."
   ],
+  "cro_scorecard": {
+    "tests_launched": {
+      "goal": 7,
+      "actual": 11
+    },
+    "win_rate": {
+      "goal": "30%",
+      "actual": "18%",
+      "detail": "2W / 6L / 3F of 11 concluded"
+    },
+    "funnels_within_kpi": {
+      "kpi": "100% Net ROAS",
+      "rows": [
+        {
+          "funnel": "RS1",
+          "net_roas": "120%",
+          "within_kpi": true
+        },
+        {
+          "funnel": "357",
+          "net_roas": null,
+          "within_kpi": null
+        },
+        {
+          "funnel": "SF2",
+          "net_roas": "88%",
+          "within_kpi": false
+        },
+        {
+          "funnel": "SSP",
+          "net_roas": "54%",
+          "within_kpi": false
+        },
+        {
+          "funnel": "OSSF",
+          "net_roas": null,
+          "within_kpi": null
+        },
+        {
+          "funnel": "WPSS",
+          "net_roas": null,
+          "within_kpi": null
+        }
+      ]
+    },
+    "pg1_shopify_trials": {
+      "value": null,
+      "note": "\u26a0 Pending \u2014 trial definition changed multiple times; pull from testing dashboard once stable"
+    },
+    "pg1_coc_trials": {
+      "value": null,
+      "note": "Deprioritized \u2014 moving off CoC (357 and digital funnels still on CoC, migrating to Shopify)"
+    },
+    "estimated_test_impact": [
+      {
+        "test_id": "0546",
+        "name": "357 Checkout Champ \u2014 Var B",
+        "outcome": "WIN",
+        "cvr_lift": null,
+        "monthly_orders": null,
+        "aov": null,
+        "estimated_monthly_impact": null
+      },
+      {
+        "test_id": "0545",
+        "name": "One Shot Slice Fix \u2014 CoC",
+        "outcome": "WIN",
+        "cvr_lift": null,
+        "monthly_orders": null,
+        "aov": null,
+        "estimated_monthly_impact": null
+      }
+    ],
+    "top_funnel_cvr_aov": [
+      {
+        "funnel": "RS1",
+        "cvr": "1.01%",
+        "aov": "$410",
+        "cvr_note": "Paid CVR"
+      },
+      {
+        "funnel": "357",
+        "cvr": "49.41%",
+        "aov": "$298",
+        "cvr_note": "OP CVR"
+      },
+      {
+        "funnel": "SF2",
+        "cvr": null,
+        "aov": "$324",
+        "cvr_note": null
+      },
+      {
+        "funnel": "SSP",
+        "cvr": null,
+        "aov": "$258",
+        "cvr_note": null
+      },
+      {
+        "funnel": "OSSF",
+        "cvr": "62.42%",
+        "aov": "$112",
+        "cvr_note": "OP CVR"
+      },
+      {
+        "funnel": "WPSS",
+        "cvr": "57.20%",
+        "aov": "$198",
+        "cvr_note": "OP CVR"
+      }
+    ],
+    "rebuy_aov_contribution": {
+      "value": null,
+      "note": "\u26a0 Pending \u2014 pull from Rebuy dashboard"
+    }
+  },
   "goals": {
     "tests_launched": 7,
     "win_rate": "30%",
