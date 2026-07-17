@@ -16,9 +16,9 @@
     "digital":  { "current": 7911,  "prior": 18884, "change": "−58.1%", "direction": "down" }
   },
   "physical_rollup": {
-    "total_revenue": "$3.72M", "prior_revenue": "$3.16M", "revenue_change": "+17.7%",
-    "fe_sales": 9850, "prior_fe_sales": 12200,
-    "aov": "$377.66", "prior_aov": "$259.02", "aov_change": "+45.8%"
+    "total_revenue": "$3.72M", "prior_revenue": "$3.43M", "revenue_change": "+8.5%",
+    "fe_sales": 9850, "prior_fe_sales": 14472,
+    "aov": "$377.66", "prior_aov": "$236.86", "aov_change": "+59.5%"
   },
   "physical_funnels_current": [
     { "funnel": "RS1",   "fe_sales": 4120, "revenue": 1648000, "aov": 400.00, "visitors": null, "op_cvr": null },
@@ -29,20 +29,20 @@
     { "funnel": "DF1",   "fe_sales": 170,  "revenue": 129100,  "aov": 759.41, "visitors": null, "op_cvr": null }
   ],
   "physical_funnels_prior": [
-    { "funnel": "357",   "fe_sales": 5800, "revenue": 1508000, "aov": 260.00, "visitors": null, "op_cvr": null },
-    { "funnel": "SF1",   "fe_sales": 4100, "revenue": 1025000, "aov": 250.00, "visitors": null, "op_cvr": null },
-    { "funnel": "THR",   "fe_sales": 1100, "revenue": 247500,  "aov": 225.00, "visitors": null, "op_cvr": null },
-    { "funnel": "CLST",  "fe_sales": 820,  "revenue": 172200,  "aov": 210.00, "visitors": null, "op_cvr": null },
-    { "funnel": "SQP",   "fe_sales": 240,  "revenue": 136800,  "aov": 570.00, "visitors": null, "op_cvr": null },
-    { "funnel": "SQSE",  "fe_sales": 100,  "revenue": 50000,   "aov": 500.00, "visitors": null, "op_cvr": null },
-    { "funnel": "TOW",   "fe_calls": 40,   "fe_sales": 40,     "revenue": 20000, "aov": 500.00, "visitors": null, "op_cvr": null }
+    { "funnel": "357",  "fe_sales": 6449, "revenue": 1577938, "aov": 244.68, "visitors": 13562, "op_cvr": "51.10%" },
+    { "funnel": "SF1",  "fe_sales": 3064, "revenue": 889334,  "aov": 290.25, "visitors": 8620,  "op_cvr": "35.55%" },
+    { "funnel": "THR",  "fe_sales": 1041, "revenue": 333453,  "aov": 320.32, "visitors": 2864,  "op_cvr": "38.97%" },
+    { "funnel": "CLST", "fe_sales": 1499, "revenue": 247852,  "aov": 165.34, "visitors": 2700,  "op_cvr": "56.04%" },
+    { "funnel": "SQP",  "fe_sales": 908,  "revenue": 192035,  "aov": 211.49, "visitors": 2332,  "op_cvr": "38.94%" },
+    { "funnel": "SQSE", "fe_sales": 1432, "revenue": 172609,  "aov": 120.54, "visitors": 2249,  "op_cvr": "63.67%" },
+    { "funnel": "TOW",  "fe_sales": 79,   "revenue": 14405,   "aov": 182.34, "visitors": 157,   "op_cvr": "50.32%" }
   ],
   "physical_takeaways": [
-    "RS1 is the new anchor — $1.65M (44% of physical) at $400 AOV. Didn't exist in the June 2025 mix.",
-    "Revenue up +18% on 19% fewer sales — AOV jumped +46% ($259 → $378). We're selling less but earning more per order.",
-    "SF1 is offline ('ooo and never coming back') — 4,100 sales last June, zero this June. RS1 and SF2 absorbed that load.",
-    "DF1 at $759 AOV signals high-ticket physical is a real channel — worth watching as it scales.",
-    "Concentration risk is shifting: RS1 + 357 = 73% of physical revenue. RS1 is now the single biggest risk if it slows."
+    "RS1 is the new anchor — didn't exist in June 2025. It's now the largest physical funnel by revenue.",
+    "357 held volume relatively well: 6,449 sales in June 2025, current data pending. AOV up vs. prior year ($245 → est. $360).",
+    "SF1 is offline — 3,064 FE sales and $889K in June 2025, zero this June. RS1 and SF2 absorbed that load.",
+    "AOV story is real: prior year blended AOV was $237. Current year estimated at $378 — a 60% jump driven by RS1 and mix shift away from SQSE/SQP.",
+    "SQSE/SQP/TOW/THR accounted for 3,460 sales in June 2025. Effectively deprecated this year — that volume has not been replaced 1:1."
   ],
   "digital_rollup": {
     "total_revenue": "⚠ Pending (PSS missing)", "prior_revenue": "$510K", "revenue_change": "⚠ Pending",
