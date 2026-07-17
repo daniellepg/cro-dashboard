@@ -178,53 +178,6 @@ function CroScorecardSection({ sc }: { sc: CroScorecard }) {
         </div>
       </div>
 
-      {/* Estimated test impact */}
-      <div className="mb-6">
-        <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold mb-3">Estimated Impact of Shipped Winners</div>
-        <div className="overflow-x-auto rounded-lg border border-white/[0.08]">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="border-b border-white/[0.06]">
-                {["Exp ID", "Test", "CVR Lift", "Monthly Orders", "AOV", "Est. Monthly Impact"].map((h) => (
-                  <th key={h} className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#5a6478] font-medium">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {sc.estimated_test_impact.map((r) => (
-                <tr key={r.test_id} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
-                  <td className="px-4 py-3 font-mono text-[#5a6478]">{r.test_id}</td>
-                  <td className="px-4 py-3 text-[#f4f5f7]">{r.name}</td>
-                  <td className="px-4 py-3 text-[#8b95a7]">{r.cvr_lift ?? <span className="text-[#5a6478] text-[10px]">⚠ pending</span>}</td>
-                  <td className="px-4 py-3 text-[#8b95a7]">{r.monthly_orders != null ? fmt.number(r.monthly_orders) : <span className="text-[#5a6478] text-[10px]">⚠ pending</span>}</td>
-                  <td className="px-4 py-3 text-[#8b95a7]">{r.aov ?? <span className="text-[#5a6478] text-[10px]">⚠ pending</span>}</td>
-                  <td className="px-4 py-3 text-[#c9a55e] font-medium">{r.estimated_monthly_impact ?? <span className="text-[#5a6478] text-[10px]">⚠ pending</span>}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="text-[10px] text-[#5a6478] mt-2">Formula: CVR lift % × monthly orders × AOV = estimated incremental revenue · CVR lift estimated from RPV data — verify with Katherine&apos;s scorecard</p>
-      </div>
-
-      {/* Bottom row: Trials + Rebuy */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
-          <div className="text-[10px] uppercase tracking-[0.18em] text-[#8b95a7] font-semibold mb-2">PG1 Shopify Trials (Testing Impact)</div>
-          <div className="text-lg font-semibold text-[#f4f5f7]">{sc.pg1_shopify_trials.value ?? "—"}</div>
-          <p className="text-[10px] text-[#5a6478] mt-1.5 leading-relaxed">{sc.pg1_shopify_trials.note}</p>
-        </div>
-        <div className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
-          <div className="text-[10px] uppercase tracking-[0.18em] text-[#8b95a7] font-semibold mb-2">PG1 CoC Trials (Testing Impact)</div>
-          <div className="text-lg font-semibold text-[#f4f5f7]">{sc.pg1_coc_trials.value ?? "—"}</div>
-          <p className="text-[10px] text-[#5a6478] mt-1.5 leading-relaxed">{sc.pg1_coc_trials.note}</p>
-        </div>
-        <div className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
-          <div className="text-[10px] uppercase tracking-[0.18em] text-[#8b95a7] font-semibold mb-2">Rebuy Contribution to AOV</div>
-          <div className="text-lg font-semibold text-[#f4f5f7]">{sc.rebuy_aov_contribution.value ?? "—"}</div>
-          <p className="text-[10px] text-[#5a6478] mt-1.5 leading-relaxed">{sc.rebuy_aov_contribution.note}</p>
-        </div>
-      </div>
     </section>
   );
 }
