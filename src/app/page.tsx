@@ -99,9 +99,6 @@ export default async function CoverPage() {
       {/* Header + top CTA */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>
-          <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold mb-3">
-            Performance Golf · CRO
-          </div>
           <h1 className="text-4xl font-semibold tracking-tight">CRO Command Center</h1>
           <p className="text-[#8b95a7] mt-2 max-w-xl">
             Live test pipeline, funnel performance, and the testing backlog — all in one place.
