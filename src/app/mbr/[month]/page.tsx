@@ -696,22 +696,29 @@ function PricingJourneyChart({ v0NetRevenue }: { v0NetRevenue: string }) {
         ))}
 
         {/* Golf cart at V3 */}
-        <g transform="translate(355, 8)">
-          {/* canopy */}
-          <rect x="2" y="0" width="30" height="8" rx="3" fill="#c9a55e" />
-          {/* body */}
-          <rect x="0" y="7" width="34" height="10" rx="2" fill="#1e2533" stroke="#c9a55e" strokeWidth="0.8" />
-          {/* windshield */}
-          <rect x="24" y="7" width="8" height="9" rx="1" fill="#c9a55e" opacity="0.3" />
-          {/* wheels */}
-          <circle cx="8"  cy="19" r="4" fill="#34d399" />
-          <circle cx="26" cy="19" r="4" fill="#34d399" />
-          <circle cx="8"  cy="19" r="2" fill="#0d1117" />
-          <circle cx="26" cy="19" r="2" fill="#0d1117" />
-          {/* flag pole */}
-          <line x1="36" y1="17" x2="36" y2="2" stroke="#34d399" strokeWidth="1.2" />
+        <g transform="translate(342, 2)">
+          {/* roof canopy — overhangs front */}
+          <rect x="0" y="0" width="52" height="7" rx="2" fill="#c9a55e" />
+          {/* rear support post */}
+          <rect x="3" y="6" width="3" height="12" fill="#c9a55e" opacity="0.7" />
+          {/* angled windshield (front post) */}
+          <polygon points="42,6 48,6 44,18" fill="#c9a55e" opacity="0.25" />
+          <line x1="42" y1="6" x2="44" y2="18" stroke="#c9a55e" strokeWidth="1.2" opacity="0.7" />
+          {/* seat */}
+          <rect x="8" y="8" width="32" height="7" rx="1.5" fill="#2a3448" stroke="#c9a55e" strokeWidth="0.5" />
+          {/* floor / undercarriage */}
+          <rect x="3" y="15" width="50" height="5" rx="1.5" fill="#1e2533" stroke="#c9a55e" strokeWidth="0.7" />
+          {/* rear cargo bump */}
+          <rect x="3" y="11" width="8" height="9" rx="1" fill="#1a2030" stroke="#c9a55e" strokeWidth="0.5" />
+          {/* wheels — outer ring + hub */}
+          <circle cx="14" cy="23" r="6" fill="#1e2533" stroke="#34d399" strokeWidth="1.8" />
+          <circle cx="14" cy="23" r="2.2" fill="#34d399" />
+          <circle cx="42" cy="23" r="6" fill="#1e2533" stroke="#34d399" strokeWidth="1.8" />
+          <circle cx="42" cy="23" r="2.2" fill="#34d399" />
+          {/* flag pole at front */}
+          <line x1="52" y1="22" x2="52" y2="1" stroke="#34d399" strokeWidth="1.3" />
           {/* flag */}
-          <polygon points="36,2 44,5 36,8" fill="#34d399" />
+          <polygon points="52,1 62,5 52,9" fill="#34d399" />
         </g>
 
         {/* X axis */}
