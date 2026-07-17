@@ -230,12 +230,12 @@
     "SQSE/SQP/TOW/THR accounted for 3,460 sales in June 2025. These funnels were taken offline because they could not hit Net ROAS targets \u2014 the volume loss is intentional, not structural."
   ],
   "digital_rollup": {
-    "total_revenue": "\u26a0 Pending (PSS missing)",
+    "total_revenue": "$272,115",
     "prior_revenue": "$510K",
-    "revenue_change": "\u26a0 Pending",
+    "revenue_change": "vs $510K June 2025",
     "fe_sales": 2057,
     "prior_fe_sales": 5048,
-    "aov": "$132.30",
+    "aov": "$132.29",
     "prior_aov": "$101.07",
     "aov_change": "+31.0%"
   },
@@ -271,14 +271,6 @@
       "aov": 116.76,
       "visitors": 392,
       "op_cvr": "72.70%"
-    },
-    {
-      "funnel": "PSS",
-      "fe_sales": null,
-      "revenue": null,
-      "aov": null,
-      "visitors": null,
-      "op_cvr": "\u26a0 pending"
     }
   ],
   "digital_funnels_prior": [
@@ -328,7 +320,7 @@
     "WPSS ($110K, $198 AOV) is new this year \u2014 didn't exist in June 2025. Partially offsets SSTS volume decline with higher AOV.",
     "OSSF held steady: 885 to 877 FE sales (flat), AOV rose from $96 to $112. OP CVR dropped from 73% to 62%.",
     "SRSW scaled from 53 to 339 FE sales (+540%), revenue from $4K to $31K. Small base but strong growth trajectory.",
-    "PSS June 2026 data pending \u2014 June 2025 PSS was 858 sales / $116K. Need to pull 2026 numbers to complete the rollup."
+    "PSS became WPSS in 2026 \u2014 WPSS recorded 556 FE sales and $110K revenue in June at $198 AOV, a significantly higher price point than PSS's prior $135 AOV."
   ],
   "cro_scorecard": {
     "tests_launched": {
