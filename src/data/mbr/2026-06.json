@@ -508,11 +508,27 @@
       "stat_sig": "—"
     },
     {
-      "id": "PG14A-100",
-      "name": "Club Only + Club + App Copy (100%) — Shopify",
-      "outcome": "FLAT",
-      "primary_metric": "RPV flat",
-      "revenue_stat": "AOV $316",
+      "id": "PG14A",
+      "name": "V2 Club Only + Club + App — Shopify-wide (Var A)",
+      "outcome": "LOSS",
+      "primary_metric": "RPV −48%",
+      "revenue_stat": "AOV +4% · Membership shift +25pp · CVR collapse offset all AOV gains",
+      "stat_sig": "—"
+    },
+    {
+      "id": "PG14B",
+      "name": "V2 Club Only + Club + App — Shopify-wide (Var B)",
+      "outcome": "LOSS",
+      "primary_metric": "RPV −24%",
+      "revenue_stat": "AOV +13% · Membership shift +32pp · RPV still negative",
+      "stat_sig": "—"
+    },
+    {
+      "id": "PG14C",
+      "name": "V2 Club Only + Club + App — Shopify-wide (Var C)",
+      "outcome": "LOSS",
+      "primary_metric": "RPV −30%",
+      "revenue_stat": "AOV +9% · Membership shift +34pp · Max CPC compressed $2.26 → $1.58",
       "stat_sig": "—"
     },
     {
