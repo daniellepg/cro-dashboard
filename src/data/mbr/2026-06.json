@@ -325,12 +325,12 @@
   "cro_scorecard": {
     "tests_launched": {
       "goal": 7,
-      "actual": 11
+      "actual": 9
     },
     "win_rate": {
       "goal": "30%",
-      "actual": "18%",
-      "detail": "2W / 6L / 3F of 11 concluded"
+      "actual": "27%",
+      "detail": "3W/5L/3F"
     },
     "funnels_within_kpi": {
       "kpi": "100% Net ROAS",
@@ -480,39 +480,23 @@
       "name": "WPSS Checkout Champ Test",
       "outcome": "LOSS",
       "primary_metric": "CVR loss",
-      "revenue_stat": "Membership +84pp (data anomaly)",
+      "revenue_stat": null,
       "stat_sig": "\u2014"
     },
     {
-      "id": "PG14A",
-      "name": "Club Only + Club + App Copy (A) \u2014 Shopify",
+      "id": "PG14A\u2013C",
+      "name": "Club Only + Club + App Copy (3 variants) \u2014 Shopify",
       "outcome": "LOSS",
-      "primary_metric": "RPV \u221248%",
-      "revenue_stat": "Membership +25pp \u00b7 AOV $306 \u2192 $318 (+4%)",
-      "stat_sig": "\u2014"
-    },
-    {
-      "id": "PG14B",
-      "name": "Club Only + Club + App Copy (B) \u2014 Shopify",
-      "outcome": "LOSS",
-      "primary_metric": "RPV \u221224%",
-      "revenue_stat": "Membership +32pp \u00b7 AOV $309 \u2192 $350 (+13%)",
-      "stat_sig": "\u2014"
-    },
-    {
-      "id": "PG14C",
-      "name": "Club Only + Club + App Copy (C) \u2014 Shopify",
-      "outcome": "LOSS",
-      "primary_metric": "RPV \u221230%",
-      "revenue_stat": "Membership +34pp \u00b7 AOV $291 \u2192 $317 (+9%)",
+      "primary_metric": "CVR decrease",
+      "revenue_stat": null,
       "stat_sig": "\u2014"
     },
     {
       "id": "PG0023",
       "name": "ONE.1 Wedge \u2014 Help Me Choose Quiz \u2014 Shopify",
-      "outcome": "LOSS",
-      "primary_metric": "RPV \u221220%",
-      "revenue_stat": "AOV $207 \u2192 $170 (\u221218%)",
+      "outcome": "WIN",
+      "primary_metric": "ATC + CVR lift",
+      "revenue_stat": "RPV \u221220% (non-primary \u00b7 AOV skewed by quiz path)",
       "stat_sig": "\u2014"
     },
     {
@@ -535,8 +519,8 @@
       "id": "PG09A",
       "name": "Help Me Choose \u2014 Shopify",
       "outcome": "FLAT",
-      "primary_metric": "RPV \u22120%",
-      "revenue_stat": "AOV $236 \u2192 $240 (+2%)",
+      "primary_metric": "Inconclusive \u00b7 promo period",
+      "revenue_stat": "Help Me Choose clicked: 2.1% \u00b7 ran Jun 8\u201323 during heavy promo",
       "stat_sig": "\u2014"
     }
   ],
@@ -596,9 +580,9 @@
       },
       {
         "version": "V1",
-        "label": "Single Price \u00b7 No Trial",
+        "label": "Member / Non-Member Pricing",
         "date_range": "Apr 12 \u2013 May 11",
-        "description": "Baseline. One checkout price across all funnels, no subscription or free trial offer.",
+        "description": "Baseline. Two price points \u2014 members saw a lower price, non-members a higher price. No trial offer. This was the live structure before any testing began.",
         "cvr": "0.95%",
         "aov": "$261",
         "pg1_trials": 2332,
@@ -611,9 +595,9 @@
       },
       {
         "version": "V2",
-        "label": "Member / Non-Member Pricing",
+        "label": "Club & Club + App Pricing",
         "date_range": "May 12 \u2013 Jun 9",
-        "description": "Two-price checkout. Non-members saw a higher price with an auto-added $29/mo PG1 subscription. A/B tests (PG08, PG14) confirmed CVR loss outweighed subscription LTV.",
+        "description": "Same price point as V1 but reframed as two options: Club only vs. Club + App. A/B tests (PG08, PG14) ran this structure against the V1 member/non-member baseline \u2014 every variant returned a CVR loss.",
         "cvr": "0.83%",
         "aov": "$306",
         "pg1_trials": 5276,
@@ -628,7 +612,7 @@
         "version": "V3",
         "label": "Single Price + Auto-Trial",
         "date_range": "Jun 11 \u2013 Jul 11",
-        "description": "Returned to single price. PG1 7-day free trial auto-added to cart (removable). Live Jun 10 Shopify, Jun 11 357 CC. First profitable period of all three.",
+        "description": "Removed the two-option structure entirely. Single checkout price across all funnels. PG1 7-day free trial auto-added to cart (removable). Live Jun 10 Shopify, Jun 11 357 CC. First profitable period of all three.",
         "cvr": "0.92%",
         "aov": "$295",
         "pg1_trials": 7968,
@@ -660,7 +644,7 @@
     "callout_watch": "AOV is down from V2 ($306 \u2192 $295). V2's non-member price premium drove higher AOV; V3's single price brought it back down slightly. At 75.4% trial attach rate and $29/month, even 2-month average subscriber retention more than covers the $11 AOV gap per buyer \u2014 but trial-to-paid conversion rate is the metric to watch in the next 30\u201360 days.",
     "ab_test_evidence": {
       "headline": "A/B test evidence behind the V2 reversal",
-      "intro": "Six tests across SF2 (Shopify) and Shopify-wide funnels tested the member/non-member two-price structure. Every variant returned an RPV loss \u2014 the signal paid media algorithms use to set bid ceilings \u2014 meaning higher AOV from non-member pricing could not compensate for the CVR drop.",
+      "intro": "Six tests across SF2 (Shopify) and Shopify-wide funnels compared the Club & Club + App two-option structure (V2) against the member/non-member baseline (V1). Every variant returned an RPV loss \u2014 meaning the Club/Club + App reframe hurt revenue per visitor despite AOV holding up, because CVR dropped more than price could compensate.",
       "tests": [
         {
           "id": "PG08A",
@@ -761,11 +745,11 @@
           "highlight": true
         }
       ],
-      "conclusion": "Even at full subscription ramp, V2 required subscribers to stay for 10.3 months on average to offset the revenue lost from the CVR drop. Industry average SaaS churn makes that a very long bet \u2014 and there was no data suggesting PG1 retention would hold at that level."
+      "conclusion": "Even at full subscription ramp, V2 (Club & Club + App) required subscribers to stay for 10.3 months on average to offset the revenue lost from the CVR drop vs. V1 (member/non-member). Industry churn rates make that a very long bet \u2014 and there was no data suggesting PG1 retention would hold at that level."
     },
     "paid_media_impact": {
       "headline": "Paid media double penalty: bid ceiling + CVR",
-      "intro": "V2 created two simultaneous headwinds for paid media efficiency. First, the RPV drop compressed the max efficient CPC \u2014 the algorithm could no longer bid as aggressively without breaking ROAS targets. Second, the CVR drop meant more clicks (and spend) were required per purchase. Either alone is manageable; together they make scaling impossible.",
+      "intro": "The Club & Club + App structure (V2) created two simultaneous headwinds vs. the member/non-member baseline (V1). First, RPV dropped on every variant, compressing the max efficient CPC \u2014 the algorithm could no longer bid as aggressively without breaking ROAS targets. Second, the CVR drop meant more clicks (and spend) were required per purchase. Either alone is manageable; together they make scaling unprofitable.",
       "bid_ceiling_rows": [
         {
           "test": "PG08B (SF2)",
@@ -832,7 +816,7 @@
       "scenarios": [
         {
           "version": "V1",
-          "label": "Stayed on single price \u00b7 no trial",
+          "label": "Member / Non-Member pricing continues",
           "orders": 10648,
           "gross_revenue": "$2,779K",
           "pg1_trials": 3897,
@@ -840,11 +824,11 @@
           "net_revenue": "~\u2212$18K",
           "net_revenue_positive": false,
           "verdict": "Near breakeven \u2014 no path to profit at scale",
-          "note": "CVR holds but no subscription acquisition engine. Trial starts plateau at ~37% of orders with no structural mechanism to grow them. ROAS stays near breakeven indefinitely with no LTV lever to pull."
+          "note": "Two price points, no trial. CVR holds but no subscription acquisition engine and no structural change to the checkout experience. ROAS stays near breakeven indefinitely with no LTV lever to pull."
         },
         {
           "version": "V2",
-          "label": "Member / non-member pricing fully implemented",
+          "label": "Club & Club + App fully implemented",
           "orders": 9303,
           "gross_revenue": "$2,847K",
           "pg1_trials": 5387,
@@ -852,7 +836,7 @@
           "net_revenue": "~\u2212$81K",
           "net_revenue_positive": false,
           "verdict": "Unprofitable with no near-term path to breakeven",
-          "note": "Subscription revenue ramps to ~$46.5K/month at steady state \u2014 closing 41% of the $114K/month gap vs V1. Breakeven requires 10.3-month average subscriber retention. Net revenue worsens as spend scales because the CVR penalty grows linearly while subscription LTV accrues slowly."
+          "note": "Same price as V1, reframed as Club vs. Club + App. CVR loss confirmed across all 6 tests. Subscription revenue ramps to ~$46.5K/month at steady state but can only close 41% of the revenue gap. Breakeven requires 10.3-month average subscriber retention."
         },
         {
           "version": "V3",
