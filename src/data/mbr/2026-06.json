@@ -365,8 +365,8 @@
         },
         {
           "funnel": "OSSF",
-          "net_roas": null,
-          "within_kpi": null
+          "net_roas": "65%",
+          "within_kpi": false
         },
         {
           "funnel": "WPSS",
