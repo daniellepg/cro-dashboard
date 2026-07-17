@@ -122,23 +122,6 @@ export function CroKpiGrid({ sc }: { sc: CroScorecard }) {
 
   return (
     <div>
-      {/* Patrick's automation note */}
-      <div className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4 mb-5 flex items-center justify-between gap-4">
-        <div>
-          <div className="text-[10px] uppercase tracking-[0.22em] text-[#8b95a7] font-semibold mb-1">Automated Dashboard</div>
-          <p className="text-xs text-[#5a6478]">
-            Full DOMO-connected KPI dashboard in progress — built by Patrick. Values sourced from MBR until automation is live.
-          </p>
-        </div>
-        <a
-          href={PATRICK_CLICKUP}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="shrink-0 text-[10px] uppercase tracking-widest text-[#c9a55e] hover:text-[#d6b572] transition-colors whitespace-nowrap"
-        >
-          ClickUp task ↗
-        </a>
-      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {tiles.map((t) => (
