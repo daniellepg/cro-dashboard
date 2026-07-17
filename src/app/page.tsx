@@ -10,6 +10,7 @@ type Tile = {
   href: string;
   title: string;
   subtitle: string;
+  note?: string;
   stat?: number | null;
   external?: boolean;
 };
@@ -21,6 +22,7 @@ function TileCard({ t }: { t: Tile }) {
         <div>
           <div className="text-base font-medium">{t.title}</div>
           <div className="text-xs text-[#8b95a7] mt-0.5">{t.subtitle}</div>
+          {t.note && <div className="text-[10px] text-[#5a6478] mt-1.5 uppercase tracking-widest">⚠ {t.note}</div>}
         </div>
         {t.external && (
           <span className="text-[10px] tracking-wider text-[#8b95a7] uppercase">↗ External</span>
@@ -82,8 +84,8 @@ export default async function CoverPage() {
   ];
 
   const data: Tile[] = [
-    { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "WoW Data by Funnel", subtitle: "Week-over-week · from Domo", external: true },
-    { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board" },
+    { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "WoW Data by Funnel", subtitle: "Week-over-week · from Domo", note: "Work in progress", external: true },
+    { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board", note: "Work in progress" },
   ];
 
   const reporting: Tile[] = [
