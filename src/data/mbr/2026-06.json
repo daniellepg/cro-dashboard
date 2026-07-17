@@ -607,9 +607,24 @@
   "generated_at": "2026-07-07T00:00:00Z",
   "data_source": "DOMO (Orders with Acq Spend 2.0) + ClickUp",
   "pricing_model_analysis": {
-    "headline": "New Pricing Model Analysis",
-    "sub": "Three pricing eras across all paid funnels \u2014 Apr 12 through Jul 11 \u00b7 Source: Domo Ad Performance (357 campaigns)",
+    "headline": "Pricing Model Analysis \u2014 V0 through V3",
+    "sub": "Four pricing eras \u00b7 Mar 6 through Jul 11 \u00b7 V0 is the forced-continuity baseline (not a viable path) \u00b7 Source: DOMO Ad Performance",
     "versions": [
+      {
+        "version": "V0",
+        "label": "Forced Continuity \u2014 Baseline",
+        "date_range": "Mar 6 \u2013 Apr 6",
+        "description": "Pre-change baseline. $29/mo PG1 subscription auto-added and forced at checkout. High trial volume but driven by force, not intent. Not a viable path \u2014 compliance and refund risk required moving away from this model.",
+        "cvr": "0.85%",
+        "aov": "$213",
+        "pg1_trials": 9342,
+        "trials_per_100_orders": "86.1",
+        "net_roas": "84%",
+        "ad_spend": "$1.66M",
+        "cpa": "$156",
+        "net_revenue": "\u2212$266K",
+        "net_revenue_positive": false
+      },
       {
         "version": "V1",
         "label": "Single Price \u00b7 No Trial",

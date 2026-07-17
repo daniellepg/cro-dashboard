@@ -289,6 +289,7 @@ function TestsTable({ tests }: { tests: TestResult[] }) {
 }
 
 const VERSION_STYLES: Record<string, { badge: string; border: string; dot: string }> = {
+  V0: { badge: "text-amber-500 bg-amber-500/10 border-amber-500/20", border: "border-amber-500/20", dot: "#f59e0b" },
   V1: { badge: "text-[#8b95a7] bg-white/[0.06] border-white/[0.08]", border: "border-white/[0.08]", dot: "#8b95a7" },
   V2: { badge: "text-red-400 bg-red-400/10 border-red-400/20", border: "border-red-400/20", dot: "#f87171" },
   V3: { badge: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20", border: "border-emerald-400/30", dot: "#34d399" },
