@@ -540,38 +540,7 @@
       "stat_sig": "\u2014"
     }
   ],
-  "tests_in_progress": [
-    {
-      "id": "0494",
-      "name": "357 Checkout Champ Test 0494",
-      "key_kpi": "RPV",
-      "next_steps": "Running since Apr 20 \u2014 monitor"
-    },
-    {
-      "id": "PG0022",
-      "name": "Shopify Checkout UVPs Above CTA",
-      "key_kpi": "RPV",
-      "next_steps": "Started Jun 29 \u2014 early results"
-    },
-    {
-      "id": "PG0031",
-      "name": "PDP RS1 & RS1+ Help Me Choose \u2014 Shopify",
-      "key_kpi": "RPV",
-      "next_steps": "Live \u2014 monitor"
-    },
-    {
-      "id": "PG0032",
-      "name": "Putter CLP to RS1 PDP \u2014 Shopify",
-      "key_kpi": "RPV",
-      "next_steps": "Started Jun 30 \u2014 early results"
-    },
-    {
-      "id": "PG0028",
-      "name": "SF2 PDP Adding Tolstoy \u2014 Shopify",
-      "key_kpi": "RPV",
-      "next_steps": "Live \u2014 monitor"
-    }
-  ],
+  "tests_in_progress": [],
   "themes": [
     {
       "number": 1,
