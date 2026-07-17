@@ -558,10 +558,10 @@
     },
     {
       "number": 3,
-      "title": "PG1 v3 on Shopify is the structural bet",
+      "title": "V1 and V2 failed. V3 is the only pricing model that worked.",
       "outcome": "WIN",
-      "narrative": "Moving PG1 to Shopify and introducing a 7-day no-subscription free trial removes the forced continuity model that created refund exposure. Removing misleading checkout text (implying subscription when it was a free trial) addresses a trust and compliance issue at the highest-volume point in the funnel.",
-      "takeaway": "Free trial clarity at checkout is a CRO win and a retention investment — measure trial-to-paid conversion as the north star."
+      "narrative": "V1 (member/non-member two price points) lost $7K net. V2 (Club Only vs. Club + App reframe) lost $81K net — every A/B test across both eras returned a CVR loss, RPV dropped 24–48%, and paid media bid ceilings compressed. V3 (single price + auto-trial) is the only era to generate positive net revenue: +$61K on the same ad spend. The data is unambiguous.",
+      "takeaway": "V3 wins. Don't revisit V1 or V2 pricing structures — the test record across 6 variants is clear."
     }
   ],
   "triumphs": [
