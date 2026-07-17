@@ -32,7 +32,7 @@ function TileCard({ t }: { t: Tile }) {
         </div>
       ) : (
         <div className="absolute bottom-5 left-5">
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0a0e14] bg-[#c9a55e] rounded px-3 py-1.5 transition-all group-hover:bg-[#d6b572]">
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-white bg-[#FD3300] rounded px-3 py-1.5 uppercase tracking-[0.12em] transition-all group-hover:bg-[#e02d00]">
             View →
           </span>
         </div>
