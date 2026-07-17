@@ -304,7 +304,7 @@ function TestsTable({ tests }: { tests: TestResult[] }) {
       <table className="w-full text-xs">
         <thead>
           <tr className="border-b border-white/[0.06]">
-            {["Exp ID", "Test", "Outcome", "Primary Metric", "Revenue Stat", "Stat Sig"].map((h) => (
+            {["Exp ID", "Test", "Outcome", "Primary Metric", "Revenue Stat", "Stat Sig", ""].map((h) => (
               <th key={h} className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#5a6478] font-medium">
                 {h}
               </th>
@@ -320,6 +320,16 @@ function TestsTable({ tests }: { tests: TestResult[] }) {
               <td className="px-4 py-3 text-[#8b95a7]">{t.primary_metric ?? "—"}</td>
               <td className="px-4 py-3 text-[#8b95a7]">{t.revenue_stat ?? "—"}</td>
               <td className="px-4 py-3 text-[#8b95a7]">{t.stat_sig ?? "—"}</td>
+              <td className="px-4 py-3">
+                <a
+                  href="https://pg-domo-analytics-kg.vercel.app/testing/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] uppercase tracking-widest text-[#5a6478] hover:text-[#c9a55e] transition-colors whitespace-nowrap"
+                >
+                  Scorecard ↗
+                </a>
+              </td>
             </tr>
           ))}
         </tbody>
