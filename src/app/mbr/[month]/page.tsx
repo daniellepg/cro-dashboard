@@ -588,50 +588,64 @@ function PricingModelSection({ data }: { data: PricingModelAnalysis }) {
       </div>
 
       {/* Path projection */}
-      {data.path_projection && (
-        <div>
-          <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold mb-1">{data.path_projection.headline}</div>
-          <p className="text-xs text-[#5a6478] mb-4 leading-relaxed">{data.path_projection.sub}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-            {data.path_projection.scenarios.map((s) => {
-              const st = VERDICT_STYLES[s.version] ?? VERDICT_STYLES.V1;
-              return (
-                <div key={s.version} className={`rounded-lg border ${st.border} bg-gradient-to-b from-white/[0.03] to-transparent p-5`}>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded border ${st.badge}`}>{s.version}</span>
-                    {s.net_revenue_positive
-                      ? <span className="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider">Profitable</span>
-                      : <span className="text-[10px] text-red-400 font-semibold uppercase tracking-wider">Loss</span>
-                    }
+      {data.path_projection && (() => {
+        const v0Version = data.versions.find((v) => v.version === "V0");
+        const nonV3 = data.path_projection!.scenarios.filter((s) => s.version !== "V3");
+        const v3 = data.path_projection!.scenarios.find((s) => s.version === "V3");
+        const renderScenarioCard = (s: (typeof data.path_projection)["scenarios"][number]) => {
+          const st = VERDICT_STYLES[s.version] ?? VERDICT_STYLES.V1;
+          return (
+            <div key={s.version} className={`rounded-lg border ${st.border} bg-gradient-to-b from-white/[0.03] to-transparent p-5`}>
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded border ${st.badge}`}>{s.version}</span>
+                {s.net_revenue_positive
+                  ? <span className="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider">Profitable</span>
+                  : <span className="text-[10px] text-red-400 font-semibold uppercase tracking-wider">Loss</span>
+                }
+              </div>
+              <p className="text-[11px] text-[#8b95a7] mb-4 leading-snug">{s.label}</p>
+              <div className="space-y-2 border-t border-white/[0.06] pt-3">
+                {[
+                  { label: "Orders", value: s.orders.toLocaleString() },
+                  { label: "Gross Revenue", value: s.gross_revenue },
+                  { label: "PG1 Trials", value: s.pg1_trials.toLocaleString(), gold: true },
+                  { label: "Net ROAS", value: s.net_roas },
+                  { label: "Net Revenue", value: s.net_revenue, colored: true, positive: s.net_revenue_positive },
+                ].map(({ label, value, gold, colored, positive }) => (
+                  <div key={label} className="flex justify-between items-baseline gap-2">
+                    <span className="text-[10px] uppercase tracking-[0.12em] text-[#5a6478]">{label}</span>
+                    <span className={`text-xs font-medium ${gold ? "text-[#c9a55e]" : colored ? (positive ? "text-emerald-400" : "text-red-400") : "text-[#f4f5f7]"}`}>{value}</span>
                   </div>
-                  <p className="text-[11px] text-[#8b95a7] mb-4 leading-snug">{s.label}</p>
-                  <div className="space-y-2 border-t border-white/[0.06] pt-3">
-                    {[
-                      { label: "Orders", value: s.orders.toLocaleString() },
-                      { label: "Gross Revenue", value: s.gross_revenue },
-                      { label: "PG1 Trials", value: s.pg1_trials.toLocaleString(), gold: true },
-                      { label: "Net ROAS", value: s.net_roas },
-                      { label: "Net Revenue", value: s.net_revenue, colored: true, positive: s.net_revenue_positive },
-                    ].map(({ label, value, gold, colored, positive }) => (
-                      <div key={label} className="flex justify-between items-baseline gap-2">
-                        <span className="text-[10px] uppercase tracking-[0.12em] text-[#5a6478]">{label}</span>
-                        <span className={`text-xs font-medium ${gold ? "text-[#c9a55e]" : colored ? (positive ? "text-emerald-400" : "text-red-400") : "text-[#f4f5f7]"}`}>{value}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="border-t border-white/[0.06] pt-3 mt-3">
-                    <p className="text-[11px] text-[#5a6478] leading-relaxed italic">{s.note}</p>
-                  </div>
-                </div>
-              );
-            })}
+                ))}
+              </div>
+              <div className="border-t border-white/[0.06] pt-3 mt-3">
+                <p className="text-[11px] text-[#5a6478] leading-relaxed italic">{s.note}</p>
+              </div>
+            </div>
+          );
+        };
+        return (
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold mb-1">{data.path_projection!.headline}</div>
+            <p className="text-xs text-[#5a6478] mb-4 leading-relaxed">{data.path_projection!.sub}</p>
+            {/* V1 / V2 scenario cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              {nonV3.map((s) => renderScenarioCard(s))}
+            </div>
+            {/* V3 card + journey chart */}
+            {v3 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                {renderScenarioCard(v3)}
+                <PricingJourneyChart v0NetRevenue={v0Version?.net_revenue ?? "−$266K"} />
+              </div>
+            )}
+            <div className="rounded-lg border border-emerald-400/20 bg-emerald-400/[0.03] p-5">
+              <div className="text-[10px] uppercase tracking-widest text-emerald-400 font-semibold mb-2">Conclusion</div>
+              <p className="text-xs text-[#8b95a7] leading-relaxed">{data.path_projection!.conclusion}</p>
+            </div>
           </div>
-          <div className="rounded-lg border border-emerald-400/20 bg-emerald-400/[0.03] p-5">
-            <div className="text-[10px] uppercase tracking-widest text-emerald-400 font-semibold mb-2">Conclusion</div>
-            <p className="text-xs text-[#8b95a7] leading-relaxed">{data.path_projection.conclusion}</p>
-          </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* Finding + Watch callouts */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -645,6 +659,68 @@ function PricingModelSection({ data }: { data: PricingModelAnalysis }) {
         </div>
       </div>
     </section>
+  );
+}
+
+function PricingJourneyChart({ v0NetRevenue }: { v0NetRevenue: string }) {
+  // Points (x, y) mapped to revenue: -$266K → y=170, +$61K → y=35
+  // Breakeven ($0) → y=61
+  const pts = [
+    { x: 50,  y: 170, label: "V0", rev: v0NetRevenue,  color: "#5a6478", textColor: "#5a6478" },
+    { x: 155, y: 68,  label: "V1", rev: "~−$18K",      color: "#8b95a7", textColor: "#8b95a7" },
+    { x: 265, y: 95,  label: "V2", rev: "~−$81K",      color: "#f87171", textColor: "#f87171" },
+    { x: 375, y: 35,  label: "V3", rev: "+$61K",       color: "#34d399", textColor: "#34d399" },
+  ];
+  const breakY = 61;
+  // Smooth cubic bezier through the 4 points
+  const path = `M ${pts[0].x} ${pts[0].y} C ${pts[0].x + 60} ${pts[0].y}, ${pts[1].x - 40} ${pts[1].y}, ${pts[1].x} ${pts[1].y} S ${pts[2].x - 30} ${pts[2].y + 20}, ${pts[2].x} ${pts[2].y} S ${pts[3].x - 40} ${pts[3].y - 10}, ${pts[3].x} ${pts[3].y}`;
+
+  return (
+    <div className="rounded-lg border border-emerald-400/20 bg-gradient-to-b from-white/[0.02] to-transparent p-4 flex flex-col gap-2">
+      <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">Pricing Journey</div>
+      <svg viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg" className="w-full">
+        {/* Breakeven dashed line */}
+        <line x1="30" y1={breakY} x2="400" y2={breakY} stroke="#5a6478" strokeWidth="1" strokeDasharray="4 3" opacity="0.5" />
+        <text x="32" y={breakY - 5} fill="#5a6478" fontSize="8" fontFamily="monospace" opacity="0.7">breakeven</text>
+
+        {/* Journey path */}
+        <path d={path} fill="none" stroke="#c9a55e" strokeWidth="2" opacity="0.5" />
+
+        {/* Dots + labels */}
+        {pts.map((p) => (
+          <g key={p.label}>
+            <circle cx={p.x} cy={p.y} r="5" fill={p.color} />
+            <text x={p.x} y={p.y - 10} textAnchor="middle" fill={p.textColor} fontSize="8.5" fontWeight="700" fontFamily="sans-serif">{p.label}</text>
+            <text x={p.x} y={p.y - 19} textAnchor="middle" fill={p.textColor} fontSize="8" fontFamily="monospace" opacity="0.85">{p.rev}</text>
+          </g>
+        ))}
+
+        {/* Golf cart at V3 */}
+        <g transform="translate(355, 8)">
+          {/* canopy */}
+          <rect x="2" y="0" width="30" height="8" rx="3" fill="#c9a55e" />
+          {/* body */}
+          <rect x="0" y="7" width="34" height="10" rx="2" fill="#1e2533" stroke="#c9a55e" strokeWidth="0.8" />
+          {/* windshield */}
+          <rect x="24" y="7" width="8" height="9" rx="1" fill="#c9a55e" opacity="0.3" />
+          {/* wheels */}
+          <circle cx="8"  cy="19" r="4" fill="#34d399" />
+          <circle cx="26" cy="19" r="4" fill="#34d399" />
+          <circle cx="8"  cy="19" r="2" fill="#0d1117" />
+          <circle cx="26" cy="19" r="2" fill="#0d1117" />
+          {/* flag pole */}
+          <line x1="36" y1="17" x2="36" y2="2" stroke="#34d399" strokeWidth="1.2" />
+          {/* flag */}
+          <polygon points="36,2 44,5 36,8" fill="#34d399" />
+        </g>
+
+        {/* X axis */}
+        <line x1="30" y1="185" x2="400" y2="185" stroke="#2a3042" strokeWidth="1" />
+        {/* Y axis */}
+        <line x1="30" y1="20" x2="30" y2="185" stroke="#2a3042" strokeWidth="1" />
+      </svg>
+      <p className="text-[10px] text-[#5a6478] leading-relaxed">V3 is the only era to cross breakeven — every prior version lost money at the same ad spend.</p>
+    </div>
   );
 }
 
