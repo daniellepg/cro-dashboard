@@ -203,7 +203,7 @@ function CroScorecardSection({ sc }: { sc: CroScorecard }) {
             </tbody>
           </table>
         </div>
-        <p className="text-[10px] text-[#5a6478] mt-2">Formula: CVR lift % × prior-month orders × AOV = estimated incremental monthly revenue</p>
+        <p className="text-[10px] text-[#5a6478] mt-2">Formula: CVR lift % × monthly orders × AOV = estimated incremental revenue · CVR lift estimated from RPV data — verify with Katherine&apos;s scorecard</p>
       </div>
 
       {/* Bottom row: Trials + Rebuy */}
