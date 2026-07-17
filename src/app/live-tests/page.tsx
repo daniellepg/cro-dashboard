@@ -15,13 +15,13 @@ export default async function LiveTestsPage() {
   return (
     <div>
       <div className="mb-8">
-        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-2">
+        <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold mb-2">
           01 · Pipeline
         </div>
         <h1 className="text-3xl font-semibold tracking-tight">Live Tests</h1>
         <p className="text-sm text-[#8b95a7] mt-1.5">
           From ClickUp · CRO Projects · status =&nbsp;
-          <span className="font-mono text-[#c9a55e]">live</span>
+          <span className="font-mono text-[#FD3300]">live</span>
         </p>
       </div>
       {error ? <ErrorBox message={error} /> : <TaskTable tasks={tasks} />}

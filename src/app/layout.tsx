@@ -30,7 +30,7 @@ export default function RootLayout({
               <span className="text-xs font-semibold tracking-[0.22em] text-[#FD3300] uppercase group-hover:opacity-80 transition-opacity">
                 Performance Golf
               </span>
-              <span className="text-xs tracking-[0.22em] text-[#c9a55e] uppercase font-semibold">
+              <span className="text-xs tracking-[0.22em] text-[#FD3300] uppercase font-semibold">
                 · CRO
               </span>
             </Link>

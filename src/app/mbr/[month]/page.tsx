@@ -29,7 +29,7 @@ const OUTCOME_STYLES: Record<string, string> = {
 function SectionHeader({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 mb-5">
-      <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold whitespace-nowrap">
+      <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold whitespace-nowrap">
         {label}
       </div>
       <div className="flex-1 h-px bg-white/[0.06]" />
@@ -72,7 +72,7 @@ function ThemeCard({ t }: { t: Theme }) {
       </div>
       <p className="text-xs text-[#8b95a7] leading-relaxed mb-3">{t.narrative}</p>
       <div className="border-t border-white/[0.06] pt-3">
-        <span className="text-[10px] uppercase tracking-widest text-[#c9a55e] font-semibold">Takeaway </span>
+        <span className="text-[10px] uppercase tracking-widest text-[#FD3300] font-semibold">Takeaway </span>
         <span className="text-xs text-[#8b95a7]">{t.takeaway}</span>
       </div>
     </div>
@@ -170,7 +170,7 @@ function CroScorecardSection({ sc }: { sc: CroScorecard }) {
                   <td className="px-4 py-3 font-medium uppercase tracking-wide text-[#f4f5f7]">{r.funnel}</td>
                   <td className="px-4 py-3 text-[#8b95a7]">{r.cvr ?? "—"}</td>
                   <td className="px-4 py-3 text-[#5a6478] text-[10px]">{r.cvr_note ?? "—"}</td>
-                  <td className="px-4 py-3 text-[#c9a55e] font-medium">{r.aov}</td>
+                  <td className="px-4 py-3 text-white font-medium">{r.aov}</td>
                 </tr>
               ))}
             </tbody>
@@ -200,7 +200,7 @@ function FunnelTable({ rows }: { rows: MbrData["physical_funnels_current"] }) {
             <tr key={i} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
               <td className="px-4 py-3 font-medium uppercase tracking-wide text-[#f4f5f7]">{r.funnel}</td>
               <td className="px-4 py-3 text-[#8b95a7]">{fmt.number(r.fe_sales)}</td>
-              <td className="px-4 py-3 text-[#c9a55e] font-medium">{fmt.currency(r.revenue)}</td>
+              <td className="px-4 py-3 text-white font-medium">{fmt.currency(r.revenue)}</td>
               <td className="px-4 py-3 text-[#8b95a7]">{fmt.currency(r.aov)}</td>
               <td className="px-4 py-3 text-[#8b95a7]">{r.visitors != null ? fmt.number(r.visitors) : "—"}</td>
               <td className="px-4 py-3 text-[#8b95a7]">{r.op_cvr ?? "—"}</td>
@@ -280,7 +280,7 @@ function DigitalFunnelComparisonTable({
                   </span>
                 )}
               </td>
-              <td className="px-3 py-3 text-[#c9a55e] font-medium">{r.curr ? fmt.currency(r.curr.revenue) : "—"}</td>
+              <td className="px-3 py-3 text-white font-medium">{r.curr ? fmt.currency(r.curr.revenue) : "—"}</td>
               <td className="px-3 py-3 text-[#8b95a7]">{r.prev ? fmt.currency(r.prev.revenue) : "—"}</td>
               <td className="px-3 py-3"><Delta val={pct(r.curr?.revenue, r.prev?.revenue)} /></td>
               <td className="px-3 py-3 text-[#8b95a7]">{r.curr ? fmt.number(r.curr.fe_sales) : "—"}</td>
@@ -325,7 +325,7 @@ function TestsTable({ tests }: { tests: TestResult[] }) {
                   href="https://pg-domo-analytics-kg.vercel.app/testing/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[10px] uppercase tracking-widest text-[#5a6478] hover:text-[#c9a55e] transition-colors whitespace-nowrap"
+                  className="text-[10px] uppercase tracking-widest text-[#5a6478] hover:text-[#FD3300] transition-colors whitespace-nowrap"
                 >
                   Scorecard ↗
                 </a>
@@ -366,8 +366,8 @@ function VersionCard({ v }: { v: PricingModelVersion }) {
         {[
           { label: "CVR", value: v.cvr, color: v.version === "V2" ? "text-red-400" : v.version === "V3" ? "text-emerald-400" : "text-[#f4f5f7]" },
           { label: "AOV", value: v.aov, color: "text-[#f4f5f7]" },
-          { label: "PG1 Trials", value: v.pg1_trials.toLocaleString(), color: "text-[#c9a55e]" },
-          { label: "Trials / 100 Orders", value: v.trials_per_100_orders + "%", color: "text-[#c9a55e]" },
+          { label: "PG1 Trials", value: v.pg1_trials.toLocaleString(), color: "text-[#FD3300]" },
+          { label: "Trials / 100 Orders", value: v.trials_per_100_orders + "%", color: "text-[#FD3300]" },
           { label: "Net ROAS", value: v.net_roas, color: v.version === "V3" ? "text-emerald-400" : v.version === "V2" ? "text-red-400" : "text-[#8b95a7]" },
           { label: "Ad Spend", value: v.ad_spend, color: "text-[#8b95a7]" },
           { label: "CPA", value: v.cpa, color: "text-[#8b95a7]" },
@@ -533,7 +533,7 @@ function PricingModelSection({ data }: { data: PricingModelAnalysis }) {
                 <th className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#5a6478] font-medium">KPI</th>
                 <th className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-red-400/70 font-medium">V2 If Implemented</th>
                 <th className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-emerald-400/70 font-medium">V3 Actual</th>
-                <th className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#c9a55e]/70 font-medium">Delta</th>
+                <th className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#FD3300]/70 font-medium">Delta</th>
               </tr>
             </thead>
             <tbody>
@@ -542,7 +542,7 @@ function PricingModelSection({ data }: { data: PricingModelAnalysis }) {
                   <td className="px-4 py-3 text-[10px] uppercase tracking-[0.14em] text-[#5a6478]">{r.label}</td>
                   <td className="px-4 py-3 text-red-400">{r.v2}</td>
                   <td className="px-4 py-3 text-emerald-400 font-medium">{r.v3}</td>
-                  <td className="px-4 py-3 text-[#c9a55e] font-medium">{r.delta}</td>
+                  <td className="px-4 py-3 text-white font-medium">{r.delta}</td>
                 </tr>
               ))}
             </tbody>
@@ -577,7 +577,7 @@ function PricingModelSection({ data }: { data: PricingModelAnalysis }) {
                 ].map(({ label, value, gold, colored, positive }) => (
                   <div key={label} className="flex justify-between items-baseline gap-2">
                     <span className="text-[10px] uppercase tracking-[0.12em] text-[#5a6478]">{label}</span>
-                    <span className={`text-xs font-medium ${gold ? "text-[#c9a55e]" : colored ? (positive ? "text-emerald-400" : "text-red-400") : "text-[#f4f5f7]"}`}>{value}</span>
+                    <span className={`text-xs font-medium ${gold ? "text-[#FD3300]" : colored ? (positive ? "text-emerald-400" : "text-red-400") : "text-[#f4f5f7]"}`}>{value}</span>
                   </div>
                 ))}
               </div>
@@ -642,7 +642,7 @@ function PricingJourneyChart({ versions }: { versions: PricingModelVersion[] }) 
   const aovIdx   = idx(aovVals);
 
   const METRICS = [
-    { label: "Net ROAS", color: "#c9a55e", idx: roasIdx, raw: roasVals,  fmt: (v: number) => `${v.toFixed(0)}%` },
+    { label: "Net ROAS", color: "#FD3300", idx: roasIdx, raw: roasVals,  fmt: (v: number) => `${v.toFixed(0)}%` },
     { label: "CVR",      color: "#60a5fa", idx: cvrIdx,  raw: cvrVals,   fmt: (v: number) => `${v.toFixed(2)}%` },
     { label: "AOV",      color: "#34d399", idx: aovIdx,  raw: aovVals,   fmt: (v: number) => `$${v.toFixed(0)}` },
   ];
@@ -751,7 +751,7 @@ export default async function MbrDetailPage({ params }: { params: Promise<{ mont
 
       {/* Header */}
       <div>
-        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-2">
+        <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold mb-2">
           Monthly Business Review
         </div>
         <div className="flex items-end justify-between gap-4">
@@ -822,7 +822,7 @@ export default async function MbrDetailPage({ params }: { params: Promise<{ mont
           ].map((item) => (
             <div key={item.label} className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
               <div className="text-[10px] uppercase tracking-[0.18em] text-[#5a6478] mb-1">{item.label}</div>
-              <div className="text-xl font-semibold text-[#c9a55e]">{item.value}</div>
+              <div className="text-xl font-semibold text-[#FD3300]">{item.value}</div>
               <div className="text-[10px] text-[#5a6478] mt-1">{item.change}</div>
             </div>
           ))}
@@ -834,7 +834,7 @@ export default async function MbrDetailPage({ params }: { params: Promise<{ mont
         <ul className="mt-4 space-y-2">
           {mbr.physical_takeaways.map((t, i) => (
             <li key={i} className="text-xs text-[#8b95a7] flex gap-2">
-              <span className="text-[#c9a55e] mt-0.5">·</span>
+              <span className="text-[#FD3300] mt-0.5">·</span>
               <span>{t}</span>
             </li>
           ))}
@@ -853,7 +853,7 @@ export default async function MbrDetailPage({ params }: { params: Promise<{ mont
           ].map((item) => (
             <div key={item.label} className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
               <div className="text-[10px] uppercase tracking-[0.18em] text-[#5a6478] mb-1">{item.label}</div>
-              <div className="text-xl font-semibold text-[#c9a55e]">{item.value}</div>
+              <div className="text-xl font-semibold text-[#FD3300]">{item.value}</div>
               <div className="text-[10px] text-[#5a6478] mt-1">{item.change}</div>
             </div>
           ))}
@@ -865,7 +865,7 @@ export default async function MbrDetailPage({ params }: { params: Promise<{ mont
         <ul className="mt-4 space-y-2">
           {mbr.digital_takeaways.map((t, i) => (
             <li key={i} className="text-xs text-[#8b95a7] flex gap-2">
-              <span className="text-[#c9a55e] mt-0.5">·</span>
+              <span className="text-[#FD3300] mt-0.5">·</span>
               <span>{t}</span>
             </li>
           ))}
@@ -889,7 +889,7 @@ export default async function MbrDetailPage({ params }: { params: Promise<{ mont
                 </div>
                 <div>
                   <div className="text-[10px] text-[#5a6478] mb-0.5">Actual</div>
-                  <div className="text-base font-semibold text-[#c9a55e]">{item.actual}</div>
+                  <div className="text-base font-semibold text-[#FD3300]">{item.actual}</div>
                 </div>
               </div>
             </div>

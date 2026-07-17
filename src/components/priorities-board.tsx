@@ -11,8 +11,8 @@ type ByFunnel = Record<FunnelCode | "OTHER", ClickUpTask[]>;
 const STATUS_COLORS: Record<string, string> = {
   backlog:      "bg-white/[0.06] text-[#8b95a7]",
   intake:       "bg-violet-500/15 text-violet-300",
-  "cro dev":    "bg-[#c9a55e]/15 text-[#c9a55e]",
-  "dev sprint": "bg-[#c9a55e]/15 text-[#c9a55e]",
+  "cro dev":    "bg-[#FD3300]/15 text-[#FD3300]",
+  "dev sprint": "bg-[#FD3300]/15 text-[#FD3300]",
   qa:           "bg-sky-500/15 text-sky-300",
   analytics:    "bg-emerald-500/15 text-emerald-300",
 };
@@ -29,7 +29,7 @@ function StatusPill({ status }: { status: string }) {
 // ── Score bar ───────────────────────────────────────────────────────────────
 function ScoreBar({ score }: { score: number }) {
   const pct = Math.round((score / MAX_SCORE) * 100);
-  const color = pct >= 70 ? "bg-emerald-500" : pct >= 40 ? "bg-[#c9a55e]" : "bg-white/20";
+  const color = pct >= 70 ? "bg-emerald-500" : pct >= 40 ? "bg-[#FD3300]" : "bg-white/20";
   return (
     <div className="flex items-center gap-2 min-w-[80px]">
       <div className="flex-1 h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
@@ -80,7 +80,7 @@ function CriterionCell({
         onClick={() => onChange(!checked)}
         className={`w-6 h-6 rounded transition-colors text-[10px] font-bold ${
           checked
-            ? "bg-[#c9a55e] text-[#0a0e14]"
+            ? "bg-[#FD3300] text-[#0a0e14]"
             : "bg-white/[0.06] text-[#5a6478] hover:bg-white/[0.12]"
         }`}
         title={`${criterion.label} — ${checked ? pts : 0}/${pts} pts`}
@@ -98,7 +98,7 @@ function LeadershipCell({ value, onChange }: { value: boolean; onChange: (v: boo
       <button
         onClick={() => onChange(!value)}
         title="Mark as Priority for Leadership"
-        className={`text-base transition-colors ${value ? "text-[#c9a55e]" : "text-[#3a4050] hover:text-[#c9a55e]/50"}`}
+        className={`text-base transition-colors ${value ? "text-[#FD3300]" : "text-[#3a4050] hover:text-[#FD3300]/50"}`}
       >
         ★
       </button>
@@ -155,8 +155,8 @@ export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
               onClick={() => setSelected(code)}
               className={`px-3 py-1.5 rounded-md text-sm border transition-colors font-medium ${
                 active
-                  ? "bg-[#c9a55e] text-[#0a0e14] border-[#c9a55e]"
-                  : "bg-white/[0.03] text-[#8b95a7] border-white/10 hover:border-[#c9a55e]/40 hover:text-[#f4f5f7]"
+                  ? "bg-[#FD3300] text-[#0a0e14] border-[#FD3300]"
+                  : "bg-white/[0.03] text-[#8b95a7] border-white/10 hover:border-[#FD3300]/40 hover:text-[#f4f5f7]"
               }`}
             >
               {code} <span className="opacity-60 ml-1">{n}</span>
@@ -167,7 +167,7 @@ export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
 
       {/* PXL legend */}
       <div className="rounded-lg border border-white/[0.08] bg-[#121821] px-5 py-3 mb-6 text-[11px] text-[#8b95a7] flex flex-wrap gap-x-6 gap-y-1">
-        <span className="font-semibold text-[#c9a55e] tracking-wider uppercase text-[10px]">PXL Scoring</span>
+        <span className="font-semibold text-[#FD3300] tracking-wider uppercase text-[10px]">PXL Scoring</span>
         {CRITERIA.map((c) => (
           <span key={c.key}><span className="text-[#f4f5f7]">{c.short}</span> = {c.max}pt{c.max !== 1 ? "s" : ""}</span>
         ))}
@@ -222,7 +222,7 @@ export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
                         </th>
                       ))}
                       {/* Leadership priority */}
-                      <th className="px-3 py-2.5 text-center text-[10px] tracking-widest text-[#c9a55e] uppercase font-semibold border-r border-white/[0.06] w-16"
+                      <th className="px-3 py-2.5 text-center text-[10px] tracking-widest text-[#FD3300] uppercase font-semibold border-r border-white/[0.06] w-16"
                           title="Priority for Leadership">
                         ★ Lead
                       </th>
@@ -243,7 +243,7 @@ export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
                           key={t.id}
                           className={`border-t border-white/[0.06] transition-colors ${
                             isLeadership
-                              ? "bg-[#c9a55e]/[0.04] hover:bg-[#c9a55e]/[0.07]"
+                              ? "bg-[#FD3300]/[0.04] hover:bg-[#FD3300]/[0.07]"
                               : "hover:bg-white/[0.02]"
                           }`}
                         >
@@ -251,13 +251,13 @@ export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
                           <td className="px-4 py-2.5 border-r border-white/[0.06]">
                             <div className="flex items-center gap-2">
                               {isLeadership && (
-                                <span className="text-[#c9a55e] text-[10px]">★</span>
+                                <span className="text-[#FD3300] text-[10px]">★</span>
                               )}
                               <a
                                 href={t.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="font-medium text-[12px] hover:text-[#c9a55e] transition-colors"
+                                className="font-medium text-[12px] hover:text-[#FD3300] transition-colors"
                               >
                                 {t.name}
                               </a>

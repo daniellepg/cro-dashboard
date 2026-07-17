@@ -108,7 +108,7 @@ function EditCell({
         if (isNaN(raw)) { onChange(null); return; }
         onChange(format === "pct" ? raw / 100 : raw);
       }}
-      className="w-full bg-transparent text-center text-[12px] text-[#c9a55e] placeholder:text-[#5a6478] focus:outline-none focus:ring-1 focus:ring-[#c9a55e]/40 rounded px-1 py-0.5"
+      className="w-full bg-transparent text-center text-[12px] text-[#FD3300] placeholder:text-[#5a6478] focus:outline-none focus:ring-1 focus:ring-[#FD3300]/40 rounded px-1 py-0.5"
     />
   );
 }
@@ -148,7 +148,7 @@ export default function BandwidthPage() {
     <div>
       {/* Back + title */}
       <div className="mb-8">
-        <Link href="/" className="text-[11px] tracking-[0.2em] text-[#8b95a7] uppercase hover:text-[#c9a55e] transition-colors">
+        <Link href="/" className="text-[11px] tracking-[0.2em] text-[#8b95a7] uppercase hover:text-[#FD3300] transition-colors">
           ← Command Center
         </Link>
         <h1 className="text-3xl font-semibold tracking-tight mt-3">Test Bandwidth Calculator</h1>
@@ -160,7 +160,7 @@ export default function BandwidthPage() {
 
       {/* ── Global settings ── */}
       <div className="rounded-lg border border-white/[0.08] bg-[#121821] p-5 mb-8">
-        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-4">
+        <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold mb-4">
           Global Settings
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
@@ -184,7 +184,7 @@ export default function BandwidthPage() {
                     if (isNaN(raw)) return;
                     setSettings((s) => ({ ...s, [key]: format === "pct" ? raw / 100 : raw }));
                   }}
-                  className="w-full rounded border border-white/[0.08] bg-[#0a0e14] px-3 py-1.5 text-sm text-[#c9a55e] focus:outline-none focus:ring-1 focus:ring-[#c9a55e]/40"
+                  className="w-full rounded border border-white/[0.08] bg-[#0a0e14] px-3 py-1.5 text-sm text-[#FD3300] focus:outline-none focus:ring-1 focus:ring-[#FD3300]/40"
                 />
               </div>
             );
@@ -226,7 +226,7 @@ export default function BandwidthPage() {
                 <>
                   {/* Product group header */}
                   <tr key={`grp-${product}`} className="bg-white/[0.02] border-t border-white/[0.06]">
-                    <td colSpan={11} className="px-5 py-2 text-[10px] tracking-[0.25em] text-[#c9a55e] uppercase font-semibold">
+                    <td colSpan={11} className="px-5 py-2 text-[10px] tracking-[0.25em] text-[#FD3300] uppercase font-semibold">
                       /{product}/
                     </td>
                   </tr>
@@ -264,7 +264,7 @@ export default function BandwidthPage() {
                         {/* Weekly visitors (editable if null) */}
                         <td className="px-3 py-2.5">
                           {needsVisitors ? (
-                            <div className="border border-[#c9a55e]/30 rounded bg-[#c9a55e]/5 px-1">
+                            <div className="border border-[#FD3300]/30 rounded bg-[#FD3300]/5 px-1">
                               <EditCell
                                 value={row.weeklyVisitors}
                                 onChange={(v) => updateRow(row.id, { weeklyVisitors: v })}
@@ -278,7 +278,7 @@ export default function BandwidthPage() {
 
                         {/* CR% (always editable) */}
                         <td className="px-3 py-2.5">
-                          <div className="border border-[#c9a55e]/30 rounded bg-[#c9a55e]/5 px-1">
+                          <div className="border border-[#FD3300]/30 rounded bg-[#FD3300]/5 px-1">
                             <EditCell
                               value={row.cr}
                               onChange={(v) => updateRow(row.id, { cr: v ?? 0 })}
@@ -308,7 +308,7 @@ export default function BandwidthPage() {
 
                         {/* AOV (editable) */}
                         <td className="px-3 py-2.5">
-                          <div className="border border-[#c9a55e]/30 rounded bg-[#c9a55e]/5 px-1">
+                          <div className="border border-[#FD3300]/30 rounded bg-[#FD3300]/5 px-1">
                             <EditCell
                               value={row.aov}
                               onChange={(v) => updateRow(row.id, { aov: v ?? 0 })}
@@ -321,7 +321,7 @@ export default function BandwidthPage() {
                         {/* Revenue effect (auto) */}
                         <td className="pr-5 pl-3 py-2.5 font-semibold">
                           {c.revenueEffect != null ? (
-                            <span className="text-[#c9a55e]">{fmt$(c.revenueEffect)}</span>
+                            <span className="text-[#FD3300]">{fmt$(c.revenueEffect)}</span>
                           ) : (
                             <span className="text-[#5a6478]">—</span>
                           )}

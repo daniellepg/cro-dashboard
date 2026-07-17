@@ -2,7 +2,7 @@ export default function ScorecardsPage() {
   return (
     <div className="flex flex-col h-full">
       <div className="mb-6">
-        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-2">
+        <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold mb-2">
           Testing · Scorecards
         </div>
         <h1 className="text-3xl font-semibold tracking-tight">Test Scorecards</h1>

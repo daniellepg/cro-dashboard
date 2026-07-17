@@ -39,7 +39,7 @@ export function TaskTable({ tasks }: { tasks: ClickUpTask[] }) {
                 <td className="px-4 py-3 font-medium">{t.name}</td>
                 <td className="px-4 py-3">
                   {funnel ? (
-                    <span className="inline-block px-2 py-0.5 rounded border border-[#c9a55e]/30 bg-[#c9a55e]/10 text-[#c9a55e] text-xs font-medium">
+                    <span className="inline-block px-2 py-0.5 rounded border border-[#FD3300]/30 bg-[#FD3300]/10 text-[#FD3300] text-xs font-medium">
                       {funnel}
                     </span>
                   ) : (
@@ -55,7 +55,7 @@ export function TaskTable({ tasks }: { tasks: ClickUpTask[] }) {
                     href={t.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#5a6478] hover:text-[#c9a55e]"
+                    className="text-[#5a6478] hover:text-[#FD3300]"
                     title="Open in ClickUp"
                   >
                     ↗

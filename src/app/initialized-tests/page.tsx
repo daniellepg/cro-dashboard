@@ -15,7 +15,7 @@ export default async function InitializedTestsPage() {
   return (
     <div>
       <div className="mb-8">
-        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-2">
+        <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold mb-2">
           02 · Pipeline
         </div>
         <h1 className="text-3xl font-semibold tracking-tight">Initialized Tests</h1>
@@ -23,7 +23,7 @@ export default async function InitializedTestsPage() {
           From ClickUp · CRO Projects · statuses:{" "}
           {PRE_LIVE_STATUSES.map((s, i) => (
             <span key={s}>
-              <span className="font-mono text-[#c9a55e]">{s}</span>
+              <span className="font-mono text-[#FD3300]">{s}</span>
               {i < PRE_LIVE_STATUSES.length - 1 && <span className="text-[#5a6478]"> · </span>}
             </span>
           ))}

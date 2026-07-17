@@ -19,7 +19,7 @@ const MONTHS: MbrMonth[] = [
 function SectionHeader({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 mb-6">
-      <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold whitespace-nowrap">
+      <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold whitespace-nowrap">
         {label}
       </div>
       <div className="flex-1 h-px bg-white/[0.06]" />
@@ -31,7 +31,7 @@ function MbrTile({ m }: { m: MbrMonth }) {
   const inner = (
     <div className={`group relative h-44 rounded-lg border p-5 transition-all ${
       m.available
-        ? "border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent hover:border-[#c9a55e]/40 hover:from-[#c9a55e]/[0.06]"
+        ? "border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent hover:border-[#FD3300]/40 hover:from-[#FD3300]/[0.06]"
         : "border-white/[0.04] bg-white/[0.01] opacity-50 cursor-not-allowed"
     }`}>
       <div className="text-base font-medium text-[#f4f5f7]">{m.label}</div>
@@ -44,7 +44,7 @@ function MbrTile({ m }: { m: MbrMonth }) {
         )}
       </div>
       {m.available && (
-        <div className="absolute bottom-5 right-5 text-[#5a6478] group-hover:text-[#c9a55e] transition-colors">→</div>
+        <div className="absolute bottom-5 right-5 text-[#5a6478] group-hover:text-[#FD3300] transition-colors">→</div>
       )}
     </div>
   );
@@ -60,7 +60,7 @@ export default function MbrIndexPage() {
   return (
     <div>
       <div className="mb-10">
-        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-3">
+        <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold mb-3">
           Reporting
         </div>
         <h1 className="text-4xl font-semibold tracking-tight">Monthly Business Reviews</h1>

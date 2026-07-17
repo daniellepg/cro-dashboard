@@ -24,7 +24,7 @@ function Tile({ label, value, subvalue, sublabel, goal, detail, status, source, 
     status === "above"   ? "text-emerald-400" :
     status === "below"   ? "text-red-400"      :
     status === "pending" ? "text-[#5a6478]"    :
-                           "text-[#c9a55e]";
+                           "text-[#FD3300]";
 
   const badge =
     status === "above"   ? <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-widest">↑ Above goal</span> :
@@ -52,7 +52,7 @@ function Tile({ label, value, subvalue, sublabel, goal, detail, status, source, 
       <div className="mt-auto pt-2 border-t border-white/[0.04]">
         {sourceHref ? (
           <a href={sourceHref} target="_blank" rel="noopener noreferrer"
-            className="text-[10px] text-[#5a6478] hover:text-[#c9a55e] transition-colors leading-snug">
+            className="text-[10px] text-[#5a6478] hover:text-[#FD3300] transition-colors leading-snug">
             {source} ↗
           </a>
         ) : (

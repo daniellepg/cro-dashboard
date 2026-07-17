@@ -30,7 +30,7 @@ export default async function PrioritiesPage() {
   return (
     <div>
       <div className="mb-8">
-        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-2">
+        <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold mb-2">
           06 · Backlog
         </div>
         <h1 className="text-3xl font-semibold tracking-tight">Testing Priorities</h1>

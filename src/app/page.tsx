@@ -16,7 +16,7 @@ type Tile = {
 
 function TileCard({ t }: { t: Tile }) {
   const inner = (
-    <div className="group relative h-44 rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-5 transition-all hover:border-[#c9a55e]/40 hover:from-[#c9a55e]/[0.06]">
+    <div className="group relative h-44 rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-5 transition-all hover:border-[#FD3300]/40 hover:from-[#FD3300]/[0.06]">
       <div className="flex items-start justify-between">
         <div>
           <div className="text-base font-medium">{t.title}</div>
@@ -28,7 +28,7 @@ function TileCard({ t }: { t: Tile }) {
       </div>
       {t.stat !== null && t.stat !== undefined ? (
         <div className="absolute bottom-5 left-5">
-          <div className="text-4xl font-semibold tracking-tight text-[#c9a55e]">{t.stat}</div>
+          <div className="text-4xl font-semibold tracking-tight text-white">{t.stat}</div>
         </div>
       ) : (
         <div className="absolute bottom-5 left-5">
@@ -37,7 +37,7 @@ function TileCard({ t }: { t: Tile }) {
           </span>
         </div>
       )}
-      <div className="absolute bottom-5 right-5 text-[#5a6478] group-hover:text-[#c9a55e] transition-colors">
+      <div className="absolute bottom-5 right-5 text-[#5a6478] group-hover:text-[#FD3300] transition-colors">
         →
       </div>
     </div>
@@ -54,7 +54,7 @@ function TileCard({ t }: { t: Tile }) {
 function SectionHeader({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 mb-4">
-      <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold">
+      <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold">
         {label}
       </div>
       <div className="flex-1 h-px bg-white/[0.06]" />

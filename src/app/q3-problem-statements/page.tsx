@@ -68,7 +68,7 @@ export default function Q3ProblemStatementsPage() {
   return (
     <div>
       <div className="mb-8">
-        <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-2">
+        <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold mb-2">
           Q3 · Strategy
         </div>
         <div className="flex items-end justify-between gap-4">
@@ -101,7 +101,7 @@ export default function Q3ProblemStatementsPage() {
               {TILES.map((tile) => (
                 <th
                   key={tile}
-                  className="border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-center text-xs font-semibold tracking-widest text-[#c9a55e] uppercase"
+                  className="border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-center text-xs font-semibold tracking-widest text-[#FD3300] uppercase"
                 >
                   {tile}
                 </th>
