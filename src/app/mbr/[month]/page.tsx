@@ -589,7 +589,7 @@ function PricingModelSection({ data }: { data: PricingModelAnalysis }) {
             {v3 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 {renderScenarioCard(v3)}
-                <PricingJourneyChart v0NetRevenue={v0Version?.net_revenue ?? "−$266K"} />
+                <PricingJourneyChart versions={data.versions} />
               </div>
             )}
             <div className="rounded-lg border border-emerald-400/20 bg-emerald-400/[0.03] p-5">
@@ -615,71 +615,90 @@ function PricingModelSection({ data }: { data: PricingModelAnalysis }) {
   );
 }
 
-function PricingJourneyChart({ v0NetRevenue }: { v0NetRevenue: string }) {
-  // Points (x, y) mapped to revenue: -$266K → y=170, +$61K → y=35
-  // Breakeven ($0) → y=61
-  const pts = [
-    { x: 50,  y: 170, label: "V0", rev: v0NetRevenue,  color: "#5a6478", textColor: "#5a6478" },
-    { x: 155, y: 68,  label: "V1", rev: "~−$18K",      color: "#8b95a7", textColor: "#8b95a7" },
-    { x: 265, y: 95,  label: "V2", rev: "~−$81K",      color: "#f87171", textColor: "#f87171" },
-    { x: 375, y: 35,  label: "V3", rev: "+$61K",       color: "#34d399", textColor: "#34d399" },
+function PricingJourneyChart({ versions }: { versions: PricingModelVersion[] }) {
+  // X positions for V0–V3
+  const XS = [72, 182, 292, 390];
+  const vColors = ["#5a6478", "#8b95a7", "#f87171", "#34d399"];
+
+  // Extract numeric values per metric
+  const roasVals  = versions.map((v) => parseFloat(v.net_roas));
+  const cvrVals   = versions.map((v) => parseFloat(v.cvr));
+  const aovVals   = versions.map((v) => parseFloat((v.aov ?? "$0").replace(/[$,]/g, "")));
+  const trialVals = versions.map((v) => v.pg1_trials);
+
+  function norm(vals: number[], rowTop: number, rowBot: number) {
+    const mn = Math.min(...vals), mx = Math.max(...vals);
+    return vals.map((v) => mn === mx ? (rowTop + rowBot) / 2 : rowBot - ((v - mn) / (mx - mn)) * (rowBot - rowTop));
+  }
+
+  // Row bands (top, bottom y)
+  const ROWS = [
+    { label: "Net ROAS", unit: "%",  vals: roasVals,  top: 18,  bot: 52,  fmt: (v: number) => `${v.toFixed(0)}%` },
+    { label: "CVR",      unit: "%",  vals: cvrVals,   top: 68,  bot: 102, fmt: (v: number) => `${v.toFixed(2)}%` },
+    { label: "AOV",      unit: "$",  vals: aovVals,   top: 118, bot: 152, fmt: (v: number) => `$${v.toFixed(0)}` },
+    { label: "Trials",   unit: "",   vals: trialVals, top: 168, bot: 202, fmt: (v: number) => v >= 1000 ? `${(v/1000).toFixed(1)}K` : `${v}` },
   ];
-  const breakY = 61;
-  // Smooth cubic bezier through the 4 points
-  const path = `M ${pts[0].x} ${pts[0].y} C ${pts[0].x + 60} ${pts[0].y}, ${pts[1].x - 40} ${pts[1].y}, ${pts[1].x} ${pts[1].y} S ${pts[2].x - 30} ${pts[2].y + 20}, ${pts[2].x} ${pts[2].y} S ${pts[3].x - 40} ${pts[3].y - 10}, ${pts[3].x} ${pts[3].y}`;
 
   return (
     <div className="rounded-lg border border-emerald-400/20 bg-gradient-to-b from-white/[0.02] to-transparent p-4 flex flex-col gap-2">
-      <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">Pricing Journey</div>
-      <svg viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg" className="w-full">
-        {/* Breakeven dashed line */}
-        <line x1="30" y1={breakY} x2="400" y2={breakY} stroke="#5a6478" strokeWidth="1" strokeDasharray="4 3" opacity="0.5" />
-        <text x="32" y={breakY - 5} fill="#5a6478" fontSize="8" fontFamily="monospace" opacity="0.7">breakeven</text>
+      <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">Metrics by Pricing Era</div>
+      <svg viewBox="0 0 430 230" xmlns="http://www.w3.org/2000/svg" className="w-full">
 
-        {/* Journey path */}
-        <path d={path} fill="none" stroke="#c9a55e" strokeWidth="2" opacity="0.5" />
-
-        {/* Dots + labels */}
-        {pts.map((p) => (
-          <g key={p.label}>
-            <circle cx={p.x} cy={p.y} r="5" fill={p.color} />
-            <text x={p.x} y={p.y - 10} textAnchor="middle" fill={p.textColor} fontSize="8.5" fontWeight="700" fontFamily="sans-serif">{p.label}</text>
-            <text x={p.x} y={p.y - 19} textAnchor="middle" fill={p.textColor} fontSize="8" fontFamily="monospace" opacity="0.85">{p.rev}</text>
-          </g>
+        {/* Version labels across top */}
+        {versions.map((v, i) => (
+          <text key={v.version} x={XS[i]} y="10" textAnchor="middle" fill={vColors[i]} fontSize="8.5" fontWeight="700" fontFamily="sans-serif">{v.version}</text>
         ))}
 
-        {/* Golf cart at V3 */}
-        <g transform="translate(342, 2)">
-          {/* roof canopy — overhangs front */}
-          <rect x="0" y="0" width="52" height="7" rx="2" fill="#c9a55e" />
-          {/* rear support post */}
-          <rect x="3" y="6" width="3" height="12" fill="#c9a55e" opacity="0.7" />
-          {/* angled windshield (front post) */}
-          <polygon points="42,6 48,6 44,18" fill="#c9a55e" opacity="0.25" />
-          <line x1="42" y1="6" x2="44" y2="18" stroke="#c9a55e" strokeWidth="1.2" opacity="0.7" />
-          {/* seat */}
-          <rect x="8" y="8" width="32" height="7" rx="1.5" fill="#2a3448" stroke="#c9a55e" strokeWidth="0.5" />
-          {/* floor / undercarriage */}
-          <rect x="3" y="15" width="50" height="5" rx="1.5" fill="#1e2533" stroke="#c9a55e" strokeWidth="0.7" />
-          {/* rear cargo bump */}
-          <rect x="3" y="11" width="8" height="9" rx="1" fill="#1a2030" stroke="#c9a55e" strokeWidth="0.5" />
-          {/* wheels — outer ring + hub */}
-          <circle cx="14" cy="23" r="6" fill="#1e2533" stroke="#34d399" strokeWidth="1.8" />
-          <circle cx="14" cy="23" r="2.2" fill="#34d399" />
-          <circle cx="42" cy="23" r="6" fill="#1e2533" stroke="#34d399" strokeWidth="1.8" />
-          <circle cx="42" cy="23" r="2.2" fill="#34d399" />
-          {/* flag pole at front */}
-          <line x1="52" y1="22" x2="52" y2="1" stroke="#34d399" strokeWidth="1.3" />
-          {/* flag */}
-          <polygon points="52,1 62,5 52,9" fill="#34d399" />
+        {/* V0 "not viable" stripe */}
+        <rect x="48" y="14" width="50" height="210" fill="#5a6478" opacity="0.04" />
+        <text x="73" y="222" textAnchor="middle" fill="#5a6478" fontSize="7" fontFamily="sans-serif" opacity="0.5">baseline</text>
+
+        {/* Row bands + sparklines */}
+        {ROWS.map((row) => {
+          const ys = norm(row.vals, row.top, row.bot);
+          const linePts = XS.map((x, i) => `${x},${ys[i]}`).join(" ");
+          return (
+            <g key={row.label}>
+              {/* subtle row band */}
+              <rect x="48" y={row.top - 4} width="370" height={row.bot - row.top + 8} rx="3" fill="white" opacity="0.015" />
+              {/* metric label */}
+              <text x="44" y={(row.top + row.bot) / 2 + 3} textAnchor="end" fill="#5a6478" fontSize="7.5" fontFamily="sans-serif">{row.label}</text>
+              {/* connecting line — dashed from V0, solid V1→V3 */}
+              <polyline points={`${XS[0]},${ys[0]} ${XS[1]},${ys[1]}`} fill="none" stroke="#5a6478" strokeWidth="1" strokeDasharray="3 2" opacity="0.4" />
+              <polyline points={`${XS[1]},${ys[1]} ${XS[2]},${ys[2]} ${XS[3]},${ys[3]}`} fill="none" stroke="#c9a55e" strokeWidth="1.5" opacity="0.6" />
+              {/* dots + value labels */}
+              {versions.map((v, i) => (
+                <g key={v.version}>
+                  <circle cx={XS[i]} cy={ys[i]} r="4" fill={vColors[i]} />
+                  <text x={XS[i]} y={ys[i] - 7} textAnchor="middle" fill={vColors[i]} fontSize="7.5" fontFamily="monospace" fontWeight="600">{row.fmt(row.vals[i])}</text>
+                </g>
+              ))}
+            </g>
+          );
+        })}
+
+        {/* Golf cart above V3 column */}
+        <g transform="translate(360, 14)">
+          <rect x="0" y="0" width="46" height="6" rx="2" fill="#c9a55e" />
+          <rect x="3" y="5" width="3" height="10" fill="#c9a55e" opacity="0.7" />
+          <polygon points="37,5 43,5 40,15" fill="#c9a55e" opacity="0.25" />
+          <line x1="37" y1="5" x2="40" y2="15" stroke="#c9a55e" strokeWidth="1" opacity="0.7" />
+          <rect x="7" y="6" width="28" height="6" rx="1" fill="#2a3448" stroke="#c9a55e" strokeWidth="0.5" />
+          <rect x="3" y="12" width="44" height="4" rx="1" fill="#1e2533" stroke="#c9a55e" strokeWidth="0.6" />
+          <rect x="3" y="9" width="7" height="7" rx="1" fill="#1a2030" stroke="#c9a55e" strokeWidth="0.4" />
+          <circle cx="12" cy="19" r="5" fill="#1e2533" stroke="#34d399" strokeWidth="1.6" />
+          <circle cx="12" cy="19" r="1.8" fill="#34d399" />
+          <circle cx="36" cy="19" r="5" fill="#1e2533" stroke="#34d399" strokeWidth="1.6" />
+          <circle cx="36" cy="19" r="1.8" fill="#34d399" />
+          <line x1="46" y1="18" x2="46" y2="1" stroke="#34d399" strokeWidth="1.2" />
+          <polygon points="46,1 55,4.5 46,8" fill="#34d399" />
         </g>
 
-        {/* X axis */}
-        <line x1="30" y1="185" x2="400" y2="185" stroke="#2a3042" strokeWidth="1" />
-        {/* Y axis */}
-        <line x1="30" y1="20" x2="30" y2="185" stroke="#2a3042" strokeWidth="1" />
+        {/* Vertical dividers between versions */}
+        {[127, 237].map((x) => (
+          <line key={x} x1={x} y1="14" x2={x} y2="210" stroke="#2a3042" strokeWidth="0.5" strokeDasharray="2 3" opacity="0.4" />
+        ))}
       </svg>
-      <p className="text-[10px] text-[#5a6478] leading-relaxed">V3 is the only era to cross breakeven — every prior version lost money at the same ad spend.</p>
     </div>
   );
 }
