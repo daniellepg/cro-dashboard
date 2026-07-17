@@ -657,7 +657,7 @@
       "net_revenue": "+$61K"
     },
     "callout_positive": "V3 wins on every dimension that matters. CVR nearly recovered to V1 (0.92% vs 0.95%). Net ROAS crossed into profit for the first time at 103%. CPA is declining at $175. And subscription acquisition reached its highest rate ever — 75 trials per 100 orders — without any pricing friction. V3 at $1.8M spend is producing +1,265 more orders, +$268K more gross revenue, and +2,581 more PG1 trials than V2 would have at the same scale. Net revenue swing: -$81K projected → +$61K actual = $142K flip.",
-    "callout_watch": "AOV is down from V2 ($306 → $295). V2's non-member price premium drove higher AOV; V3's single price brought it back down slightly. At 75.4% trial attach rate and $29/month, even 2-month average subscriber retention more than covers the $11 AOV gap per buyer — but trial-to-paid conversion rate is the metric to watch in the next 30–60 days.",
+    "callout_watch": "AOV is down from V2 ($306 → $295). V2's Club + App price point drove higher AOV; V3's single price brought it back down slightly. At 75.4% trial attach rate and $29/month, even 2-month average subscriber retention more than covers the $11 AOV gap per buyer — but trial-to-paid conversion rate is the metric to watch in the next 30–60 days.",
     "ab_test_evidence": {
       "headline": "A/B test evidence behind the V2 reversal",
       "intro": "Six tests across SF2 (Shopify) and Shopify-wide funnels compared the Club & Club + App two-option structure (V2) against the member/non-member baseline (V1). Every variant returned an RPV loss — meaning the Club/Club + App reframe hurt revenue per visitor despite AOV holding up, because CVR dropped more than price could compensate.",
@@ -867,7 +867,7 @@
           "note": "CVR nearly recovered to V1 levels (0.92% vs 0.95%). Auto-trial drives 75 trial starts per 100 orders — highest attach rate of all three eras — without a price premium or CVR penalty. Profitable at current scale with room to grow spend further."
         }
       ],
-      "conclusion": "V1 was a ceiling — near-breakeven forever with no subscription lever. V2 was a bet on subscriber retention that the LTV math couldn't support. V3 is the only scenario that produces profit from launch, scales the subscription base efficiently, and gives the paid media algorithm a clean ROAS signal to bid against."
+      "conclusion": "V1 (member/non-member pricing) was a ceiling — near-breakeven with a low-friction subscription lever that couldn't scale. V2 reframed the same two-option structure as Club vs. Club + App, but the CVR loss made the LTV math impossible to close. V3 eliminated the pricing decision entirely — single price, auto-trial — and is the only era to produce profit from launch, scale the subscription base efficiently, and give the paid media algorithm a clean ROAS signal to bid against."
     }
   }
 }
