@@ -45,33 +45,30 @@
     "Concentration risk is shifting: RS1 + 357 = 73% of physical revenue. RS1 is now the single biggest risk if it slows."
   ],
   "digital_rollup": {
-    "total_revenue": "⚠ Pending", "prior_revenue": "⚠ Pending", "revenue_change": "⚠ Pending",
-    "fe_sales": 2057, "prior_fe_sales": 18884,
-    "aov": "$132.30", "prior_aov": "$258.43", "aov_change": "⚠ Pending"
+    "total_revenue": "⚠ Pending (PSS missing)", "prior_revenue": "$510K", "revenue_change": "⚠ Pending",
+    "fe_sales": 2057, "prior_fe_sales": 5048,
+    "aov": "$132.30", "prior_aov": "$101.07", "aov_change": "+31.0%"
   },
   "digital_funnels_current": [
     { "funnel": "OSSF",  "fe_sales": 877,  "revenue": 97999,  "aov": 111.74, "visitors": 1405, "op_cvr": "62.42%" },
     { "funnel": "WPSS",  "fe_sales": 556,  "revenue": 109814, "aov": 197.51, "visitors": 972,  "op_cvr": "57.20%" },
     { "funnel": "SRSW",  "fe_sales": 339,  "revenue": 31025,  "aov": 91.52,  "visitors": 450,  "op_cvr": "75.33%" },
     { "funnel": "SSTS",  "fe_sales": 285,  "revenue": 33277,  "aov": 116.76, "visitors": 392,  "op_cvr": "72.70%" },
-    { "funnel": "HTKT",  "fe_sales": null, "revenue": null,   "aov": null,   "visitors": null, "op_cvr": null },
-    { "funnel": "PSS",   "fe_sales": null, "revenue": null,   "aov": null,   "visitors": null, "op_cvr": null }
+    { "funnel": "PSS",   "fe_sales": null, "revenue": null,   "aov": null,   "visitors": null, "op_cvr": "⚠ pending" }
   ],
   "digital_funnels_prior": [
-    { "funnel": "SSTS",  "fe_sales": 6200, "revenue": 1116000, "aov": 180.00, "visitors": null, "op_cvr": null },
-    { "funnel": "SSG2",  "fe_sales": 5800, "revenue": 812000,  "aov": 140.00, "visitors": null, "op_cvr": null },
-    { "funnel": "PSS",   "fe_sales": 3100, "revenue": 1240000, "aov": 400.00, "visitors": null, "op_cvr": null },
-    { "funnel": "OSSF",  "fe_sales": 2400, "revenue": 384000,  "aov": 160.00, "visitors": null, "op_cvr": null },
-    { "funnel": "Apple", "fe_sales": 900,  "revenue": 810000,  "aov": 900.00, "visitors": null, "op_cvr": null },
-    { "funnel": "SSDP",  "fe_sales": 340,  "revenue": 238000,  "aov": 700.00, "visitors": null, "op_cvr": null },
-    { "funnel": "SRSW",  "fe_sales": 144,  "revenue": 28800,   "aov": 200.00, "visitors": null, "op_cvr": null }
+    { "funnel": "SSTS",  "fe_sales": 3032, "revenue": 285600, "aov": 94.20,  "visitors": 3861, "op_cvr": "78.53%" },
+    { "funnel": "PSS",   "fe_sales": 858,  "revenue": 115981, "aov": 135.18, "visitors": 1134, "op_cvr": "75.66%" },
+    { "funnel": "OSSF",  "fe_sales": 885,  "revenue": 84960,  "aov": 96.00,  "visitors": 1207, "op_cvr": "73.32%" },
+    { "funnel": "SSDP",  "fe_sales": 220,  "revenue": 19468,  "aov": 88.49,  "visitors": 260,  "op_cvr": "84.62%" },
+    { "funnel": "SRSW",  "fe_sales": 53,   "revenue": 4205,   "aov": 79.34,  "visitors": 71,   "op_cvr": "74.65%" }
   ],
   "digital_takeaways": [
-    "OSSF is the volume leader: 877 FE sales, $98K revenue at $112 AOV, 62% OP CVR. Highest traffic funnel in the mix.",
-    "WPSS leads on revenue despite fewer sales: 556 sales at $198 AOV → $110K. Higher-ticket, lower-volume profile.",
-    "SRSW has the best OP CVR at 75% on 339 sales — efficient converter but still building volume.",
-    "SSTS: 285 FE sales, $33K revenue, $117 AOV, 73% OP CVR. Down significantly vs. June 2025 (6,200 sales).",
-    "⚠ HTKT and PSS data pending — pull separately from DOMO (different funnel filter). These will affect the digital rollup totals."
+    "SSTS collapsed: 3,032 sales in June 2025 to 285 in June 2026 (-91%). Single biggest volume loss in digital.",
+    "WPSS ($110K, $198 AOV) is new this year — didn't exist in June 2025. Partially offsets SSTS volume decline with higher AOV.",
+    "OSSF held steady: 885 to 877 FE sales (flat), AOV rose from $96 to $112. OP CVR dropped from 73% to 62%.",
+    "SRSW scaled from 53 to 339 FE sales (+540%), revenue from $4K to $31K. Small base but strong growth trajectory.",
+    "PSS June 2026 data pending — June 2025 PSS was 858 sales / $116K. Need to pull 2026 numbers to complete the rollup."
   ],
   "goals": {
     "tests_launched": 7,
