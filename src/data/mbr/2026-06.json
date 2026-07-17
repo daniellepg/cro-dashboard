@@ -370,8 +370,8 @@
         },
         {
           "funnel": "WPSS",
-          "net_roas": null,
-          "within_kpi": null
+          "net_roas": "80%",
+          "within_kpi": false
         }
       ]
     },
