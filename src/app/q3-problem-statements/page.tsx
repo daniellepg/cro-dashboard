@@ -8,8 +8,52 @@ const STORAGE_KEY = "q3-problem-statements-v1";
 
 type Grid = string[][];
 
+// col order: RS1, SF2, 357, PG1, SSP, Little Legends
+const DEFAULT_GRID: Grid = [
+  [
+    "RS1 is paused through mid-to-late August due to inventory. No testing until stock returns — focus shifts to reactivation CVR once traffic resumes.",
+    "Visitors aren't converting because they don't understand what SF2 teaches or who it's for — the page lacks specificity about the outcome, leading to drop-off before the CTA.",
+    "CVR dropped after the price increase and hasn't recovered — we don't know if the issue is price anchoring, perceived value, or page framing.",
+    "We're leaving subscription attach revenue on the table because every method we've tried hurts initial CVR — we need an offer structure that captures subs without eroding trial volume.",
+    "SSP has chronically low CVR and we don't have a clear hypothesis for why — we need session replay + funnel data to identify the biggest drop-off point before writing a testable hypothesis.",
+    "We haven't aligned on the primary KPI for Little Legends — is it program sign-ups, product purchase, or email capture? The problem statement depends on that decision.",
+  ],
+  [
+    "Once RS1 restocks, we expect a CVR dip from a gap in traffic warmth — we need a reactivation angle (urgency, scarcity, updated social proof) to recover baseline quickly.",
+    "The SF2 offer is being evaluated too early — prospects don't have enough context about the transformation before they hit the price, causing sticker shock and abandonment.",
+    "We're not communicating the value delta between the old and new price — there's no anchor, no justification, and no risk reversal strong enough to overcome the price sensitivity.",
+    "Trial-to-paid conversion is our biggest leverage point — too many users start a trial and don't convert, and we don't know if that's an onboarding gap, billing friction, or perceived value problem.",
+    "We don't know what SSP's best-converting traffic source looks like — the funnel may be attracting the wrong audience, which no page test will fix.",
+    "Little Legends has no established baseline — we need a measurement plan before testing so we know what a win actually looks like.",
+  ],
+  [
+    "RS1's creative and messaging may go stale during the stock pause — we risk re-launching into a cold audience with outdated hooks if we don't plan a creative refresh now.",
+    "SF2 doesn't surface enough proof from people like the buyer — testimonials are generic and don't address the specific transformation a senior golfer is looking for.",
+    "The 357 page doesn't have a strong enough risk reversal to offset price sensitivity — the guarantee or trial structure needs to do more work.",
+    "The V3 pricing model is working but we haven't optimized the page around it yet — there's likely CVR upside in how we present the offer, not just the price itself.",
+    "SSP's above-the-fold doesn't clearly communicate who it's for or what problem it solves — visitors have to read too far before they self-select.",
+    "Little Legends has no social proof from parents or junior players — without credibility signals, price sensitivity will be high regardless of the offer.",
+  ],
+  [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ],
+  [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ],
+];
+
 function emptyGrid(): Grid {
-  return Array.from({ length: ROW_COUNT }, () => Array(TILES.length).fill(""));
+  return DEFAULT_GRID.map((row) => [...row]);
 }
 
 export default function Q3ProblemStatementsPage() {
