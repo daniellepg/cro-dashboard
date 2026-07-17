@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import type { MbrData, Theme, TestResult, KpiCard } from "@/lib/mbr";
+import type { MbrData, Theme, TestResult, KpiCard, PricingModelVersion, PricingModelAnalysis } from "@/lib/mbr";
 
 import jun2026 from "@/data/mbr/2026-06.json";
 
@@ -135,6 +135,121 @@ function TestsTable({ tests }: { tests: TestResult[] }) {
         </tbody>
       </table>
     </div>
+  );
+}
+
+const VERSION_STYLES: Record<string, { badge: string; border: string; dot: string }> = {
+  V1: { badge: "text-[#8b95a7] bg-white/[0.06] border-white/[0.08]", border: "border-white/[0.08]", dot: "#8b95a7" },
+  V2: { badge: "text-red-400 bg-red-400/10 border-red-400/20", border: "border-red-400/20", dot: "#f87171" },
+  V3: { badge: "text-emerald-400 bg-emerald-400/10 border-emerald-400/20", border: "border-emerald-400/30", dot: "#34d399" },
+};
+
+function VersionCard({ v }: { v: PricingModelVersion }) {
+  const s = VERSION_STYLES[v.version] ?? VERSION_STYLES.V1;
+  const revenueColor = v.net_revenue_positive ? "text-emerald-400" : "text-red-400";
+  return (
+    <div className={`rounded-lg border ${s.border} bg-gradient-to-b from-white/[0.03] to-transparent p-5 flex flex-col gap-3`}>
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <span className={`text-[10px] font-semibold uppercase tracking-widest px-2 py-0.5 rounded border ${s.badge}`}>
+            {v.version}
+          </span>
+          <p className="text-[11px] text-[#8b95a7] mt-1.5">{v.date_range}</p>
+        </div>
+      </div>
+      <div>
+        <div className="text-sm font-medium text-[#f4f5f7] leading-snug">{v.label}</div>
+        <p className="text-xs text-[#5a6478] mt-1 leading-relaxed">{v.description}</p>
+      </div>
+      <div className="border-t border-white/[0.06] pt-3 space-y-2">
+        {[
+          { label: "CVR", value: v.cvr, color: v.version === "V2" ? "text-red-400" : v.version === "V3" ? "text-emerald-400" : "text-[#f4f5f7]" },
+          { label: "AOV", value: v.aov, color: "text-[#f4f5f7]" },
+          { label: "PG1 Trials", value: v.pg1_trials.toLocaleString(), color: "text-[#c9a55e]" },
+          { label: "Trials / 100 Orders", value: v.trials_per_100_orders + "%", color: "text-[#c9a55e]" },
+          { label: "Net ROAS", value: v.net_roas, color: v.version === "V3" ? "text-emerald-400" : v.version === "V2" ? "text-red-400" : "text-[#8b95a7]" },
+          { label: "Ad Spend", value: v.ad_spend, color: "text-[#8b95a7]" },
+          { label: "CPA", value: v.cpa, color: "text-[#8b95a7]" },
+          { label: "Net Revenue", value: v.net_revenue, color: revenueColor },
+        ].map(({ label, value, color }) => (
+          <div key={label} className="flex justify-between items-baseline gap-2">
+            <span className="text-[10px] uppercase tracking-[0.14em] text-[#5a6478]">{label}</span>
+            <span className={`text-xs font-medium ${color}`}>{value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PricingModelSection({ data }: { data: PricingModelAnalysis }) {
+  const projRows: { label: string; v2: string; v3: string }[] = [
+    { label: "Orders", v2: data.v2_if_implemented.orders.toLocaleString(), v3: data.v3_actual.orders.toLocaleString() },
+    { label: "Gross Revenue", v2: data.v2_if_implemented.gross_revenue, v3: data.v3_actual.gross_revenue },
+    { label: "PG1 Trials", v2: data.v2_if_implemented.pg1_trials.toLocaleString(), v3: data.v3_actual.pg1_trials.toLocaleString() },
+    { label: "Net ROAS", v2: data.v2_if_implemented.net_roas, v3: data.v3_actual.net_roas },
+    { label: "Net Revenue", v2: data.v2_if_implemented.net_revenue, v3: data.v3_actual.net_revenue },
+  ];
+
+  return (
+    <section>
+      <SectionHeader label={data.headline} />
+      <p className="text-xs text-[#5a6478] mb-6 -mt-2">{data.sub}</p>
+
+      {/* Three version cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        {data.versions.map((v) => <VersionCard key={v.version} v={v} />)}
+      </div>
+
+      {/* V2 if implemented projection */}
+      <div className="mb-6">
+        <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold mb-1">{data.projection_headline}</div>
+        <p className="text-xs text-[#5a6478] mb-4">{data.projection_sub}</p>
+        <div className="overflow-x-auto rounded-lg border border-white/[0.08]">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="border-b border-white/[0.06]">
+                <th className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#5a6478] font-medium">KPI</th>
+                <th className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-red-400/70 font-medium">V2 If Implemented (projected)</th>
+                <th className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-emerald-400/70 font-medium">V3 Actual</th>
+                <th className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#5a6478] font-medium">Delta</th>
+              </tr>
+            </thead>
+            <tbody>
+              {projRows.map((r, i) => {
+                const deltas: Record<string, string> = {
+                  "Orders": "+1,265 (+14%)",
+                  "Gross Revenue": "+$268K (+9%)",
+                  "PG1 Trials": "+2,581 (+48%)",
+                  "Net ROAS": "+8pp",
+                  "Net Revenue": "+$142K swing",
+                };
+                return (
+                  <tr key={r.label} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+                    <td className="px-4 py-3 text-[10px] uppercase tracking-[0.14em] text-[#5a6478]">{r.label}</td>
+                    <td className="px-4 py-3 text-red-400">{r.v2}</td>
+                    <td className="px-4 py-3 text-emerald-400 font-medium">{r.v3}</td>
+                    <td className="px-4 py-3 text-[#c9a55e] font-medium">{deltas[r.label] ?? "—"}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Callouts */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="rounded-lg border border-emerald-400/20 bg-emerald-400/[0.03] p-5">
+          <div className="text-[10px] uppercase tracking-widest text-emerald-400 font-semibold mb-2">Finding</div>
+          <p className="text-xs text-[#8b95a7] leading-relaxed">{data.callout_positive}</p>
+        </div>
+        <div className="rounded-lg border border-amber-400/20 bg-amber-400/[0.03] p-5">
+          <div className="text-[10px] uppercase tracking-widest text-amber-400 font-semibold mb-2">Watch</div>
+          <p className="text-xs text-[#8b95a7] leading-relaxed">{data.callout_watch}</p>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -320,6 +435,11 @@ export default async function MbrDetailPage({ params }: { params: Promise<{ mont
           </div>
         )}
       </section>
+
+      {/* Pricing Model Analysis */}
+      {mbr.pricing_model_analysis && (
+        <PricingModelSection data={mbr.pricing_model_analysis} />
+      )}
 
       {/* Themes */}
       {mbr.themes.length > 0 && (

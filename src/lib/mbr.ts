@@ -34,6 +34,46 @@ export type Theme = {
   takeaway: string;
 };
 
+export type PricingModelVersion = {
+  version: string;
+  label: string;
+  date_range: string;
+  description: string;
+  cvr: string;
+  aov: string;
+  pg1_trials: number;
+  trials_per_100_orders: string;
+  net_roas: string;
+  ad_spend: string;
+  cpa: string;
+  net_revenue: string;
+  net_revenue_positive: boolean;
+};
+
+export type PricingModelAnalysis = {
+  headline: string;
+  sub: string;
+  versions: PricingModelVersion[];
+  projection_headline: string;
+  projection_sub: string;
+  v2_if_implemented: {
+    orders: number;
+    gross_revenue: string;
+    pg1_trials: number;
+    net_roas: string;
+    net_revenue: string;
+  };
+  v3_actual: {
+    orders: number;
+    gross_revenue: string;
+    pg1_trials: number;
+    net_roas: string;
+    net_revenue: string;
+  };
+  callout_positive: string;
+  callout_watch: string;
+};
+
 export type MbrData = {
   month: string;
   comparison_month: string;
@@ -92,6 +132,7 @@ export type MbrData = {
   themes: Theme[];
   triumphs: string[];
   challenges: string[];
+  pricing_model_analysis?: PricingModelAnalysis;
   generated_at: string;
   data_source: string;
 };
