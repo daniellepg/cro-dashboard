@@ -1,81 +1,342 @@
 {
   "month": "June 2026",
   "comparison_month": "June 2025",
-  "headline": "Net ROAS jumped from 59% to 96% (+37 pts) on 44% less spend — net loss narrowed from −$1.38M to −$75K, nearly reaching breakeven. AOV up 44% ($204 → $294) while orders fell 43%: a deliberate trade of volume for efficiency.",
+  "headline": "Net ROAS jumped from 59% to 96% (+37 pts) on 44% less spend \u2014 net loss narrowed from \u2212$1.38M to \u2212$75K, nearly reaching breakeven. AOV up 44% ($204 \u2192 $294) while orders fell 43%: a deliberate trade of volume for efficiency.",
   "headline_kpis": [
-    { "label": "Ad Spend",         "current": "$1.89M",   "prior": "$3.36M",   "change": "▼ 43.7%",     "direction": "down", "good": true  },
-    { "label": "Net Revenue",      "current": "−$74,781", "prior": "−$1.38M",  "change": "▲ $1.30M",    "direction": "up",   "good": true  },
-    { "label": "Net ROAS",         "current": "96%",      "prior": "59%",      "change": "▲ 37 pts",    "direction": "up",   "good": true  },
-    { "label": "Gross ROAS",       "current": "166%",     "prior": "114%",     "change": "▲ 52 pts",    "direction": "up",   "good": true  },
-    { "label": "AOV",              "current": "$294",     "prior": "$204",     "change": "▲ 44.1%",     "direction": "up",   "good": true  },
-    { "label": "NC AOV",           "current": "$292",     "prior": "$202",     "change": "▲ 44.6%",     "direction": "up",   "good": true  },
-    { "label": "RC AOV",           "current": "$300",     "prior": "$208",     "change": "▲ 44.2%",     "direction": "up",   "good": true  },
-    { "label": "Orders",           "current": "10,683",   "prior": "18,799",   "change": "▼ 43.2%",     "direction": "down", "good": false },
-    { "label": "CPA",              "current": "$180",     "prior": "$182",     "change": "▼ 1.1%",      "direction": "down", "good": true  },
-    { "label": "NC CPA",           "current": "$247",     "prior": "$259",     "change": "▼ 4.6%",      "direction": "down", "good": true  },
-    { "label": "CVR",              "current": "0.88%",    "prior": "0.82%",    "change": "▲ 0.06 pts",  "direction": "up",   "good": true  },
-    { "label": "Net Loss / Trial", "current": "−$10.16",  "prior": "−$81.37",  "change": "▲ $71.21",    "direction": "up",   "good": true  }
+    {
+      "label": "Ad Spend",
+      "current": "$1.89M",
+      "prior": "$3.36M",
+      "change": "\u25bc 43.7%",
+      "direction": "down",
+      "good": true
+    },
+    {
+      "label": "Net Revenue",
+      "current": "\u2212$74,781",
+      "prior": "\u2212$1.38M",
+      "change": "\u25b2 $1.30M",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "Net ROAS",
+      "current": "96%",
+      "prior": "59%",
+      "change": "\u25b2 37 pts",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "Gross ROAS",
+      "current": "166%",
+      "prior": "114%",
+      "change": "\u25b2 52 pts",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "AOV",
+      "current": "$294",
+      "prior": "$204",
+      "change": "\u25b2 44.1%",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "NC AOV",
+      "current": "$292",
+      "prior": "$202",
+      "change": "\u25b2 44.6%",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "RC AOV",
+      "current": "$300",
+      "prior": "$208",
+      "change": "\u25b2 44.2%",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "Orders",
+      "current": "10,683",
+      "prior": "18,799",
+      "change": "\u25bc 43.2%",
+      "direction": "down",
+      "good": false
+    },
+    {
+      "label": "CPA",
+      "current": "$180",
+      "prior": "$182",
+      "change": "\u25bc 1.1%",
+      "direction": "down",
+      "good": true
+    },
+    {
+      "label": "NC CPA",
+      "current": "$247",
+      "prior": "$259",
+      "change": "\u25bc 4.6%",
+      "direction": "down",
+      "good": true
+    },
+    {
+      "label": "CVR",
+      "current": "0.88%",
+      "prior": "0.82%",
+      "change": "\u25b2 0.06 pts",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "Net Loss / Trial",
+      "current": "\u2212$10.16",
+      "prior": "\u2212$81.37",
+      "change": "\u25b2 $71.21",
+      "direction": "up",
+      "good": true
+    }
   ],
   "sales_yoy": {
-    "total":    { "current": 10683, "prior": 18799, "change": "−43.2%", "direction": "down" },
-    "physical": { "current": 9850,  "prior": 14472, "change": "−31.9%", "direction": "down" },
-    "digital":  { "current": 2057,  "prior": 5048,  "change": "−59.2%", "direction": "down" }
+    "total": {
+      "current": 10683,
+      "prior": 18799,
+      "change": "\u221243.2%",
+      "direction": "down"
+    },
+    "physical": {
+      "current": 9850,
+      "prior": 14472,
+      "change": "\u221231.9%",
+      "direction": "down"
+    },
+    "digital": {
+      "current": 2057,
+      "prior": 5048,
+      "change": "\u221259.2%",
+      "direction": "down"
+    }
   },
   "physical_rollup": {
-    "total_revenue": "⚠ Partial (ONE.1/359 pending)", "prior_revenue": "$3.43M", "revenue_change": "⚠ Pending",
-    "fe_sales": 5890, "prior_fe_sales": 14472,
-    "aov": "⚠ Partial", "prior_aov": "$236.86", "aov_change": "⚠ Pending"
+    "total_revenue": "\u26a0 Partial",
+    "prior_revenue": "$3.43M",
+    "revenue_change": "\u26a0 Pending",
+    "fe_sales": 5890,
+    "prior_fe_sales": 14472,
+    "aov": "\u26a0 Partial",
+    "prior_aov": "$236.86",
+    "aov_change": "\u26a0 Pending"
   },
   "physical_funnels_current": [
-    { "funnel": "RS1",   "fe_sales": 1715, "revenue": 703745, "aov": 410.00, "visitors": null, "op_cvr": null },
-    { "funnel": "357",   "fe_sales": 2102, "revenue": 626699, "aov": 298.14, "visitors": 4256, "op_cvr": "49.41%" },
-    { "funnel": "SF2",   "fe_sales": 1688, "revenue": 546793, "aov": 324.00, "visitors": null, "op_cvr": null },
-    { "funnel": "ONE.1", "fe_sales": null, "revenue": null,   "aov": null,   "visitors": null, "op_cvr": "⚠ pending" },
-    { "funnel": "359",   "fe_sales": null, "revenue": null,   "aov": null,   "visitors": null, "op_cvr": "⚠ pending" },
-    { "funnel": "SSP",   "fe_sales": 215,  "revenue": 55452,  "aov": 258.00, "visitors": null, "op_cvr": null },
-    { "funnel": "DF1",   "fe_sales": 170,  "revenue": 129100, "aov": 759.41, "visitors": null, "op_cvr": null }
+    {
+      "funnel": "RS1",
+      "fe_sales": 1715,
+      "revenue": 703745,
+      "aov": 410.0,
+      "visitors": null,
+      "op_cvr": null
+    },
+    {
+      "funnel": "357",
+      "fe_sales": 2102,
+      "revenue": 626699,
+      "aov": 298.14,
+      "visitors": 4256,
+      "op_cvr": "49.41%"
+    },
+    {
+      "funnel": "SF2",
+      "fe_sales": 1688,
+      "revenue": 546793,
+      "aov": 324.0,
+      "visitors": null,
+      "op_cvr": null
+    },
+    {
+      "funnel": "SSP",
+      "fe_sales": 215,
+      "revenue": 55452,
+      "aov": 258.0,
+      "visitors": null,
+      "op_cvr": null
+    },
+    {
+      "funnel": "DF1",
+      "fe_sales": 170,
+      "revenue": 129100,
+      "aov": 759.41,
+      "visitors": null,
+      "op_cvr": null
+    }
   ],
   "physical_funnels_prior": [
-    { "funnel": "357",  "fe_sales": 6449, "revenue": 1577938, "aov": 244.68, "visitors": 13562, "op_cvr": "51.10%" },
-    { "funnel": "SF1",  "fe_sales": 3064, "revenue": 889334,  "aov": 290.25, "visitors": 8620,  "op_cvr": "35.55%" },
-    { "funnel": "THR",  "fe_sales": 1041, "revenue": 333453,  "aov": 320.32, "visitors": 2864,  "op_cvr": "38.97%" },
-    { "funnel": "CLST", "fe_sales": 1499, "revenue": 247852,  "aov": 165.34, "visitors": 2700,  "op_cvr": "56.04%" },
-    { "funnel": "SQP",  "fe_sales": 908,  "revenue": 192035,  "aov": 211.49, "visitors": 2332,  "op_cvr": "38.94%" },
-    { "funnel": "SQSE", "fe_sales": 1432, "revenue": 172609,  "aov": 120.54, "visitors": 2249,  "op_cvr": "63.67%" },
-    { "funnel": "TOW",  "fe_sales": 79,   "revenue": 14405,   "aov": 182.34, "visitors": 157,   "op_cvr": "50.32%" }
+    {
+      "funnel": "357",
+      "fe_sales": 6449,
+      "revenue": 1577938,
+      "aov": 244.68,
+      "visitors": 13562,
+      "op_cvr": "51.10%"
+    },
+    {
+      "funnel": "SF1",
+      "fe_sales": 3064,
+      "revenue": 889334,
+      "aov": 290.25,
+      "visitors": 8620,
+      "op_cvr": "35.55%"
+    },
+    {
+      "funnel": "THR",
+      "fe_sales": 1041,
+      "revenue": 333453,
+      "aov": 320.32,
+      "visitors": 2864,
+      "op_cvr": "38.97%"
+    },
+    {
+      "funnel": "CLST",
+      "fe_sales": 1499,
+      "revenue": 247852,
+      "aov": 165.34,
+      "visitors": 2700,
+      "op_cvr": "56.04%"
+    },
+    {
+      "funnel": "SQP",
+      "fe_sales": 908,
+      "revenue": 192035,
+      "aov": 211.49,
+      "visitors": 2332,
+      "op_cvr": "38.94%"
+    },
+    {
+      "funnel": "SQSE",
+      "fe_sales": 1432,
+      "revenue": 172609,
+      "aov": 120.54,
+      "visitors": 2249,
+      "op_cvr": "63.67%"
+    },
+    {
+      "funnel": "TOW",
+      "fe_sales": 79,
+      "revenue": 14405,
+      "aov": 182.34,
+      "visitors": 157,
+      "op_cvr": "50.32%"
+    }
   ],
   "physical_takeaways": [
-    "RS1 is the new anchor — didn't exist in June 2025. It's now the largest physical funnel by revenue.",
-    "357 held volume relatively well: 6,449 sales in June 2025, current data pending. AOV up vs. prior year ($245 → est. $360).",
-    "SF1 is offline — 3,064 FE sales and $889K in June 2025, zero this June. RS1 and SF2 absorbed that load.",
-    "AOV story is real: prior year blended AOV was $237. Current year estimated at $378 — a 60% jump driven by RS1 and mix shift away from SQSE/SQP.",
-    "SQSE/SQP/TOW/THR accounted for 3,460 sales in June 2025. Effectively deprecated this year — that volume has not been replaced 1:1."
+    "RS1 is the new anchor \u2014 didn't exist in June 2025. It's now the largest physical funnel by revenue.",
+    "357 held volume relatively well: 6,449 sales in June 2025, current data pending. AOV up vs. prior year ($245 \u2192 est. $360).",
+    "SF1 is offline \u2014 3,064 FE sales and $889K in June 2025, zero this June. RS1 and SF2 absorbed that load.",
+    "AOV story is real: prior year blended AOV was $237. Current year estimated at $378 \u2014 a 60% jump driven by RS1 and mix shift away from SQSE/SQP.",
+    "SQSE/SQP/TOW/THR accounted for 3,460 sales in June 2025. Effectively deprecated this year \u2014 that volume has not been replaced 1:1."
   ],
   "digital_rollup": {
-    "total_revenue": "⚠ Pending (PSS missing)", "prior_revenue": "$510K", "revenue_change": "⚠ Pending",
-    "fe_sales": 2057, "prior_fe_sales": 5048,
-    "aov": "$132.30", "prior_aov": "$101.07", "aov_change": "+31.0%"
+    "total_revenue": "\u26a0 Pending (PSS missing)",
+    "prior_revenue": "$510K",
+    "revenue_change": "\u26a0 Pending",
+    "fe_sales": 2057,
+    "prior_fe_sales": 5048,
+    "aov": "$132.30",
+    "prior_aov": "$101.07",
+    "aov_change": "+31.0%"
   },
   "digital_funnels_current": [
-    { "funnel": "OSSF",  "fe_sales": 877,  "revenue": 97999,  "aov": 111.74, "visitors": 1405, "op_cvr": "62.42%" },
-    { "funnel": "WPSS",  "fe_sales": 556,  "revenue": 109814, "aov": 197.51, "visitors": 972,  "op_cvr": "57.20%" },
-    { "funnel": "SRSW",  "fe_sales": 339,  "revenue": 31025,  "aov": 91.52,  "visitors": 450,  "op_cvr": "75.33%" },
-    { "funnel": "SSTS",  "fe_sales": 285,  "revenue": 33277,  "aov": 116.76, "visitors": 392,  "op_cvr": "72.70%" },
-    { "funnel": "PSS",   "fe_sales": null, "revenue": null,   "aov": null,   "visitors": null, "op_cvr": "⚠ pending" }
+    {
+      "funnel": "OSSF",
+      "fe_sales": 877,
+      "revenue": 97999,
+      "aov": 111.74,
+      "visitors": 1405,
+      "op_cvr": "62.42%"
+    },
+    {
+      "funnel": "WPSS",
+      "fe_sales": 556,
+      "revenue": 109814,
+      "aov": 197.51,
+      "visitors": 972,
+      "op_cvr": "57.20%"
+    },
+    {
+      "funnel": "SRSW",
+      "fe_sales": 339,
+      "revenue": 31025,
+      "aov": 91.52,
+      "visitors": 450,
+      "op_cvr": "75.33%"
+    },
+    {
+      "funnel": "SSTS",
+      "fe_sales": 285,
+      "revenue": 33277,
+      "aov": 116.76,
+      "visitors": 392,
+      "op_cvr": "72.70%"
+    },
+    {
+      "funnel": "PSS",
+      "fe_sales": null,
+      "revenue": null,
+      "aov": null,
+      "visitors": null,
+      "op_cvr": "\u26a0 pending"
+    }
   ],
   "digital_funnels_prior": [
-    { "funnel": "SSTS",  "fe_sales": 3032, "revenue": 285600, "aov": 94.20,  "visitors": 3861, "op_cvr": "78.53%" },
-    { "funnel": "PSS",   "fe_sales": 858,  "revenue": 115981, "aov": 135.18, "visitors": 1134, "op_cvr": "75.66%" },
-    { "funnel": "OSSF",  "fe_sales": 885,  "revenue": 84960,  "aov": 96.00,  "visitors": 1207, "op_cvr": "73.32%" },
-    { "funnel": "SSDP",  "fe_sales": 220,  "revenue": 19468,  "aov": 88.49,  "visitors": 260,  "op_cvr": "84.62%" },
-    { "funnel": "SRSW",  "fe_sales": 53,   "revenue": 4205,   "aov": 79.34,  "visitors": 71,   "op_cvr": "74.65%" }
+    {
+      "funnel": "SSTS",
+      "fe_sales": 3032,
+      "revenue": 285600,
+      "aov": 94.2,
+      "visitors": 3861,
+      "op_cvr": "78.53%"
+    },
+    {
+      "funnel": "PSS",
+      "fe_sales": 858,
+      "revenue": 115981,
+      "aov": 135.18,
+      "visitors": 1134,
+      "op_cvr": "75.66%"
+    },
+    {
+      "funnel": "OSSF",
+      "fe_sales": 885,
+      "revenue": 84960,
+      "aov": 96.0,
+      "visitors": 1207,
+      "op_cvr": "73.32%"
+    },
+    {
+      "funnel": "SSDP",
+      "fe_sales": 220,
+      "revenue": 19468,
+      "aov": 88.49,
+      "visitors": 260,
+      "op_cvr": "84.62%"
+    },
+    {
+      "funnel": "SRSW",
+      "fe_sales": 53,
+      "revenue": 4205,
+      "aov": 79.34,
+      "visitors": 71,
+      "op_cvr": "74.65%"
+    }
   ],
   "digital_takeaways": [
     "SSTS collapsed: 3,032 sales in June 2025 to 285 in June 2026 (-91%). Single biggest volume loss in digital.",
-    "WPSS ($110K, $198 AOV) is new this year — didn't exist in June 2025. Partially offsets SSTS volume decline with higher AOV.",
+    "WPSS ($110K, $198 AOV) is new this year \u2014 didn't exist in June 2025. Partially offsets SSTS volume decline with higher AOV.",
     "OSSF held steady: 885 to 877 FE sales (flat), AOV rose from $96 to $112. OP CVR dropped from 73% to 62%.",
     "SRSW scaled from 53 to 339 FE sales (+540%), revenue from $4K to $31K. Small base but strong growth trajectory.",
-    "PSS June 2026 data pending — June 2025 PSS was 858 sales / $116K. Need to pull 2026 numbers to complete the rollup."
+    "PSS June 2026 data pending \u2014 June 2025 PSS was 858 sales / $116K. Need to pull 2026 numbers to complete the rollup."
   ],
   "goals": {
     "tests_launched": 7,
@@ -90,36 +351,128 @@
     "rebuy_aov": "TBD"
   },
   "tests_concluded": [
-    { "id": "0546",      "name": "357 Checkout Champ — Variation B",             "outcome": "WIN",  "primary_metric": "RPV +22%",           "revenue_stat": "AOV $313 → $306 (−2%)",           "stat_sig": "—" },
-    { "id": "0545",      "name": "One Shot Slice Fix — Checkout Champ",           "outcome": "WIN",  "primary_metric": "RPV +1%",            "revenue_stat": "AOV $114 → $114 (flat)",           "stat_sig": "—" },
-    { "id": "0547",      "name": "357 Checkout Champ — Variation C",             "outcome": "LOSS", "primary_metric": "RPV −17%",           "revenue_stat": "AOV $317 → $289 (−9%)",           "stat_sig": "—" },
-    { "id": "0551",      "name": "WPSS Checkout Champ Test",                     "outcome": "LOSS", "primary_metric": "CVR loss",           "revenue_stat": "Membership +84pp (data anomaly)", "stat_sig": "—" },
-    { "id": "PG14A",     "name": "Club Only + Club + App Copy (A) — Shopify",    "outcome": "LOSS", "primary_metric": "RPV −48%",           "revenue_stat": "Membership +25pp · AOV $306 → $318 (+4%)", "stat_sig": "—" },
-    { "id": "PG14B",     "name": "Club Only + Club + App Copy (B) — Shopify",    "outcome": "LOSS", "primary_metric": "RPV −24%",           "revenue_stat": "Membership +32pp · AOV $309 → $350 (+13%)", "stat_sig": "—" },
-    { "id": "PG14C",     "name": "Club Only + Club + App Copy (C) — Shopify",    "outcome": "LOSS", "primary_metric": "RPV −30%",           "revenue_stat": "Membership +34pp · AOV $291 → $317 (+9%)", "stat_sig": "—" },
-    { "id": "PG0023",    "name": "ONE.1 Wedge — Help Me Choose Quiz — Shopify",  "outcome": "LOSS", "primary_metric": "RPV −20%",           "revenue_stat": "AOV $207 → $170 (−18%)",          "stat_sig": "—" },
-    { "id": "0542",      "name": "357 Post-Purchase Interstitial",               "outcome": "FLAT", "primary_metric": "Inconclusive",       "revenue_stat": "Upsell take −11pp · AOV $323 → $277 (−14%)", "stat_sig": "—" },
-    { "id": "PG14A-100", "name": "Club Only + Club + App Copy (100%) — Shopify", "outcome": "FLAT", "primary_metric": "RPV flat",           "revenue_stat": "AOV $316",                        "stat_sig": "—" },
-    { "id": "PG09A",     "name": "Help Me Choose — Shopify",                     "outcome": "FLAT", "primary_metric": "RPV −0%",            "revenue_stat": "AOV $236 → $240 (+2%)",           "stat_sig": "—" }
+    {
+      "id": "0546",
+      "name": "357 Checkout Champ \u2014 Variation B",
+      "outcome": "WIN",
+      "primary_metric": "RPV +22%",
+      "revenue_stat": "AOV $313 \u2192 $306 (\u22122%)",
+      "stat_sig": "\u2014"
+    },
+    {
+      "id": "0545",
+      "name": "One Shot Slice Fix \u2014 Checkout Champ",
+      "outcome": "WIN",
+      "primary_metric": "RPV +1%",
+      "revenue_stat": "AOV $114 \u2192 $114 (flat)",
+      "stat_sig": "\u2014"
+    },
+    {
+      "id": "0547",
+      "name": "357 Checkout Champ \u2014 Variation C",
+      "outcome": "LOSS",
+      "primary_metric": "RPV \u221217%",
+      "revenue_stat": "AOV $317 \u2192 $289 (\u22129%)",
+      "stat_sig": "\u2014"
+    },
+    {
+      "id": "0551",
+      "name": "WPSS Checkout Champ Test",
+      "outcome": "LOSS",
+      "primary_metric": "CVR loss",
+      "revenue_stat": "Membership +84pp (data anomaly)",
+      "stat_sig": "\u2014"
+    },
+    {
+      "id": "PG14A",
+      "name": "Club Only + Club + App Copy (A) \u2014 Shopify",
+      "outcome": "LOSS",
+      "primary_metric": "RPV \u221248%",
+      "revenue_stat": "Membership +25pp \u00b7 AOV $306 \u2192 $318 (+4%)",
+      "stat_sig": "\u2014"
+    },
+    {
+      "id": "PG14B",
+      "name": "Club Only + Club + App Copy (B) \u2014 Shopify",
+      "outcome": "LOSS",
+      "primary_metric": "RPV \u221224%",
+      "revenue_stat": "Membership +32pp \u00b7 AOV $309 \u2192 $350 (+13%)",
+      "stat_sig": "\u2014"
+    },
+    {
+      "id": "PG14C",
+      "name": "Club Only + Club + App Copy (C) \u2014 Shopify",
+      "outcome": "LOSS",
+      "primary_metric": "RPV \u221230%",
+      "revenue_stat": "Membership +34pp \u00b7 AOV $291 \u2192 $317 (+9%)",
+      "stat_sig": "\u2014"
+    },
+    {
+      "id": "PG0023",
+      "name": "ONE.1 Wedge \u2014 Help Me Choose Quiz \u2014 Shopify",
+      "outcome": "LOSS",
+      "primary_metric": "RPV \u221220%",
+      "revenue_stat": "AOV $207 \u2192 $170 (\u221218%)",
+      "stat_sig": "\u2014"
+    },
+    {
+      "id": "0542",
+      "name": "357 Post-Purchase Interstitial",
+      "outcome": "FLAT",
+      "primary_metric": "Inconclusive",
+      "revenue_stat": "Upsell take \u221211pp \u00b7 AOV $323 \u2192 $277 (\u221214%)",
+      "stat_sig": "\u2014"
+    },
+    {
+      "id": "PG14A-100",
+      "name": "Club Only + Club + App Copy (100%) \u2014 Shopify",
+      "outcome": "FLAT",
+      "primary_metric": "RPV flat",
+      "revenue_stat": "AOV $316",
+      "stat_sig": "\u2014"
+    },
+    {
+      "id": "PG09A",
+      "name": "Help Me Choose \u2014 Shopify",
+      "outcome": "FLAT",
+      "primary_metric": "RPV \u22120%",
+      "revenue_stat": "AOV $236 \u2192 $240 (+2%)",
+      "stat_sig": "\u2014"
+    }
   ],
   "tests_in_progress": [
-    { "id": "0494",   "name": "357 Checkout Champ Test 0494",      "key_kpi": "RPV", "next_steps": "Running since Apr 20 — monitor" },
-    { "id": "PG0022", "name": "Shopify Checkout UVPs Above CTA",   "key_kpi": "RPV", "next_steps": "Started Jun 29 — early results" },
-    { "id": "PG0032", "name": "Putter CLP to RS1 PDP — Shopify",  "key_kpi": "RPV", "next_steps": "Started Jun 30 — early results" }
+    {
+      "id": "0494",
+      "name": "357 Checkout Champ Test 0494",
+      "key_kpi": "RPV",
+      "next_steps": "Running since Apr 20 \u2014 monitor"
+    },
+    {
+      "id": "PG0022",
+      "name": "Shopify Checkout UVPs Above CTA",
+      "key_kpi": "RPV",
+      "next_steps": "Started Jun 29 \u2014 early results"
+    },
+    {
+      "id": "PG0032",
+      "name": "Putter CLP to RS1 PDP \u2014 Shopify",
+      "key_kpi": "RPV",
+      "next_steps": "Started Jun 30 \u2014 early results"
+    }
   ],
   "themes": [
     {
       "number": 1,
-      "title": "Efficiency over volume — the business chose margin",
+      "title": "Efficiency over volume \u2014 the business chose margin",
       "outcome": "WIN",
       "narrative": "Spend dropped 46% and orders dropped 43%, but Net ROAS jumped from 44% to 111% and refund rate collapsed from 32% to 7%. The shift away from high-volume, high-refund digital funnels (led by SSG2 being retired) drove the biggest efficiency gain in recent memory.",
-      "takeaway": "Protect this efficiency — don't let spend creep back into low-quality volume."
+      "takeaway": "Protect this efficiency \u2014 don't let spend creep back into low-quality volume."
     },
     {
       "number": 2,
       "title": "AOV is the growth lever that's working",
       "outcome": "WIN",
-      "narrative": "Physical AOV: +46% ($259 → $378). Digital AOV: +82% ($258 → $470). Higher-ticket funnels (RS1 at $400, PSS at $1,900, HTKT at $8,192) are replacing the commodity volume. The business is moving upmarket.",
+      "narrative": "Physical AOV: +46% ($259 \u2192 $378). Digital AOV: +82% ($258 \u2192 $470). Higher-ticket funnels (RS1 at $400, PSS at $1,900, HTKT at $8,192) are replacing the commodity volume. The business is moving upmarket.",
       "takeaway": "Double down on high-AOV funnels. Any new test should have an AOV hypothesis."
     },
     {
@@ -127,18 +480,87 @@
       "title": "PG1 v3 on Shopify is the structural bet",
       "outcome": "WIN",
       "narrative": "Moving PG1 to Shopify and introducing a 7-day no-subscription free trial removes the forced continuity model that created refund exposure. Removing misleading checkout text (implying subscription when it was a free trial) addresses a trust and compliance issue at the highest-volume point in the funnel.",
-      "takeaway": "Free trial clarity at checkout is a CRO win and a retention investment — measure trial-to-paid conversion as the north star."
+      "takeaway": "Free trial clarity at checkout is a CRO win and a retention investment \u2014 measure trial-to-paid conversion as the north star."
     }
   ],
   "triumphs": [
-    "Launched PG1 v3 on Shopify with a 7-day no-sub free trial — moving off forced continuity toward an opt-in model.",
+    "Launched PG1 v3 on Shopify with a 7-day no-sub free trial \u2014 moving off forced continuity toward an opt-in model.",
     "Removed misleading checkout text that implied customers were getting a subscription when they were actually starting a free trial.",
-    "11 tests concluded in June — 2 wins, 6 losses, 3 flat. 0546 (357 CoC) and 0545 (OSSF CoC) both shipped."
+    "11 tests concluded in June \u2014 2 wins, 6 losses, 3 flat. 0546 (357 CoC) and 0545 (OSSF CoC) both shipped."
   ],
   "challenges": [
-    "Free trial tracking is unreliable — the definition has changed multiple times, making it impossible to get a clean total count or a trustworthy trial-to-paid conversion rate. Need a single agreed-upon definition locked in before we can measure the PG1 v3 launch properly.",
-    "Trial-to-paid conversion rate is not yet measurable by platform — CoC and Shopify handle trials differently, and we can't compare them apples-to-apples until reporting is separated and standardized per platform."
+    "Free trial tracking is unreliable \u2014 the definition has changed multiple times, making it impossible to get a clean total count or a trustworthy trial-to-paid conversion rate. Need a single agreed-upon definition locked in before we can measure the PG1 v3 launch properly.",
+    "Trial-to-paid conversion rate is not yet measurable by platform \u2014 CoC and Shopify handle trials differently, and we can't compare them apples-to-apples until reporting is separated and standardized per platform."
   ],
   "generated_at": "2026-07-07T00:00:00Z",
-  "data_source": "DOMO (Orders with Acq Spend 2.0) + ClickUp"
+  "data_source": "DOMO (Orders with Acq Spend 2.0) + ClickUp",
+  "pricing_model_analysis": {
+    "headline": "New Pricing Model Analysis",
+    "sub": "Three pricing eras across all paid funnels \u2014 Apr 12 through Jul 11 \u00b7 Source: Domo Ad Performance (357 campaigns)",
+    "versions": [
+      {
+        "version": "V1",
+        "label": "Single Price \u00b7 No Trial",
+        "date_range": "Apr 12 \u2013 May 11",
+        "description": "Baseline. One checkout price across all funnels, no subscription or free trial offer.",
+        "cvr": "0.95%",
+        "aov": "$261",
+        "pg1_trials": 2332,
+        "trials_per_100_orders": "36.6",
+        "net_roas": "99%",
+        "ad_spend": "$982K",
+        "cpa": "$157",
+        "net_revenue": "-$7K",
+        "net_revenue_positive": false
+      },
+      {
+        "version": "V2",
+        "label": "Member / Non-Member Pricing",
+        "date_range": "May 12 \u2013 Jun 9",
+        "description": "Two-price checkout. Non-members saw a higher price with an auto-added $29/mo PG1 subscription. A/B tests (PG08, PG14) confirmed CVR loss outweighed subscription LTV.",
+        "cvr": "0.83%",
+        "aov": "$306",
+        "pg1_trials": 5276,
+        "trials_per_100_orders": "57.9",
+        "net_roas": "95%",
+        "ad_spend": "$1,625K",
+        "cpa": "$181",
+        "net_revenue": "-$75K",
+        "net_revenue_positive": false
+      },
+      {
+        "version": "V3",
+        "label": "Single Price + Auto-Trial",
+        "date_range": "Jun 11 \u2013 Jul 11",
+        "description": "Returned to single price. PG1 7-day free trial auto-added to cart (removable). Live Jun 10 Shopify, Jun 11 357 CC. First profitable period of all three.",
+        "cvr": "0.92%",
+        "aov": "$295",
+        "pg1_trials": 7968,
+        "trials_per_100_orders": "75.4",
+        "net_roas": "103%",
+        "ad_spend": "$1,806K",
+        "cpa": "$175",
+        "net_revenue": "+$61K",
+        "net_revenue_positive": true
+      }
+    ],
+    "projection_headline": "What if V2 had been fully implemented at V3 spend scale?",
+    "projection_sub": "Projecting V2's observed CVR (0.83%) and trial attach rate (57.9%) onto V3's actual click volume (1,120,793 clicks at $1.8M spend).",
+    "v2_if_implemented": {
+      "orders": 9303,
+      "gross_revenue": "$2,847K",
+      "pg1_trials": 5387,
+      "net_roas": "~95%",
+      "net_revenue": "~-$81K"
+    },
+    "v3_actual": {
+      "orders": 10568,
+      "gross_revenue": "$3,115K",
+      "pg1_trials": 7968,
+      "net_roas": "103%",
+      "net_revenue": "+$61K"
+    },
+    "callout_positive": "V3 wins on every dimension that matters. CVR nearly recovered to V1 (0.92% vs 0.95%). Net ROAS crossed into profit for the first time at 103%. CPA is declining at $175. And subscription acquisition reached its highest rate ever \u2014 75 trials per 100 orders \u2014 without any pricing friction. V3 at $1.8M spend is producing +1,265 more orders, +$268K more gross revenue, and +2,581 more PG1 trials than V2 would have at the same scale. Net revenue swing: -$81K projected \u2192 +$61K actual = $142K flip.",
+    "callout_watch": "AOV is down from V2 ($306 \u2192 $295). V2's non-member price premium drove higher AOV; V3's single price brought it back down slightly. At 75.4% trial attach rate and $29/month, even 2-month average subscriber retention more than covers the $11 AOV gap per buyer \u2014 but trial-to-paid conversion rate is the metric to watch in the next 30\u201360 days."
+  }
 }
