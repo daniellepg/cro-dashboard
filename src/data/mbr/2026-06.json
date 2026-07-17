@@ -456,7 +456,7 @@
       "name": "357 Checkout Champ — Variation B",
       "outcome": "WIN",
       "primary_metric": "RPV +22%",
-      "revenue_stat": "AOV $313 → $306 (−2%)",
+      "revenue_stat": "AOV $313 → $306 (−2%) · Membership 62.5% → 56.5% (−6pp)",
       "stat_sig": "—"
     },
     {
@@ -464,31 +464,15 @@
       "name": "One Shot Slice Fix — Checkout Champ",
       "outcome": "WIN",
       "primary_metric": "RPV +1%",
-      "revenue_stat": "AOV $114 → $114 (flat)",
+      "revenue_stat": "AOV $114 → $114 (flat) · Membership 71.4% → 64.8% (−6.7pp)",
       "stat_sig": "—"
     },
     {
-      "id": "0547",
-      "name": "357 Checkout Champ — Variation C",
-      "outcome": "LOSS",
-      "primary_metric": "RPV −17%",
-      "revenue_stat": "AOV $317 → $289 (−9%)",
-      "stat_sig": "—"
-    },
-    {
-      "id": "0551",
-      "name": "WPSS Checkout Champ Test",
-      "outcome": "LOSS",
-      "primary_metric": "CVR loss",
-      "revenue_stat": null,
-      "stat_sig": "—"
-    },
-    {
-      "id": "PG14A–C",
-      "name": "Club Only + Club + App Copy (3 variants) — Shopify",
-      "outcome": "LOSS",
-      "primary_metric": "CVR decrease",
-      "revenue_stat": null,
+      "id": "PG0022",
+      "name": "Shopify Checkout UVPs Above CTA",
+      "outcome": "WIN",
+      "primary_metric": "RPV +1%",
+      "revenue_stat": "AOV $299 → $299 (flat) · Jun 29 – Jul 13",
       "stat_sig": "—"
     },
     {
@@ -496,15 +480,23 @@
       "name": "ONE.1 Wedge — Help Me Choose Quiz — Shopify",
       "outcome": "WIN",
       "primary_metric": "ATC ↑ · CVR ↑ · Help Me Choose clicks ↑",
-      "revenue_stat": "Key KPI: ATC · Secondary: CVR, quiz engagement",
+      "revenue_stat": "RPV −20% (non-primary · AOV $207 → $170 (−18%) skewed by quiz path)",
       "stat_sig": "—"
     },
     {
-      "id": "PG021",
-      "name": "357 Post-Purchase Interstitial",
-      "outcome": "FLAT",
-      "primary_metric": "Inconclusive",
-      "revenue_stat": "Needs more traffic · customers removing 357 to capture 359 discount",
+      "id": "0547",
+      "name": "357 Checkout Champ — Variation C",
+      "outcome": "LOSS",
+      "primary_metric": "RPV −17%",
+      "revenue_stat": "AOV $317 → $289 (−9%) · Membership 78.1% → 72.5% (−5.6pp)",
+      "stat_sig": "—"
+    },
+    {
+      "id": "0551",
+      "name": "Women's Pendulum Swing Sequence — Checkout Champ",
+      "outcome": "LOSS",
+      "primary_metric": "RPV loss",
+      "revenue_stat": "AOV $0 → $166 · Membership 0% → 84.2% (+84.2pp) · Jun 4 concluded",
       "stat_sig": "—"
     },
     {
@@ -532,29 +524,38 @@
       "stat_sig": "—"
     },
     {
-      "id": "PG09A–C",
-      "name": "PG1 CVR Lift — V1 Direction (3 variants)",
+      "id": "PG09A",
+      "name": "Help Me Choose — Shopify",
       "outcome": "LOSS",
-      "primary_metric": "Learning — V1 is not the right direction to increase CVR",
-      "revenue_stat": null,
+      "primary_metric": "RPV −1%",
+      "revenue_stat": "AOV $236 → $241 (+2%) · Learning — V1 not the right direction for CVR · Jun 8–23",
       "stat_sig": "—"
     },
     {
       "id": "PG0027A",
-      "name": "SF2 META LP to PDP",
+      "name": "SF2 META LP to PDP (50/50)",
       "outcome": "LOSS",
-      "primary_metric": "CVR loss",
-      "revenue_stat": "PDP does not increase CVR to META audience",
+      "primary_metric": "RPV −17%",
+      "revenue_stat": "AOV $319 → $319 (flat) · PDP does not increase CVR to META audience · Jun 30 – Jul 6",
       "stat_sig": "—"
     },
     {
       "id": "EXP-0555",
-      "name": "357 Hybrid to Shopify PDP — 90/10",
+      "name": "357 Hybrid → Shopify PDP (90/10)",
+      "outcome": "FLAT",
+      "primary_metric": "CVR 1.16% → 0.70% (−40%)",
+      "revenue_stat": "Directionally negative on key and secondary KPIs · Convert test",
+      "stat_sig": "—"
+    },
+    {
+      "id": "PG0021",
+      "name": "357 Rebuy — ATC 359 Cross-Sell Pop",
       "outcome": "FLAT",
       "primary_metric": "Inconclusive",
-      "revenue_stat": "Directionally negative on key and secondary KPIs",
+      "revenue_stat": "Needs more traffic · customers removing 357 to capture 359 discount",
       "stat_sig": "—"
-    }
+    },
+    {
   ],
   "tests_in_progress": [],
   "themes": [
