@@ -22,17 +22,18 @@
     "digital":  { "current": 2057,  "prior": 5048,  "change": "−59.2%", "direction": "down" }
   },
   "physical_rollup": {
-    "total_revenue": "⚠ Partial (RS1/ONE.1/359/DF1 pending)", "prior_revenue": "$3.43M", "revenue_change": "⚠ Pending",
-    "fe_sales": 3790, "prior_fe_sales": 14472,
+    "total_revenue": "⚠ Partial (ONE.1/359 pending)", "prior_revenue": "$3.43M", "revenue_change": "⚠ Pending",
+    "fe_sales": 5890, "prior_fe_sales": 14472,
     "aov": "⚠ Partial", "prior_aov": "$236.86", "aov_change": "⚠ Pending"
   },
   "physical_funnels_current": [
-    { "funnel": "RS1",   "fe_sales": null, "revenue": null,   "aov": null,   "visitors": null, "op_cvr": "⚠ pending" },
+    { "funnel": "RS1",   "fe_sales": 1715, "revenue": 703745, "aov": 410.00, "visitors": null, "op_cvr": null },
     { "funnel": "357",   "fe_sales": 2102, "revenue": 626699, "aov": 298.14, "visitors": 4256, "op_cvr": "49.41%" },
     { "funnel": "SF2",   "fe_sales": 1688, "revenue": 546793, "aov": 324.00, "visitors": null, "op_cvr": null },
     { "funnel": "ONE.1", "fe_sales": null, "revenue": null,   "aov": null,   "visitors": null, "op_cvr": "⚠ pending" },
     { "funnel": "359",   "fe_sales": null, "revenue": null,   "aov": null,   "visitors": null, "op_cvr": "⚠ pending" },
-    { "funnel": "DF1",   "fe_sales": 170,  "revenue": 129100,  "aov": 759.41, "visitors": null, "op_cvr": null }
+    { "funnel": "SSP",   "fe_sales": 215,  "revenue": 55452,  "aov": 258.00, "visitors": null, "op_cvr": null },
+    { "funnel": "DF1",   "fe_sales": 170,  "revenue": 129100, "aov": 759.41, "visitors": null, "op_cvr": null }
   ],
   "physical_funnels_prior": [
     { "funnel": "357",  "fe_sales": 6449, "revenue": 1577938, "aov": 244.68, "visitors": 13562, "op_cvr": "51.10%" },
