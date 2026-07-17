@@ -495,16 +495,16 @@
       "id": "PG0023",
       "name": "ONE.1 Wedge — Help Me Choose Quiz — Shopify",
       "outcome": "WIN",
-      "primary_metric": "ATC + CVR lift",
-      "revenue_stat": "RPV −20% (non-primary · AOV skewed by quiz path)",
+      "primary_metric": "ATC ↑ · CVR ↑ · Help Me Choose clicks ↑",
+      "revenue_stat": "Key KPI: ATC · Secondary: CVR, quiz engagement",
       "stat_sig": "—"
     },
     {
-      "id": "0542",
+      "id": "PG021",
       "name": "357 Post-Purchase Interstitial",
       "outcome": "FLAT",
       "primary_metric": "Inconclusive",
-      "revenue_stat": "Upsell take −11pp · AOV $323 → $277 (−14%)",
+      "revenue_stat": "Needs more traffic · customers removing 357 to capture 359 discount",
       "stat_sig": "—"
     },
     {
@@ -532,11 +532,27 @@
       "stat_sig": "—"
     },
     {
-      "id": "PG09A",
-      "name": "Help Me Choose — Shopify",
+      "id": "PG09A–C",
+      "name": "PG1 CVR Lift — V1 Direction (3 variants)",
+      "outcome": "LOSS",
+      "primary_metric": "Learning — V1 is not the right direction to increase CVR",
+      "revenue_stat": null,
+      "stat_sig": "—"
+    },
+    {
+      "id": "PG0027A",
+      "name": "SF2 META LP to PDP",
+      "outcome": "LOSS",
+      "primary_metric": "CVR loss",
+      "revenue_stat": "PDP does not increase CVR to META audience",
+      "stat_sig": "—"
+    },
+    {
+      "id": "EXP-0555",
+      "name": "357 Hybrid to Shopify PDP — 90/10",
       "outcome": "FLAT",
-      "primary_metric": "Inconclusive · promo period",
-      "revenue_stat": "Help Me Choose clicked: 2.1% · ran Jun 8–23 during heavy promo",
+      "primary_metric": "Inconclusive",
+      "revenue_stat": "Directionally negative on key and secondary KPIs",
       "stat_sig": "—"
     }
   ],
