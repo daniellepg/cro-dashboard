@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import type { MbrData, Theme, TestResult, KpiCard, PricingModelVersion, PricingModelAnalysis } from "@/lib/mbr";
+import type { MbrData, Theme, TestResult, KpiCard, PricingModelVersion, PricingModelAnalysis, CroScorecard } from "@/lib/mbr";
 
 import jun2026 from "@/data/mbr/2026-06.json";
 
@@ -75,6 +75,156 @@ function ThemeCard({ t }: { t: Theme }) {
         <span className="text-xs text-[#8b95a7]">{t.takeaway}</span>
       </div>
     </div>
+  );
+}
+
+function CroScorecardSection({ sc }: { sc: CroScorecard }) {
+  const testsAbove = sc.tests_launched.actual >= sc.tests_launched.goal;
+  const winAbove   = parseFloat(sc.win_rate.actual) >= parseFloat(sc.win_rate.goal);
+  const kpiRows    = sc.funnels_within_kpi.rows;
+  const confirmed  = kpiRows.filter((r) => r.within_kpi === true).length;
+  const total      = kpiRows.filter((r) => r.within_kpi !== null).length;
+
+  return (
+    <section>
+      <SectionHeader label="CRO Scorecard" />
+
+      {/* Big-3 goals */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+        {/* Tests launched */}
+        <div className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-5">
+          <div className="text-[10px] uppercase tracking-[0.22em] text-[#8b95a7] font-semibold mb-1">Tests Launched</div>
+          <div className="text-[10px] text-[#5a6478] mb-3">Goal: {sc.tests_launched.goal}</div>
+          <div className="text-3xl font-semibold tracking-tight text-[#f4f5f7]">{sc.tests_launched.actual}</div>
+          <div className={`text-xs font-medium mt-1.5 ${testsAbove ? "text-emerald-400" : "text-red-400"}`}>
+            {testsAbove ? `+${sc.tests_launched.actual - sc.tests_launched.goal} above goal` : `${sc.tests_launched.actual - sc.tests_launched.goal} below goal`}
+          </div>
+        </div>
+
+        {/* Win rate */}
+        <div className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-5">
+          <div className="text-[10px] uppercase tracking-[0.22em] text-[#8b95a7] font-semibold mb-1">Win Rate</div>
+          <div className="text-[10px] text-[#5a6478] mb-3">Goal: {sc.win_rate.goal}</div>
+          <div className="text-3xl font-semibold tracking-tight text-[#f4f5f7]">{sc.win_rate.actual}</div>
+          <div className={`text-xs font-medium mt-1.5 ${winAbove ? "text-emerald-400" : "text-red-400"}`}>
+            {sc.win_rate.detail}
+          </div>
+        </div>
+
+        {/* Funnels within KPI */}
+        <div className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-5">
+          <div className="text-[10px] uppercase tracking-[0.22em] text-[#8b95a7] font-semibold mb-1">Funnels Within KPI</div>
+          <div className="text-[10px] text-[#5a6478] mb-3">KPI: {sc.funnels_within_kpi.kpi}</div>
+          <div className="text-3xl font-semibold tracking-tight text-[#f4f5f7]">
+            {confirmed} <span className="text-base text-[#5a6478] font-normal">/ {total} confirmed</span>
+          </div>
+          <div className="text-[10px] text-[#5a6478] mt-1.5">{kpiRows.filter((r) => r.within_kpi === null).length} funnels pending Ad Perf pull</div>
+        </div>
+      </div>
+
+      {/* Funnel KPI table */}
+      <div className="overflow-x-auto rounded-lg border border-white/[0.08] mb-6">
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="border-b border-white/[0.06]">
+              {["Funnel", "Net ROAS", `vs ${sc.funnels_within_kpi.kpi} target`].map((h) => (
+                <th key={h} className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#5a6478] font-medium">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {kpiRows.map((r) => (
+              <tr key={r.funnel} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+                <td className="px-4 py-3 font-medium uppercase tracking-wide text-[#f4f5f7]">{r.funnel}</td>
+                <td className="px-4 py-3 text-[#8b95a7]">{r.net_roas ?? "—"}</td>
+                <td className="px-4 py-3">
+                  {r.within_kpi === null
+                    ? <span className="text-[10px] text-[#5a6478]">⚠ pending</span>
+                    : r.within_kpi
+                      ? <span className="text-emerald-400 text-[10px] font-semibold uppercase tracking-widest">✓ Within KPI</span>
+                      : <span className="text-red-400 text-[10px] font-semibold uppercase tracking-widest">✗ Below KPI</span>
+                  }
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Top 6 funnel CVR & AOV */}
+      <div className="mb-6">
+        <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold mb-3">CVR &amp; AOV — Top 6 Funnels</div>
+        <div className="overflow-x-auto rounded-lg border border-white/[0.08]">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="border-b border-white/[0.06]">
+                {["Funnel", "CVR", "CVR Type", "AOV"].map((h) => (
+                  <th key={h} className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#5a6478] font-medium">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {sc.top_funnel_cvr_aov.map((r) => (
+                <tr key={r.funnel} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+                  <td className="px-4 py-3 font-medium uppercase tracking-wide text-[#f4f5f7]">{r.funnel}</td>
+                  <td className="px-4 py-3 text-[#8b95a7]">{r.cvr ?? "—"}</td>
+                  <td className="px-4 py-3 text-[#5a6478] text-[10px]">{r.cvr_note ?? "—"}</td>
+                  <td className="px-4 py-3 text-[#c9a55e] font-medium">{r.aov}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Estimated test impact */}
+      <div className="mb-6">
+        <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold mb-3">Estimated Impact of Shipped Winners</div>
+        <div className="overflow-x-auto rounded-lg border border-white/[0.08]">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="border-b border-white/[0.06]">
+                {["Exp ID", "Test", "CVR Lift", "Monthly Orders", "AOV", "Est. Monthly Impact"].map((h) => (
+                  <th key={h} className="px-4 py-3 text-left text-[10px] uppercase tracking-[0.18em] text-[#5a6478] font-medium">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {sc.estimated_test_impact.map((r) => (
+                <tr key={r.test_id} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+                  <td className="px-4 py-3 font-mono text-[#5a6478]">{r.test_id}</td>
+                  <td className="px-4 py-3 text-[#f4f5f7]">{r.name}</td>
+                  <td className="px-4 py-3 text-[#8b95a7]">{r.cvr_lift ?? <span className="text-[#5a6478] text-[10px]">⚠ pending</span>}</td>
+                  <td className="px-4 py-3 text-[#8b95a7]">{r.monthly_orders != null ? fmt.number(r.monthly_orders) : <span className="text-[#5a6478] text-[10px]">⚠ pending</span>}</td>
+                  <td className="px-4 py-3 text-[#8b95a7]">{r.aov ?? <span className="text-[#5a6478] text-[10px]">⚠ pending</span>}</td>
+                  <td className="px-4 py-3 text-[#c9a55e] font-medium">{r.estimated_monthly_impact ?? <span className="text-[#5a6478] text-[10px]">⚠ pending</span>}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-[10px] text-[#5a6478] mt-2">Formula: CVR lift % × prior-month orders × AOV = estimated incremental monthly revenue</p>
+      </div>
+
+      {/* Bottom row: Trials + Rebuy */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
+          <div className="text-[10px] uppercase tracking-[0.18em] text-[#8b95a7] font-semibold mb-2">PG1 Shopify Trials (Testing Impact)</div>
+          <div className="text-lg font-semibold text-[#f4f5f7]">{sc.pg1_shopify_trials.value ?? "—"}</div>
+          <p className="text-[10px] text-[#5a6478] mt-1.5 leading-relaxed">{sc.pg1_shopify_trials.note}</p>
+        </div>
+        <div className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
+          <div className="text-[10px] uppercase tracking-[0.18em] text-[#8b95a7] font-semibold mb-2">PG1 CoC Trials (Testing Impact)</div>
+          <div className="text-lg font-semibold text-[#f4f5f7]">{sc.pg1_coc_trials.value ?? "—"}</div>
+          <p className="text-[10px] text-[#5a6478] mt-1.5 leading-relaxed">{sc.pg1_coc_trials.note}</p>
+        </div>
+        <div className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
+          <div className="text-[10px] uppercase tracking-[0.18em] text-[#8b95a7] font-semibold mb-2">Rebuy Contribution to AOV</div>
+          <div className="text-lg font-semibold text-[#f4f5f7]">{sc.rebuy_aov_contribution.value ?? "—"}</div>
+          <p className="text-[10px] text-[#5a6478] mt-1.5 leading-relaxed">{sc.rebuy_aov_contribution.note}</p>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -280,6 +430,9 @@ export default async function MbrDetailPage({ params }: { params: Promise<{ mont
         </div>
         <p className="text-sm text-[#8b95a7] mt-2 max-w-3xl leading-relaxed">{mbr.headline}</p>
       </div>
+
+      {/* CRO Scorecard */}
+      {mbr.cro_scorecard && <CroScorecardSection sc={mbr.cro_scorecard} />}
 
       {/* Headline KPIs */}
       <section>

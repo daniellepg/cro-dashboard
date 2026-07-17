@@ -74,6 +74,40 @@ export type PricingModelAnalysis = {
   callout_watch: string;
 };
 
+export type FunnelKpiRow = {
+  funnel: string;
+  net_roas: string | null;
+  within_kpi: boolean | null;
+};
+
+export type EstimatedImpactRow = {
+  test_id: string;
+  name: string;
+  outcome: string;
+  cvr_lift: string | null;
+  monthly_orders: number | null;
+  aov: string | null;
+  estimated_monthly_impact: string | null;
+};
+
+export type TopFunnelCvrAov = {
+  funnel: string;
+  cvr: string | null;
+  aov: string;
+  cvr_note: string | null;
+};
+
+export type CroScorecard = {
+  tests_launched: { goal: number; actual: number };
+  win_rate: { goal: string; actual: string; detail: string };
+  funnels_within_kpi: { kpi: string; rows: FunnelKpiRow[] };
+  pg1_shopify_trials: { value: string | null; note: string };
+  pg1_coc_trials: { value: string | null; note: string };
+  estimated_test_impact: EstimatedImpactRow[];
+  top_funnel_cvr_aov: TopFunnelCvrAov[];
+  rebuy_aov_contribution: { value: string | null; note: string };
+};
+
 export type MbrData = {
   month: string;
   comparison_month: string;
@@ -132,6 +166,7 @@ export type MbrData = {
   themes: Theme[];
   triumphs: string[];
   challenges: string[];
+  cro_scorecard?: CroScorecard;
   pricing_model_analysis?: PricingModelAnalysis;
   generated_at: string;
   data_source: string;
