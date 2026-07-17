@@ -626,88 +626,92 @@ function PricingModelSection({ data }: { data: PricingModelAnalysis }) {
 }
 
 function PricingJourneyChart({ versions }: { versions: PricingModelVersion[] }) {
-  // X positions for V0–V3
-  const XS = [72, 182, 292, 390];
+  const XS = [80, 190, 300, 390];
   const vColors = ["#5a6478", "#8b95a7", "#f87171", "#34d399"];
+  const vLabels = versions.map((v) => v.version);
 
-  // Extract numeric values per metric
   const roasVals  = versions.map((v) => parseFloat(v.net_roas));
   const cvrVals   = versions.map((v) => parseFloat(v.cvr));
   const aovVals   = versions.map((v) => parseFloat((v.aov ?? "$0").replace(/[$,]/g, "")));
   const trialVals = versions.map((v) => v.pg1_trials);
 
-  function norm(vals: number[], rowTop: number, rowBot: number) {
-    const mn = Math.min(...vals), mx = Math.max(...vals);
-    return vals.map((v) => mn === mx ? (rowTop + rowBot) / 2 : rowBot - ((v - mn) / (mx - mn)) * (rowBot - rowTop));
-  }
-
-  // Row bands (top, bottom y)
-  const ROWS = [
-    { label: "Net ROAS", unit: "%",  vals: roasVals,  top: 18,  bot: 52,  fmt: (v: number) => `${v.toFixed(0)}%` },
-    { label: "CVR",      unit: "%",  vals: cvrVals,   top: 68,  bot: 102, fmt: (v: number) => `${v.toFixed(2)}%` },
-    { label: "AOV",      unit: "$",  vals: aovVals,   top: 118, bot: 152, fmt: (v: number) => `$${v.toFixed(0)}` },
-    { label: "Trials",   unit: "",   vals: trialVals, top: 168, bot: 202, fmt: (v: number) => v >= 1000 ? `${(v/1000).toFixed(1)}K` : `${v}` },
+  const METRICS = [
+    { label: "Net ROAS", color: "#c9a55e", vals: roasVals,  fmt: (v: number) => `${v.toFixed(0)}%` },
+    { label: "CVR",      color: "#60a5fa", vals: cvrVals,   fmt: (v: number) => `${v.toFixed(2)}%` },
+    { label: "AOV",      color: "#34d399", vals: aovVals,   fmt: (v: number) => `$${v.toFixed(0)}` },
+    { label: "Trials",   color: "#a78bfa", vals: trialVals, fmt: (v: number) => v >= 1000 ? `${(v/1000).toFixed(1)}K` : `${v}` },
   ];
 
-  return (
-    <div className="rounded-lg border border-emerald-400/20 bg-gradient-to-b from-white/[0.02] to-transparent p-4 flex flex-col gap-2">
-      <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">Metrics by Pricing Era</div>
-      <svg viewBox="0 0 430 230" xmlns="http://www.w3.org/2000/svg" className="w-full">
+  const Y_TOP = 30, Y_BOT = 185;
 
-        {/* Version labels across top */}
-        {versions.map((v, i) => (
-          <text key={v.version} x={XS[i]} y="10" textAnchor="middle" fill={vColors[i]} fontSize="8.5" fontWeight="700" fontFamily="sans-serif">{v.version}</text>
+  function normY(vals: number[], v: number) {
+    const mn = Math.min(...vals), mx = Math.max(...vals);
+    if (mn === mx) return (Y_TOP + Y_BOT) / 2;
+    return Y_BOT - ((v - mn) / (mx - mn)) * (Y_BOT - Y_TOP);
+  }
+
+  return (
+    <div className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.02] to-transparent p-4 flex flex-col gap-3">
+      <div className="flex items-center justify-between gap-4">
+        <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">Metrics by Pricing Era</div>
+        <div className="flex items-center gap-4">
+          {METRICS.map((m) => (
+            <div key={m.label} className="flex items-center gap-1.5">
+              <div className="w-3 h-0.5 rounded-full" style={{ backgroundColor: m.color }} />
+              <span className="text-[9px] uppercase tracking-wider" style={{ color: m.color }}>{m.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <svg viewBox="0 0 470 215" xmlns="http://www.w3.org/2000/svg" className="w-full">
+
+        {/* Version column labels */}
+        {vLabels.map((lbl, i) => (
+          <text key={lbl} x={XS[i]} y="14" textAnchor="middle" fill={vColors[i]} fontSize="9" fontWeight="700" fontFamily="sans-serif">{lbl}</text>
         ))}
 
-        {/* V0 "not viable" stripe */}
-        <rect x="48" y="14" width="50" height="210" fill="#5a6478" opacity="0.04" />
-        <text x="73" y="222" textAnchor="middle" fill="#5a6478" fontSize="7" fontFamily="sans-serif" opacity="0.5">baseline</text>
+        {/* V0 stripe */}
+        <rect x="56" y="20" width="68" height={Y_BOT - 20 + 8} fill="#5a6478" opacity="0.04" rx="2" />
+        <text x="90" y={Y_BOT + 16} textAnchor="middle" fill="#5a6478" fontSize="7" fontFamily="sans-serif" opacity="0.45">baseline</text>
 
-        {/* Row bands + sparklines */}
-        {ROWS.map((row) => {
-          const ys = norm(row.vals, row.top, row.bot);
-          const linePts = XS.map((x, i) => `${x},${ys[i]}`).join(" ");
+        {/* Subtle vertical grid at each version */}
+        {XS.map((x) => (
+          <line key={x} x1={x} y1="20" x2={x} y2={Y_BOT + 4} stroke="#2a3042" strokeWidth="0.5" strokeDasharray="2 3" opacity="0.35" />
+        ))}
+
+        {/* Each metric line */}
+        {METRICS.map((m) => {
+          const ys = m.vals.map((v) => normY(m.vals, v));
           return (
-            <g key={row.label}>
-              {/* subtle row band */}
-              <rect x="48" y={row.top - 4} width="370" height={row.bot - row.top + 8} rx="3" fill="white" opacity="0.015" />
-              {/* metric label */}
-              <text x="44" y={(row.top + row.bot) / 2 + 3} textAnchor="end" fill="#5a6478" fontSize="7.5" fontFamily="sans-serif">{row.label}</text>
-              {/* connecting line — dashed from V0, solid V1→V3 */}
-              <polyline points={`${XS[0]},${ys[0]} ${XS[1]},${ys[1]}`} fill="none" stroke="#5a6478" strokeWidth="1" strokeDasharray="3 2" opacity="0.4" />
-              <polyline points={`${XS[1]},${ys[1]} ${XS[2]},${ys[2]} ${XS[3]},${ys[3]}`} fill="none" stroke="#c9a55e" strokeWidth="1.5" opacity="0.6" />
+            <g key={m.label}>
+              {/* dashed V0→V1 */}
+              <line x1={XS[0]} y1={ys[0]} x2={XS[1]} y2={ys[1]} stroke={m.color} strokeWidth="1" strokeDasharray="3 2" opacity="0.35" />
+              {/* solid V1→V2→V3 */}
+              <polyline
+                points={XS.slice(1).map((x, i) => `${x},${ys[i + 1]}`).join(" ")}
+                fill="none" stroke={m.color} strokeWidth="1.8" opacity="0.75"
+              />
               {/* dots + value labels */}
-              {versions.map((v, i) => (
-                <g key={v.version}>
-                  <circle cx={XS[i]} cy={ys[i]} r="4" fill={vColors[i]} />
-                  <text x={XS[i]} y={ys[i] - 7} textAnchor="middle" fill={vColors[i]} fontSize="7.5" fontFamily="monospace" fontWeight="600">{row.fmt(row.vals[i])}</text>
+              {XS.map((x, i) => (
+                <g key={i}>
+                  <circle cx={x} cy={ys[i]} r="3.5" fill={m.color} opacity={i === 0 ? 0.4 : 1} />
+                  <text
+                    x={x}
+                    y={ys[i] - 7}
+                    textAnchor="middle"
+                    fill={m.color}
+                    fontSize="7"
+                    fontFamily="monospace"
+                    fontWeight="600"
+                    opacity={i === 0 ? 0.45 : 1}
+                  >
+                    {m.fmt(m.vals[i])}
+                  </text>
                 </g>
               ))}
             </g>
           );
         })}
-
-        {/* Golf cart above V3 column */}
-        <g transform="translate(360, 14)">
-          <rect x="0" y="0" width="46" height="6" rx="2" fill="#c9a55e" />
-          <rect x="3" y="5" width="3" height="10" fill="#c9a55e" opacity="0.7" />
-          <polygon points="37,5 43,5 40,15" fill="#c9a55e" opacity="0.25" />
-          <line x1="37" y1="5" x2="40" y2="15" stroke="#c9a55e" strokeWidth="1" opacity="0.7" />
-          <rect x="7" y="6" width="28" height="6" rx="1" fill="#2a3448" stroke="#c9a55e" strokeWidth="0.5" />
-          <rect x="3" y="12" width="44" height="4" rx="1" fill="#1e2533" stroke="#c9a55e" strokeWidth="0.6" />
-          <rect x="3" y="9" width="7" height="7" rx="1" fill="#1a2030" stroke="#c9a55e" strokeWidth="0.4" />
-          <circle cx="12" cy="19" r="5" fill="#1e2533" stroke="#34d399" strokeWidth="1.6" />
-          <circle cx="12" cy="19" r="1.8" fill="#34d399" />
-          <circle cx="36" cy="19" r="5" fill="#1e2533" stroke="#34d399" strokeWidth="1.6" />
-          <circle cx="36" cy="19" r="1.8" fill="#34d399" />
-          <line x1="46" y1="18" x2="46" y2="1" stroke="#34d399" strokeWidth="1.2" />
-          <polygon points="46,1 55,4.5 46,8" fill="#34d399" />
-        </g>
-
-        {/* Vertical dividers between versions */}
-        {[127, 237].map((x) => (
-          <line key={x} x1={x} y1="14" x2={x} y2="210" stroke="#2a3042" strokeWidth="0.5" strokeDasharray="2 3" opacity="0.4" />
-        ))}
       </svg>
     </div>
   );
