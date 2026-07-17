@@ -81,22 +81,22 @@
   },
   "actual": {
     "tests_launched": 11,
-    "win_rate": "18%",
+    "win_rate": "18% (2W / 6L / 3F)",
     "coc_aov": "TBD",
     "rebuy_aov": "TBD"
   },
   "tests_concluded": [
-    { "id": "0546",   "name": "357 Checkout Champ — Variation B",           "outcome": "WIN",  "primary_metric": "RPV +22%", "revenue_stat": "AOV +12% ($313 → $305)", "stat_sig": "—" },
-    { "id": "0545",   "name": "One Shot Slice Fix — Checkout Champ",         "outcome": "WIN",  "primary_metric": "RPV +1%",  "revenue_stat": "AOV flat ($114 → $114)", "stat_sig": "—" },
-    { "id": "0542",   "name": "357 Post-Purchase Interstitial",              "outcome": "LOSS", "primary_metric": "Upsell take −11pp", "revenue_stat": "AOV −14% ($323 → $277)", "stat_sig": "—" },
-    { "id": "0547",   "name": "357 Checkout Champ — Variation C",           "outcome": "LOSS", "primary_metric": "RPV −17%", "revenue_stat": "AOV −9% ($317 → $289)", "stat_sig": "—" },
-    { "id": "0551",   "name": "WPSS Checkout Champ Test",                   "outcome": "LOSS", "primary_metric": "CVR loss",  "revenue_stat": "Membership +84pp (data anomaly)", "stat_sig": "—" },
-    { "id": "PG14A",  "name": "Club Only + Club + App Copy (A) — Shopify",  "outcome": "LOSS", "primary_metric": "RPV −48%", "revenue_stat": "Membership +25pp, AOV +4%", "stat_sig": "—" },
-    { "id": "PG14B",  "name": "Club Only + Club + App Copy (B) — Shopify",  "outcome": "LOSS", "primary_metric": "RPV −24%", "revenue_stat": "Membership +32pp, AOV +13%", "stat_sig": "—" },
-    { "id": "PG14C",  "name": "Club Only + Club + App Copy (C) — Shopify",  "outcome": "LOSS", "primary_metric": "RPV −30%", "revenue_stat": "Membership +34pp, AOV +9%", "stat_sig": "—" },
-    { "id": "PG14A-100", "name": "Club Only + Club + App Copy (100%) — Shopify", "outcome": "FLAT", "primary_metric": "RPV flat", "revenue_stat": "AOV $316", "stat_sig": "—" },
-    { "id": "PG0023", "name": "ONE.1 Wedge — Help Me Choose Quiz — Shopify","outcome": "LOSS", "primary_metric": "RPV −20%", "revenue_stat": "AOV −18% ($207 → $170)", "stat_sig": "—" },
-    { "id": "PG09A",  "name": "Help Me Choose — Shopify",                   "outcome": "FLAT", "primary_metric": "RPV −0%",  "revenue_stat": "AOV +2% ($236 → $240)", "stat_sig": "—" }
+    { "id": "0546",      "name": "357 Checkout Champ — Variation B",             "outcome": "WIN",  "primary_metric": "RPV +22%",           "revenue_stat": "AOV $313 → $306 (−2%)",           "stat_sig": "—" },
+    { "id": "0545",      "name": "One Shot Slice Fix — Checkout Champ",           "outcome": "WIN",  "primary_metric": "RPV +1%",            "revenue_stat": "AOV $114 → $114 (flat)",           "stat_sig": "—" },
+    { "id": "0547",      "name": "357 Checkout Champ — Variation C",             "outcome": "LOSS", "primary_metric": "RPV −17%",           "revenue_stat": "AOV $317 → $289 (−9%)",           "stat_sig": "—" },
+    { "id": "0551",      "name": "WPSS Checkout Champ Test",                     "outcome": "LOSS", "primary_metric": "CVR loss",           "revenue_stat": "Membership +84pp (data anomaly)", "stat_sig": "—" },
+    { "id": "PG14A",     "name": "Club Only + Club + App Copy (A) — Shopify",    "outcome": "LOSS", "primary_metric": "RPV −48%",           "revenue_stat": "Membership +25pp · AOV $306 → $318 (+4%)", "stat_sig": "—" },
+    { "id": "PG14B",     "name": "Club Only + Club + App Copy (B) — Shopify",    "outcome": "LOSS", "primary_metric": "RPV −24%",           "revenue_stat": "Membership +32pp · AOV $309 → $350 (+13%)", "stat_sig": "—" },
+    { "id": "PG14C",     "name": "Club Only + Club + App Copy (C) — Shopify",    "outcome": "LOSS", "primary_metric": "RPV −30%",           "revenue_stat": "Membership +34pp · AOV $291 → $317 (+9%)", "stat_sig": "—" },
+    { "id": "PG0023",    "name": "ONE.1 Wedge — Help Me Choose Quiz — Shopify",  "outcome": "LOSS", "primary_metric": "RPV −20%",           "revenue_stat": "AOV $207 → $170 (−18%)",          "stat_sig": "—" },
+    { "id": "0542",      "name": "357 Post-Purchase Interstitial",               "outcome": "FLAT", "primary_metric": "Inconclusive",       "revenue_stat": "Upsell take −11pp · AOV $323 → $277 (−14%)", "stat_sig": "—" },
+    { "id": "PG14A-100", "name": "Club Only + Club + App Copy (100%) — Shopify", "outcome": "FLAT", "primary_metric": "RPV flat",           "revenue_stat": "AOV $316",                        "stat_sig": "—" },
+    { "id": "PG09A",     "name": "Help Me Choose — Shopify",                     "outcome": "FLAT", "primary_metric": "RPV −0%",            "revenue_stat": "AOV $236 → $240 (+2%)",           "stat_sig": "—" }
   ],
   "tests_in_progress": [
     { "id": "0494",   "name": "357 Checkout Champ Test 0494",      "key_kpi": "RPV", "next_steps": "Running since Apr 20 — monitor" },
@@ -129,7 +129,7 @@
   "triumphs": [
     "Launched PG1 v3 on Shopify with a 7-day no-sub free trial — moving off forced continuity toward an opt-in model.",
     "Removed misleading checkout text that implied customers were getting a subscription when they were actually starting a free trial.",
-    "11 tests concluded in June — 2 wins, 7 losses, 2 flat. 0546 (357 CoC) and 0545 (OSSF CoC) both shipped."
+    "11 tests concluded in June — 2 wins, 6 losses, 3 flat. 0546 (357 CoC) and 0545 (OSSF CoC) both shipped."
   ],
   "challenges": [
     "Free trial tracking is unreliable — the definition has changed multiple times, making it impossible to get a clean total count or a trustworthy trial-to-paid conversion rate. Need a single agreed-upon definition locked in before we can measure the PG1 v3 launch properly.",
