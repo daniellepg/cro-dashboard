@@ -442,8 +442,8 @@
       }
     ],
     "rebuy_aov_contribution": {
-      "value": null,
-      "note": "\u26a0 Pending \u2014 pull from Rebuy dashboard"
+      "value": "+$4.82 (+1.99%)",
+      "note": "AOV without Rebuy: $242.38 \u2192 with Rebuy: $247.20 \u00b7 Rebuy Sales: $53,488 (1.95% of total) \u00b7 Rebuy Orders: 351 of 11,106 (3.16%) \u00b7 Source: Rebuy dashboard"
     }
   },
   "goals": {
