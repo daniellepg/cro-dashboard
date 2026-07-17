@@ -844,8 +844,6 @@ export default async function MbrDetailPage({ params }: { params: Promise<{ mont
           {[
             { label: "Tests Launched", goal: String(mbr.goals.tests_launched), actual: String(mbr.actual.tests_launched) },
             { label: "Win Rate", goal: mbr.goals.win_rate, actual: mbr.actual.win_rate },
-            { label: "CoC AOV", goal: mbr.goals.coc_aov, actual: mbr.actual.coc_aov },
-            { label: "Rebuy AOV Contribution", goal: mbr.goals.rebuy_aov, actual: mbr.actual.rebuy_aov },
           ].map((item) => (
             <div key={item.label} className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4">
               <div className="text-[10px] uppercase tracking-[0.18em] text-[#5a6478] mb-2">{item.label}</div>
