@@ -410,15 +410,15 @@
       },
       {
         "funnel": "SF2",
-        "cvr": null,
+        "cvr": "1.27%",
         "aov": "$324",
-        "cvr_note": null
+        "cvr_note": "Paid CVR"
       },
       {
         "funnel": "SSP",
-        "cvr": null,
+        "cvr": "0.25%",
         "aov": "$258",
-        "cvr_note": null
+        "cvr_note": "Paid CVR"
       },
       {
         "funnel": "OSSF",
