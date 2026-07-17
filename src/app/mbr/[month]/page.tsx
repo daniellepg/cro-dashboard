@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import type { MbrData, Theme, TestResult, KpiCard, PricingModelVersion, PricingModelAnalysis, CroScorecard } from "@/lib/mbr";
+import type { MbrData, FunnelRow, Theme, TestResult, KpiCard, PricingModelVersion, PricingModelAnalysis, CroScorecard } from "@/lib/mbr";
+import { CroKpiGrid } from "@/components/cro-kpi-grid";
 
 import jun2026 from "@/data/mbr/2026-06.json";
 
@@ -250,6 +251,92 @@ function FunnelTable({ rows }: { rows: MbrData["physical_funnels_current"] }) {
               <td className="px-4 py-3 text-[#8b95a7]">{fmt.currency(r.aov)}</td>
               <td className="px-4 py-3 text-[#8b95a7]">{r.visitors != null ? fmt.number(r.visitors) : "—"}</td>
               <td className="px-4 py-3 text-[#8b95a7]">{r.op_cvr ?? "—"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function DigitalFunnelComparisonTable({
+  current,
+  prior,
+}: {
+  current: FunnelRow[];
+  prior: FunnelRow[];
+}) {
+  const priorMap = new Map(prior.map((r) => [r.funnel, r]));
+  const currentMap = new Map(current.map((r) => [r.funnel, r]));
+
+  type MergedRow = { funnel: string; curr: FunnelRow | null; prev: FunnelRow | null; tag: "new" | "prior-only" | null };
+
+  const rows: MergedRow[] = [
+    ...[...current]
+      .sort((a, b) => b.revenue - a.revenue)
+      .map((r) => ({ funnel: r.funnel, curr: r, prev: priorMap.get(r.funnel) ?? null, tag: priorMap.has(r.funnel) ? null : ("new" as const) })),
+    ...[...prior]
+      .filter((r) => !currentMap.has(r.funnel))
+      .sort((a, b) => b.revenue - a.revenue)
+      .map((r) => ({ funnel: r.funnel, curr: null, prev: r, tag: "prior-only" as const })),
+  ];
+
+  function pct(curr: number | null | undefined, prev: number | null | undefined): number | null {
+    if (!curr || !prev) return null;
+    return ((curr - prev) / prev) * 100;
+  }
+
+  function Delta({ val }: { val: number | null }) {
+    if (val === null) return <span className="text-[#5a6478]">—</span>;
+    const pos = val >= 0;
+    return (
+      <span className={pos ? "text-emerald-400 font-semibold" : "text-rose-400 font-semibold"}>
+        {pos ? "+" : ""}
+        {val.toFixed(1)}%
+      </span>
+    );
+  }
+
+  const headers = ["Funnel", "Rev '26", "Rev '25", "Rev Δ", "Sales '26", "Sales '25", "Sales Δ", "AOV '26", "AOV '25", "CVR '26", "CVR '25"];
+
+  return (
+    <div className="overflow-x-auto rounded-lg border border-white/[0.08]">
+      <table className="w-full text-xs">
+        <thead>
+          <tr className="border-b border-white/[0.06]">
+            {headers.map((h) => (
+              <th key={h} className="px-3 py-3 text-left text-[10px] uppercase tracking-[0.15em] text-[#5a6478] font-medium whitespace-nowrap">
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr key={i} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
+              <td className="px-3 py-3 font-medium uppercase tracking-wide text-[#f4f5f7] whitespace-nowrap">
+                {r.funnel}
+                {r.tag === "new" && (
+                  <span className="ml-1.5 text-[9px] uppercase tracking-wider font-semibold text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded px-1.5 py-0.5">
+                    NEW
+                  </span>
+                )}
+                {r.tag === "prior-only" && (
+                  <span className="ml-1.5 text-[9px] uppercase tracking-wider font-semibold text-[#5a6478] bg-white/[0.04] border border-white/[0.08] rounded px-1.5 py-0.5">
+                    2025
+                  </span>
+                )}
+              </td>
+              <td className="px-3 py-3 text-[#c9a55e] font-medium">{r.curr ? fmt.currency(r.curr.revenue) : "—"}</td>
+              <td className="px-3 py-3 text-[#8b95a7]">{r.prev ? fmt.currency(r.prev.revenue) : "—"}</td>
+              <td className="px-3 py-3"><Delta val={pct(r.curr?.revenue, r.prev?.revenue)} /></td>
+              <td className="px-3 py-3 text-[#8b95a7]">{r.curr ? fmt.number(r.curr.fe_sales) : "—"}</td>
+              <td className="px-3 py-3 text-[#8b95a7]">{r.prev ? fmt.number(r.prev.fe_sales) : "—"}</td>
+              <td className="px-3 py-3"><Delta val={pct(r.curr?.fe_sales, r.prev?.fe_sales)} /></td>
+              <td className="px-3 py-3 text-[#8b95a7]">{r.curr ? fmt.currency(r.curr.aov) : "—"}</td>
+              <td className="px-3 py-3 text-[#8b95a7]">{r.prev ? fmt.currency(r.prev.aov) : "—"}</td>
+              <td className="px-3 py-3 text-[#8b95a7]">{r.curr?.op_cvr ?? "—"}</td>
+              <td className="px-3 py-3 text-[#8b95a7]">{r.prev?.op_cvr ?? "—"}</td>
             </tr>
           ))}
         </tbody>
@@ -589,7 +676,15 @@ export default async function MbrDetailPage({ params }: { params: Promise<{ mont
         <p className="text-sm text-[#8b95a7] mt-2 max-w-3xl leading-relaxed">{mbr.headline}</p>
       </div>
 
-      {/* CRO Scorecard */}
+      {/* CRO KPI Summary */}
+      {mbr.cro_scorecard && (
+        <section className="mb-8">
+          <SectionHeader label="CRO KPIs" />
+          <CroKpiGrid sc={mbr.cro_scorecard} />
+        </section>
+      )}
+
+      {/* CRO Scorecard detail */}
       {mbr.cro_scorecard && <CroScorecardSection sc={mbr.cro_scorecard} />}
 
       {/* Headline KPIs */}
@@ -677,14 +772,10 @@ export default async function MbrDetailPage({ params }: { params: Promise<{ mont
             </div>
           ))}
         </div>
-        <div className="mb-2 text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">{mbr.month}</div>
-        <FunnelTable rows={mbr.digital_funnels_current} />
-        {mbr.digital_funnels_prior.length > 0 && (
-          <div className="mt-4">
-            <div className="mb-2 text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold">{mbr.comparison_month}</div>
-            <FunnelTable rows={mbr.digital_funnels_prior} />
-          </div>
-        )}
+        <DigitalFunnelComparisonTable
+          current={mbr.digital_funnels_current}
+          prior={mbr.digital_funnels_prior}
+        />
         <ul className="mt-4 space-y-2">
           {mbr.digital_takeaways.map((t, i) => (
             <li key={i} className="text-xs text-[#8b95a7] flex gap-2">
