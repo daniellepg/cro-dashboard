@@ -350,8 +350,8 @@
         },
         {
           "funnel": "357",
-          "net_roas": null,
-          "within_kpi": null
+          "net_roas": "100%",
+          "within_kpi": true
         },
         {
           "funnel": "SF2",
