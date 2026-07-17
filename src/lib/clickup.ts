@@ -67,7 +67,25 @@ export async function fetchTasks(opts: TaskFetchOpts = {}): Promise<ClickUpTask[
 export async function countTasksByStatus(status: string): Promise<number> {
   try {
     const tasks = await fetchTasks({ statuses: [status] });
-    // Only count parent tasks (the actual test, not subtasks like "Pre-Launch QA | ...")
+    return tasks.filter((t) => !t.name.includes(" | ")).length;
+  } catch {
+    return 0;
+  }
+}
+
+// All statuses that represent a test that is set up but not yet live
+export const PRE_LIVE_STATUSES = [
+  "initialized",
+  "dev sprint",
+  "qa",
+  "copy",
+  "creative",
+  "cro dev",
+] as const;
+
+export async function countPreLiveTasks(): Promise<number> {
+  try {
+    const tasks = await fetchTasks({ statuses: [...PRE_LIVE_STATUSES] });
     return tasks.filter((t) => !t.name.includes(" | ")).length;
   } catch {
     return 0;

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { countTasksByStatus } from "@/lib/clickup";
+import { countTasksByStatus, countPreLiveTasks } from "@/lib/clickup";
 
 export const dynamic = "force-dynamic";
 
@@ -59,7 +59,7 @@ function SectionHeader({ label }: { label: string }) {
 export default async function CoverPage() {
   const [liveCount, initializedCount] = await Promise.all([
     countTasksByStatus("live"),
-    countTasksByStatus("initialized"),
+    countPreLiveTasks(),
   ]);
 
   const testing: Tile[] = [

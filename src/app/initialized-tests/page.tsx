@@ -1,4 +1,4 @@
-import { fetchTasks } from "@/lib/clickup";
+import { fetchTasks, PRE_LIVE_STATUSES } from "@/lib/clickup";
 import { TaskTable } from "@/components/task-table";
 
 export const dynamic = "force-dynamic";
@@ -7,7 +7,7 @@ export default async function InitializedTestsPage() {
   let tasks: Awaited<ReturnType<typeof fetchTasks>> = [];
   let error: string | null = null;
   try {
-    tasks = await fetchTasks({ statuses: ["initialized"] });
+    tasks = await fetchTasks({ statuses: [...PRE_LIVE_STATUSES] });
   } catch (e) {
     error = e instanceof Error ? e.message : String(e);
   }
@@ -20,8 +20,13 @@ export default async function InitializedTestsPage() {
         </div>
         <h1 className="text-3xl font-semibold tracking-tight">Initialized Tests</h1>
         <p className="text-sm text-[#8b95a7] mt-1.5">
-          From ClickUp · CRO Projects · status =&nbsp;
-          <span className="font-mono text-[#c9a55e]">initialized</span>
+          From ClickUp · CRO Projects · statuses:{" "}
+          {PRE_LIVE_STATUSES.map((s, i) => (
+            <span key={s}>
+              <span className="font-mono text-[#c9a55e]">{s}</span>
+              {i < PRE_LIVE_STATUSES.length - 1 && <span className="text-[#5a6478]"> · </span>}
+            </span>
+          ))}
         </p>
       </div>
       {error ? (
