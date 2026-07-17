@@ -141,9 +141,9 @@
     },
     {
       "funnel": "357",
-      "fe_sales": 2102,
-      "revenue": 626699,
-      "aov": 298.14,
+      "fe_sales": 2687,
+      "revenue": 755387,
+      "aov": 281.0,
       "visitors": 4256,
       "op_cvr": "49.41%"
     },
@@ -160,14 +160,6 @@
       "fe_sales": 215,
       "revenue": 55452,
       "aov": 258.0,
-      "visitors": null,
-      "op_cvr": null
-    },
-    {
-      "funnel": "DF1",
-      "fe_sales": 170,
-      "revenue": 129100,
-      "aov": 759.41,
       "visitors": null,
       "op_cvr": null
     }
