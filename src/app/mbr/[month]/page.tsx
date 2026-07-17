@@ -436,7 +436,7 @@ function PricingModelSection({ data }: { data: PricingModelAnalysis }) {
   };
 
   return (
-    <section className="space-y-10">
+    <section id="pricing-model" className="space-y-10">
       <div>
         <SectionHeader label={data.headline} />
         <p className="text-xs text-[#5a6478] -mt-2">{data.sub}</p>
