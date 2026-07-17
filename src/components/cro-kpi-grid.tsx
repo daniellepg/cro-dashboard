@@ -16,9 +16,10 @@ type TileProps = {
   status?: "above" | "below" | "pending" | "neutral";
   source: string;
   sourceHref?: string;
+  anchorHref?: string;
 };
 
-function Tile({ label, value, subvalue, sublabel, goal, detail, status, source, sourceHref }: TileProps) {
+function Tile({ label, value, subvalue, sublabel, goal, detail, status, source, sourceHref, anchorHref }: TileProps) {
   const valueColor =
     status === "above"   ? "text-emerald-400" :
     status === "below"   ? "text-red-400"      :
@@ -35,7 +36,11 @@ function Tile({ label, value, subvalue, sublabel, goal, detail, status, source, 
     <div className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-5 flex flex-col gap-2 min-h-36">
       <div className="text-[10px] uppercase tracking-[0.18em] text-[#8b95a7] leading-snug">{label}</div>
       {goal && <div className="text-[10px] text-[#5a6478]">{goal}</div>}
-      <div className={`text-3xl font-semibold tracking-tight ${valueColor}`}>{value}</div>
+      {anchorHref ? (
+        <a href={anchorHref} className={`text-3xl font-semibold tracking-tight ${valueColor} hover:opacity-80 transition-opacity`}>{value}</a>
+      ) : (
+        <div className={`text-3xl font-semibold tracking-tight ${valueColor}`}>{value}</div>
+      )}
       {subvalue && (
         <div className="flex items-baseline gap-2">
           <span className="text-lg font-semibold text-[#f4f5f7]">{subvalue}</span>
@@ -118,6 +123,7 @@ export function CroKpiGrid({ sc }: { sc: CroScorecard }) {
       status: "neutral",
       source: "DOMO · Funnel Analytics",
       sourceHref: WOW_URL,
+      anchorHref: "#cvr-aov",
     },
     {
       label: "Rebuy Contribution to AOV",

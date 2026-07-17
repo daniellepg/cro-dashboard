@@ -153,7 +153,7 @@ function CroScorecardSection({ sc }: { sc: CroScorecard }) {
       </div>
 
       {/* Top 6 funnel CVR & AOV */}
-      <div className="mb-6">
+      <div id="cvr-aov" className="mb-6">
         <div className="text-[10px] uppercase tracking-[0.22em] text-[#5a6478] font-semibold mb-3">CVR &amp; AOV — Top 6 Funnels</div>
         <div className="overflow-x-auto rounded-lg border border-white/[0.08]">
           <table className="w-full text-xs">
