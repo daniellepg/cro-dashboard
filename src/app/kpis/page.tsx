@@ -1,59 +1,164 @@
-const KPIS = [
-  { key: "tests_launched", label: "Tests launched", source: "ClickUp · tests with start_date in month" },
-  { key: "winning_pct", label: "% of winning tests", source: "ClickUp · result custom field" },
-  { key: "estimated_impact", label: "Est. $ impact per test", source: "Test log + Domo baseline" },
-  { key: "paid_within_kpi", label: "Paid funnels within KPI", source: "Domo · ROAS / CPA per funnel" },
-  { key: "pg1_shopify_lift", label: "% PG1 Shopify trial lift", source: "Shopify trials + test attribution" },
-  { key: "pg1_coc_lift", label: "% PG1 CoC trial lift", source: "Checkout Champ trials + attribution" },
-  { key: "cvr_aov_top8", label: "CVR & AOV — top 8 funnels", source: "Domo · physical + digital split" },
-  { key: "rebuy_aov", label: "Re-Buy contribution to AOV", source: "Shopify Re-Buy (post-migration)" },
-];
+import Link from "next/link";
+import jun2026 from "@/data/mbr/2026-06.json";
+import type { MbrData } from "@/lib/mbr";
 
-function currentMonth() {
-  const d = new Date();
-  return d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+const PATRICK_CLICKUP =
+  "https://performancegolf.clickup.com/t/9014714949/86bajrhva?utm_source=email-notifications&utm_type=1&utm_field=assignee_add";
+
+const SCORECARD_URL = "https://pg-domo-analytics-kg.vercel.app/testing/";
+const WOW_URL       = "https://pg-domo-analytics-kg.vercel.app/paid-media/";
+
+const mbr = jun2026 as MbrData;
+const sc  = mbr.cro_scorecard!;
+
+type KpiTileProps = {
+  label: string;
+  value: string;
+  goal?: string;
+  detail?: string;
+  status?: "above" | "below" | "pending" | "neutral";
+  source: string;
+  sourceHref?: string;
+};
+
+function KpiTile({ label, value, goal, detail, status, source, sourceHref }: KpiTileProps) {
+  const valueColor =
+    status === "above"   ? "text-emerald-400" :
+    status === "below"   ? "text-red-400"      :
+    status === "pending" ? "text-[#5a6478]"    :
+                           "text-[#c9a55e]";
+
+  const badge =
+    status === "above"   ? <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-widest">↑ Above goal</span> :
+    status === "below"   ? <span className="text-[10px] font-semibold text-red-400 uppercase tracking-widest">↓ Below goal</span>    :
+    status === "pending" ? <span className="text-[10px] text-[#5a6478] uppercase tracking-widest">⚠ Pending</span>                   :
+    null;
+
+  return (
+    <div className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-5 flex flex-col gap-2 min-h-36">
+      <div className="text-[10px] uppercase tracking-[0.18em] text-[#8b95a7] leading-snug">{label}</div>
+      {goal && <div className="text-[10px] text-[#5a6478]">{goal}</div>}
+      <div className={`text-3xl font-semibold tracking-tight ${valueColor}`}>{value}</div>
+      {detail && <div className="text-[10px] text-[#8b95a7]">{detail}</div>}
+      {badge}
+      <div className="mt-auto pt-2 border-t border-white/[0.04]">
+        {sourceHref ? (
+          <a href={sourceHref} target="_blank" rel="noopener noreferrer"
+            className="text-[10px] text-[#5a6478] hover:text-[#c9a55e] transition-colors leading-snug">
+            {source} ↗
+          </a>
+        ) : (
+          <div className="text-[10px] text-[#5a6478] leading-snug">{source}</div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default function KPIsPage() {
+  const kpiRows: KpiTileProps[] = [
+    {
+      label: "Tests Launched",
+      value: String(sc.tests_launched.actual),
+      goal: `Goal: ${sc.tests_launched.goal}`,
+      status: sc.tests_launched.actual >= sc.tests_launched.goal ? "above" : "below",
+      source: "ClickUp · concluded tests in month",
+    },
+    {
+      label: "% Winning Tests",
+      value: sc.win_rate.actual,
+      goal: `Goal: ${sc.win_rate.goal}`,
+      detail: sc.win_rate.detail,
+      status: "below",
+      source: "Katherine's scorecard",
+      sourceHref: SCORECARD_URL,
+    },
+    {
+      label: "Est. $ Impact — Shipped Winners",
+      value: "~$187K/mo",
+      detail: "0546 (357 CoC Var B) · CVR lift est. from RPV data",
+      status: "neutral",
+      source: "Katherine's scorecard · verify CVR lift",
+      sourceHref: SCORECARD_URL,
+    },
+    {
+      label: "Paid Funnels Within KPI",
+      value: `${sc.funnels_within_kpi.rows.filter(r => r.within_kpi === true).length} / ${sc.funnels_within_kpi.rows.length}`,
+      goal: `KPI: ${sc.funnels_within_kpi.kpi}`,
+      detail: "RS1 (120%) · 357 (100%) · SF2 (88%) · WPSS (80%) · OSSF (65%) · SSP (54%)",
+      status: "below",
+      source: "DOMO · PGZ Ad Performance",
+      sourceHref: WOW_URL,
+    },
+    {
+      label: "PG1 Shopify Trial Lift (Testing)",
+      value: "—",
+      status: "pending",
+      detail: sc.pg1_shopify_trials.note,
+      source: "Testing dashboard",
+      sourceHref: SCORECARD_URL,
+    },
+    {
+      label: "PG1 CoC Trial Lift (Testing)",
+      value: "—",
+      status: "pending",
+      detail: sc.pg1_coc_trials.note,
+      source: "Deprioritized — migrating off CoC",
+    },
+    {
+      label: "CVR & AOV — Top 6 Funnels",
+      value: "See MBR →",
+      detail: "RS1 · 357 · SF2 · SSP · OSSF · WPSS",
+      status: "neutral",
+      source: "DOMO · Funnel Analytics",
+      sourceHref: WOW_URL,
+    },
+    {
+      label: "Rebuy Contribution to AOV",
+      value: sc.rebuy_aov_contribution.value ?? "—",
+      detail: "AOV: $242.38 → $247.20 · 351 Rebuy orders of 11,106 total",
+      status: "neutral",
+      source: "Rebuy dashboard · Jun 2026",
+    },
+  ];
+
   return (
     <div>
       <div className="mb-8 flex items-end justify-between">
         <div>
           <div className="text-[10px] tracking-[0.3em] text-[#c9a55e] uppercase font-semibold mb-2">
-            05 · Monthly Board
+            Monthly Board
           </div>
-          <h1 className="text-3xl font-semibold tracking-tight">Key KPIs</h1>
+          <h1 className="text-3xl font-semibold tracking-tight">CRO Key KPIs</h1>
+          <p className="text-[#8b95a7] mt-1 text-sm">June 2026 · Source: MBR scorecard</p>
         </div>
-        <div className="text-sm">
-          <label className="text-[#8b95a7] mr-2 text-xs uppercase tracking-wider">Month</label>
-          <select
-            disabled
-            className="rounded-md bg-white/[0.04] border border-white/10 px-3 py-1.5 text-sm"
-          >
-            <option>{currentMonth()}</option>
-          </select>
-        </div>
+        <Link href="/mbr/2026-06"
+          className="text-xs text-[#c9a55e] hover:text-[#d6b572] transition-colors uppercase tracking-widest">
+          View full MBR →
+        </Link>
       </div>
 
-      <div className="rounded-lg border border-[#c9a55e]/30 bg-[#c9a55e]/[0.06] p-4 text-sm mb-8">
-        <div className="font-medium text-[#c9a55e]">Needs Domo + test-log wiring</div>
-        <p className="text-[#c9a55e]/80 mt-1">
-          Each tile shows its metric definition + source. Values populate once data is connected.
-        </p>
+      {/* Patrick's dashboard note */}
+      <div className="rounded-lg border border-white/[0.08] bg-white/[0.02] p-4 mb-8 flex items-center justify-between gap-4">
+        <div>
+          <div className="text-[10px] uppercase tracking-[0.22em] text-[#8b95a7] font-semibold mb-1">Automated Dashboard</div>
+          <p className="text-xs text-[#5a6478]">
+            Full DOMO-connected KPI dashboard in progress — built by Patrick. Values above sourced from June MBR until automation is live.
+          </p>
+        </div>
+        <a
+          href={PATRICK_CLICKUP}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 text-[10px] uppercase tracking-widest text-[#c9a55e] hover:text-[#d6b572] transition-colors whitespace-nowrap"
+        >
+          ClickUp task ↗
+        </a>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        {KPIS.map((k) => (
-          <div
-            key={k.key}
-            className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-5 min-h-36"
-          >
-            <div className="text-[10px] uppercase tracking-[0.18em] text-[#8b95a7] leading-snug">
-              {k.label}
-            </div>
-            <div className="text-4xl font-semibold mt-3 text-[#5a6478]">—</div>
-            <div className="text-[10px] text-[#5a6478] mt-3 leading-snug">{k.source}</div>
-          </div>
+        {kpiRows.map((k) => (
+          <KpiTile key={k.label} {...k} />
         ))}
       </div>
     </div>

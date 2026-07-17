@@ -23,7 +23,7 @@ function TileCard({ t }: { t: Tile }) {
           <div className="text-xs text-[#8b95a7] mt-0.5">{t.subtitle}</div>
         </div>
         {t.external && (
-          <span className="text-[10px] tracking-wider text-[#8b95a7] uppercase">↗ ClickUp</span>
+          <span className="text-[10px] tracking-wider text-[#8b95a7] uppercase">↗ External</span>
         )}
       </div>
       {t.stat !== null && t.stat !== undefined && (
@@ -71,17 +71,21 @@ export default async function CoverPage() {
       stat: initializedCount,
     },
     { href: "/priorities", title: "Testing Priorities", subtitle: "Backlog by funnel" },
-    { href: "/scorecards", title: "Scorecards", subtitle: "Per-test readouts" },
+    { href: "https://pg-domo-analytics-kg.vercel.app/testing/", title: "Scorecards", subtitle: "Per-test readouts", external: true },
     { href: "/bandwidth", title: "Test Bandwidth", subtitle: "MDE & capacity by page" },
   ];
 
   const data: Tile[] = [
-    { href: "/funnel-data", title: "WoW Data by Funnel", subtitle: "Week-over-week · from Domo" },
+    { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "WoW Data by Funnel", subtitle: "Week-over-week · from Domo", external: true },
     { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board" },
   ];
 
   const reporting: Tile[] = [
     { href: "/mbr", title: "Monthly Business Review", subtitle: "Paid media · funnels · experimentation" },
+  ];
+
+  const strategy: Tile[] = [
+    { href: "/q3-problem-statements", title: "Q3 Problem Statements", subtitle: "RS1 · SF2 · 357 · PG1 · SSP · Little Legends" },
   ];
 
   return (
@@ -128,10 +132,20 @@ export default async function CoverPage() {
       </section>
 
       {/* Reporting section */}
-      <section>
+      <section className="mb-10">
         <SectionHeader label="Reporting" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {reporting.map((t) => (
+            <TileCard key={t.href} t={t} />
+          ))}
+        </div>
+      </section>
+
+      {/* Q3 Strategy section */}
+      <section>
+        <SectionHeader label="Q3 Strategy" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {strategy.map((t) => (
             <TileCard key={t.href} t={t} />
           ))}
         </div>
