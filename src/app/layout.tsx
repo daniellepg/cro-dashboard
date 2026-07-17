@@ -22,10 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[#0a0e14] text-[#f4f5f7]">
+        {/* PG brand bar */}
+        <div className="h-[3px] w-full bg-[#FD3300]" />
         <header className="border-b border-white/[0.06] bg-[#0a0e14]/90 backdrop-blur sticky top-0 z-10">
           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
             <Link href="/" className="flex items-baseline gap-2 group">
-              <span className="text-xs font-semibold tracking-[0.22em] text-white uppercase">
+              <span className="text-xs font-semibold tracking-[0.22em] text-[#FD3300] uppercase group-hover:opacity-80 transition-opacity">
                 Performance Golf
               </span>
               <span className="text-xs tracking-[0.22em] text-[#c9a55e] uppercase font-semibold">
