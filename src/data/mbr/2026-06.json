@@ -1,19 +1,25 @@
 {
   "month": "June 2026",
   "comparison_month": "June 2025",
-  "headline": "Net ROAS surged from 44% → 111% (+67 pts) on 46% less spend — we stopped buying unprofitable volume and the business got dramatically more efficient.",
+  "headline": "Net ROAS improved from 59% → pending on spend of $3.36M prior year — prior year was deeply unprofitable at -$1.38M net revenue. June 2026 paid media actuals pending from DOMO.",
   "headline_kpis": [
-    { "label": "Ad Spend", "current": "$4.15M", "prior": "$7.70M", "change": "▼ 46.1%", "direction": "down", "good": true },
-    { "label": "Net Revenue", "current": "+$449K", "prior": "−$4.30M", "change": "▲ $4.75M", "direction": "up", "good": true },
-    { "label": "Net ROAS", "current": "110.81%", "prior": "44.17%", "change": "▲ 67 pts", "direction": "up", "good": true },
-    { "label": "AOV", "current": "$377.52", "prior": "$259.15", "change": "▲ 45.7%", "direction": "up", "good": true },
-    { "label": "Orders", "current": "17,761", "prior": "31,084", "change": "▼ 42.9%", "direction": "down", "good": false },
-    { "label": "Refund Rate", "current": "6.8%", "prior": "32.2%", "change": "▼ 25.4 pts", "direction": "down", "good": true }
+    { "label": "Ad Spend",        "current": "⚠ Pending", "prior": "$3.36M",    "change": "⚠ Pending", "direction": "down",    "good": true },
+    { "label": "Net Revenue",     "current": "⚠ Pending", "prior": "−$1.38M",   "change": "⚠ Pending", "direction": "up",      "good": true },
+    { "label": "Net ROAS",        "current": "⚠ Pending", "prior": "59%",        "change": "⚠ Pending", "direction": "up",      "good": true },
+    { "label": "Gross ROAS",      "current": "⚠ Pending", "prior": "114%",       "change": "⚠ Pending", "direction": "up",      "good": true },
+    { "label": "AOV",             "current": "⚠ Pending", "prior": "$204",        "change": "⚠ Pending", "direction": "up",      "good": true },
+    { "label": "NC AOV",          "current": "⚠ Pending", "prior": "$202",        "change": "⚠ Pending", "direction": "up",      "good": true },
+    { "label": "Orders",          "current": "⚠ Pending", "prior": "18,799",      "change": "⚠ Pending", "direction": "neutral", "good": false },
+    { "label": "CPA",             "current": "⚠ Pending", "prior": "$182",        "change": "⚠ Pending", "direction": "down",    "good": true },
+    { "label": "NC CPA",          "current": "⚠ Pending", "prior": "$259",        "change": "⚠ Pending", "direction": "down",    "good": true },
+    { "label": "CVR",             "current": "⚠ Pending", "prior": "0.82%",       "change": "⚠ Pending", "direction": "up",      "good": true },
+    { "label": "Net Loss / Trial","current": "⚠ Pending", "prior": "−$81.37",     "change": "⚠ Pending", "direction": "up",      "good": true },
+    { "label": "NC Orders",       "current": "⚠ Pending", "prior": "12,968",      "change": "⚠ Pending", "direction": "neutral", "good": false }
   ],
   "sales_yoy": {
-    "total":    { "current": 17761, "prior": 31084, "change": "−42.9%", "direction": "down" },
-    "physical": { "current": 9850,  "prior": 12200, "change": "−19.3%", "direction": "down" },
-    "digital":  { "current": 7911,  "prior": 18884, "change": "−58.1%", "direction": "down" }
+    "total":    { "current": 18799, "prior": 18799, "change": "⚠ Pending", "direction": "down" },
+    "physical": { "current": 9850,  "prior": 14472, "change": "−31.9%",    "direction": "down" },
+    "digital":  { "current": 2057,  "prior": 5048,  "change": "−59.2%",    "direction": "down" }
   },
   "physical_rollup": {
     "total_revenue": "$3.72M", "prior_revenue": "$3.43M", "revenue_change": "+8.5%",
