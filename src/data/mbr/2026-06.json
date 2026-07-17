@@ -80,28 +80,28 @@
     "rebuy_aov": "$3.65"
   },
   "actual": {
-    "tests_launched": 8,
-    "win_rate": "TBD",
+    "tests_launched": 11,
+    "win_rate": "18%",
     "coc_aov": "TBD",
     "rebuy_aov": "TBD"
   },
   "tests_concluded": [
-    { "id": "TBD-01", "name": "Test 1 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
-    { "id": "TBD-02", "name": "Test 2 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
-    { "id": "TBD-03", "name": "Test 3 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
-    { "id": "TBD-04", "name": "Test 4 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
-    { "id": "TBD-05", "name": "Test 5 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
-    { "id": "TBD-06", "name": "Test 6 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
-    { "id": "TBD-07", "name": "Test 7 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" },
-    { "id": "TBD-08", "name": "Test 8 — June 2026", "outcome": "IN_PROGRESS", "primary_metric": "Pending scorecard review", "revenue_stat": "—", "stat_sig": "—" }
+    { "id": "0546",   "name": "357 Checkout Champ — Variation B",           "outcome": "WIN",  "primary_metric": "RPV +22%", "revenue_stat": "AOV +12% ($313 → $305)", "stat_sig": "—" },
+    { "id": "0545",   "name": "One Shot Slice Fix — Checkout Champ",         "outcome": "WIN",  "primary_metric": "RPV +1%",  "revenue_stat": "AOV flat ($114 → $114)", "stat_sig": "—" },
+    { "id": "0542",   "name": "357 Post-Purchase Interstitial",              "outcome": "LOSS", "primary_metric": "Upsell take −11pp", "revenue_stat": "AOV −14% ($323 → $277)", "stat_sig": "—" },
+    { "id": "0547",   "name": "357 Checkout Champ — Variation C",           "outcome": "LOSS", "primary_metric": "RPV −17%", "revenue_stat": "AOV −9% ($317 → $289)", "stat_sig": "—" },
+    { "id": "0551",   "name": "WPSS Checkout Champ Test",                   "outcome": "LOSS", "primary_metric": "CVR loss",  "revenue_stat": "Membership +84pp (data anomaly)", "stat_sig": "—" },
+    { "id": "PG14A",  "name": "Club Only + Club + App Copy (A) — Shopify",  "outcome": "LOSS", "primary_metric": "RPV −48%", "revenue_stat": "Membership +25pp, AOV +4%", "stat_sig": "—" },
+    { "id": "PG14B",  "name": "Club Only + Club + App Copy (B) — Shopify",  "outcome": "LOSS", "primary_metric": "RPV −24%", "revenue_stat": "Membership +32pp, AOV +13%", "stat_sig": "—" },
+    { "id": "PG14C",  "name": "Club Only + Club + App Copy (C) — Shopify",  "outcome": "LOSS", "primary_metric": "RPV −30%", "revenue_stat": "Membership +34pp, AOV +9%", "stat_sig": "—" },
+    { "id": "PG14A-100", "name": "Club Only + Club + App Copy (100%) — Shopify", "outcome": "FLAT", "primary_metric": "RPV flat", "revenue_stat": "AOV $316", "stat_sig": "—" },
+    { "id": "PG0023", "name": "ONE.1 Wedge — Help Me Choose Quiz — Shopify","outcome": "LOSS", "primary_metric": "RPV −20%", "revenue_stat": "AOV −18% ($207 → $170)", "stat_sig": "—" },
+    { "id": "PG09A",  "name": "Help Me Choose — Shopify",                   "outcome": "FLAT", "primary_metric": "RPV −0%",  "revenue_stat": "AOV +2% ($236 → $240)", "stat_sig": "—" }
   ],
   "tests_in_progress": [
-    { "id": "LIVE-01", "name": "Live test 1", "key_kpi": "CVR", "next_steps": "Monitor & Report" },
-    { "id": "LIVE-02", "name": "Live test 2", "key_kpi": "CVR", "next_steps": "Monitor & Report" },
-    { "id": "LIVE-03", "name": "Live test 3", "key_kpi": "AOV", "next_steps": "Monitor & Report" },
-    { "id": "LIVE-04", "name": "Live test 4", "key_kpi": "CVR", "next_steps": "Monitor & Report" },
-    { "id": "LIVE-05", "name": "Live test 5", "key_kpi": "Revenue", "next_steps": "Monitor & Report" },
-    { "id": "LIVE-06", "name": "Live test 6", "key_kpi": "CVR", "next_steps": "Monitor & Report" }
+    { "id": "0494",   "name": "357 Checkout Champ Test 0494",      "key_kpi": "RPV", "next_steps": "Running since Apr 20 — monitor" },
+    { "id": "PG0022", "name": "Shopify Checkout UVPs Above CTA",   "key_kpi": "RPV", "next_steps": "Started Jun 29 — early results" },
+    { "id": "PG0032", "name": "Putter CLP to RS1 PDP — Shopify",  "key_kpi": "RPV", "next_steps": "Started Jun 30 — early results" }
   ],
   "themes": [
     {
@@ -129,7 +129,7 @@
   "triumphs": [
     "Launched PG1 v3 on Shopify with a 7-day no-sub free trial — moving off forced continuity toward an opt-in model.",
     "Removed misleading checkout text that implied customers were getting a subscription when they were actually starting a free trial.",
-    "8 tests launched in June — above our monthly goal of 7."
+    "11 tests concluded in June — 2 wins, 7 losses, 2 flat. 0546 (357 CoC) and 0545 (OSSF CoC) both shipped."
   ],
   "challenges": [
     "Free trial tracking is unreliable — the definition has changed multiple times, making it impossible to get a clean total count or a trustworthy trial-to-paid conversion rate. Need a single agreed-upon definition locked in before we can measure the PG1 v3 launch properly.",
