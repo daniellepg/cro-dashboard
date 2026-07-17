@@ -72,6 +72,47 @@ export type PricingModelAnalysis = {
   };
   callout_positive: string;
   callout_watch: string;
+  ab_test_evidence?: {
+    headline: string;
+    intro: string;
+    tests: {
+      id: string;
+      funnel: string;
+      rpv_change: string;
+      aov_change: string;
+      membership_shift: string | null;
+      verdict: "LOSS" | "FLAT" | "WIN";
+    }[];
+  };
+  sub_ltv_math?: {
+    headline: string;
+    rows: { label: string; value: string; highlight?: boolean; }[];
+    conclusion: string;
+  };
+  paid_media_impact?: {
+    headline: string;
+    intro: string;
+    bid_ceiling_rows: { test: string; control_max_cpc: string; treatment_max_cpc: string; drop_pct: string; }[];
+    period_rows: { metric: string; v1: string; v2: string; good: boolean; }[];
+    conclusion: string;
+  };
+  path_projection?: {
+    headline: string;
+    sub: string;
+    scenarios: {
+      version: string;
+      label: string;
+      orders: number;
+      gross_revenue: string;
+      pg1_trials: number;
+      net_roas: string;
+      net_revenue: string;
+      net_revenue_positive: boolean;
+      verdict: string;
+      note: string;
+    }[];
+    conclusion: string;
+  };
 };
 
 export type FunnelKpiRow = {
