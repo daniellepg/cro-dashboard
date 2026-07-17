@@ -26,9 +26,15 @@ function TileCard({ t }: { t: Tile }) {
           <span className="text-[10px] tracking-wider text-[#8b95a7] uppercase">↗ External</span>
         )}
       </div>
-      {t.stat !== null && t.stat !== undefined && (
+      {t.stat !== null && t.stat !== undefined ? (
         <div className="absolute bottom-5 left-5">
           <div className="text-4xl font-semibold tracking-tight text-[#c9a55e]">{t.stat}</div>
+        </div>
+      ) : (
+        <div className="absolute bottom-5 left-5">
+          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#5a6478] group-hover:text-[#c9a55e] border border-white/[0.08] group-hover:border-[#c9a55e]/30 rounded px-2.5 py-1 transition-all">
+            View →
+          </span>
         </div>
       )}
       <div className="absolute bottom-5 right-5 text-[#5a6478] group-hover:text-[#c9a55e] transition-colors">
