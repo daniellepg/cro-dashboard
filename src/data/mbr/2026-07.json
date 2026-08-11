@@ -293,37 +293,37 @@
         "funnel": "SF2",
         "cvr": "1.46%",
         "aov": "$306",
-        "cvr_note": "Paid CVR"
+        "cvr_note": "CVR · DOMO"
       },
       {
         "funnel": "357",
         "cvr": "1.12%",
         "aov": "$262",
-        "cvr_note": "Paid CVR"
+        "cvr_note": "CVR · DOMO"
       },
       {
         "funnel": "RS1",
         "cvr": "0.99%",
         "aov": "$408",
-        "cvr_note": "Paid CVR"
+        "cvr_note": "CVR · DOMO"
       },
       {
         "funnel": "WPSS",
         "cvr": "0.57%",
         "aov": "$194",
-        "cvr_note": "Paid CVR"
+        "cvr_note": "CVR · DOMO"
       },
       {
         "funnel": "OSSF",
         "cvr": "0.62%",
         "aov": "$103",
-        "cvr_note": "Paid CVR"
+        "cvr_note": "CVR · DOMO"
       },
       {
         "funnel": "SSTS",
         "cvr": "0.57%",
         "aov": "$115",
-        "cvr_note": "Paid CVR"
+        "cvr_note": "CVR · DOMO"
       }
     ],
     "rebuy_aov_contribution": {
