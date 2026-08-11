@@ -128,11 +128,9 @@ export function CroKpiGrid({ sc }: { sc: CroScorecard }) {
     {
       label: "Rebuy Contribution to AOV",
       value: sc.rebuy_aov_contribution.value ?? "—",
-      subvalue: "$53,488",
-      sublabel: "rebuy revenue · 1.95% of total",
-      detail: "351 rebuy orders of 11,106 total (3.16%) · AOV $242.38 → $247.20 w/ Rebuy",
+      detail: sc.rebuy_aov_contribution.note,
       status: "neutral",
-      source: "Rebuy dashboard · Jun 2026",
+      source: "Rebuy dashboard",
     },
   ];
 

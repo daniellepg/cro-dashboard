@@ -1,0 +1,469 @@
+{
+  "month": "July 2026",
+  "comparison_month": "July 2025",
+  "headline": "Net ROAS hit 111% (+41 pts) on 51% less spend — second consecutive profitable month at +$182K net revenue vs. −$990K in July 2025. AOV up 35% ($198 → $267), CPA down 4.5% to $148. Three of six funnels above the 100% Net ROAS KPI. SF2 Tolstoy won at +22% CVR — the largest single CVR lift of the year.",
+  "headline_kpis": [
+    {
+      "label": "Ad Spend",
+      "current": "$1.63M",
+      "prior": "$3.34M",
+      "change": "▼ 51.2%",
+      "direction": "down",
+      "good": true
+    },
+    {
+      "label": "Net Revenue",
+      "current": "+$182,313",
+      "prior": "−$990,332",
+      "change": "▲ $1.17M",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "Net ROAS",
+      "current": "111%",
+      "prior": "70%",
+      "change": "▲ 41 pts",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "Gross ROAS",
+      "current": "184%",
+      "prior": "130%",
+      "change": "▲ 54 pts",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "AOV",
+      "current": "$267",
+      "prior": "$198",
+      "change": "▲ 34.8%",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "NC AOV",
+      "current": "$270",
+      "prior": "$198",
+      "change": "▲ 36.4%",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "RC AOV",
+      "current": "$262",
+      "prior": "$198",
+      "change": "▲ 32.3%",
+      "direction": "up",
+      "good": true
+    },
+    {
+      "label": "Orders",
+      "current": "11,259",
+      "prior": "21,975",
+      "change": "▼ 48.8%",
+      "direction": "down",
+      "good": false
+    },
+    {
+      "label": "CPA",
+      "current": "$148",
+      "prior": "$155",
+      "change": "▼ 4.5%",
+      "direction": "down",
+      "good": true
+    },
+    {
+      "label": "NC CPA",
+      "current": "$200",
+      "prior": "$216",
+      "change": "▼ 7.4%",
+      "direction": "down",
+      "good": true
+    },
+    {
+      "label": "CVR",
+      "current": "0.93%",
+      "prior": "1.04%",
+      "change": "▼ 0.11 pts",
+      "direction": "down",
+      "good": false
+    },
+    {
+      "label": "Net Loss / Trial",
+      "current": "+$20.09",
+      "prior": "−$50.17",
+      "change": "▲ $70.26",
+      "direction": "up",
+      "good": true
+    }
+  ],
+  "sales_yoy": {
+    "total": {
+      "current": 11259,
+      "prior": 21975,
+      "change": "−48.8%",
+      "direction": "down"
+    },
+    "physical": {
+      "current": 8000,
+      "prior": 0,
+      "change": "⚠ Partial (3 funnels)",
+      "direction": "down"
+    },
+    "digital": {
+      "current": 1405,
+      "prior": 0,
+      "change": "⚠ Partial (3 funnels)",
+      "direction": "down"
+    }
+  },
+  "physical_rollup": {
+    "total_revenue": "$2,452,051",
+    "prior_revenue": "⚠ Pending",
+    "revenue_change": "⚠ Partial — RS1 + 357 + SF2 only",
+    "fe_sales": 8000,
+    "prior_fe_sales": 0,
+    "aov": "$306.51",
+    "prior_aov": "⚠ Pending",
+    "aov_change": "⚠ Pending"
+  },
+  "physical_funnels_current": [
+    {
+      "funnel": "357",
+      "fe_sales": 4378,
+      "revenue": 1147262,
+      "aov": 262.0,
+      "visitors": null,
+      "op_cvr": null
+    },
+    {
+      "funnel": "RS1",
+      "fe_sales": 1926,
+      "revenue": 786216,
+      "aov": 408.0,
+      "visitors": null,
+      "op_cvr": null
+    },
+    {
+      "funnel": "SF2",
+      "fe_sales": 1696,
+      "revenue": 518573,
+      "aov": 306.0,
+      "visitors": null,
+      "op_cvr": null
+    }
+  ],
+  "physical_funnels_prior": [],
+  "physical_takeaways": [
+    "357 is now the highest-volume physical funnel — 4,378 orders vs. 1,926 for RS1. The price increase from $199 to $249 (live in 2026) pushed 357 AOV to $262 vs. prior year's $245.",
+    "RS1 is holding at $408 AOV with 109% Net ROAS — the highest-AOV active funnel in the portfolio.",
+    "SF2 had its best ROAS month on record at 123% Net ROAS, up from 88% in June. Tolstoy (PG0028) contributed a 22% CVR lift — shipping now.",
+    "July 2025 funnel-level breakdown for RS1 and SF2 is not available — RS1 and SF2 are new 2026 funnels with no prior-year comp."
+  ],
+  "digital_rollup": {
+    "total_revenue": "$195,881",
+    "prior_revenue": "⚠ Pending",
+    "revenue_change": "⚠ Partial — WPSS + OSSF + SSTS only",
+    "fe_sales": 1405,
+    "prior_fe_sales": 0,
+    "aov": "$139.42",
+    "prior_aov": "⚠ Pending",
+    "aov_change": "⚠ Pending"
+  },
+  "digital_funnels_current": [
+    {
+      "funnel": "WPSS",
+      "fe_sales": 544,
+      "revenue": 105345,
+      "aov": 194.0,
+      "visitors": null,
+      "op_cvr": null
+    },
+    {
+      "funnel": "OSSF",
+      "fe_sales": 691,
+      "revenue": 71063,
+      "aov": 103.0,
+      "visitors": null,
+      "op_cvr": null
+    },
+    {
+      "funnel": "SSTS",
+      "fe_sales": 170,
+      "revenue": 19473,
+      "aov": 115.0,
+      "visitors": null,
+      "op_cvr": null
+    }
+  ],
+  "digital_funnels_prior": [],
+  "digital_takeaways": [
+    "WPSS is the highest-revenue digital funnel at $105K — 96% Net ROAS, just shy of the 100% KPI. AOV softened slightly from $198 (June) to $194.",
+    "OSSF remains the weakest funnel in the portfolio at 74% Net ROAS. AOV dropped from $112 (June) to $103. Primary optimization target.",
+    "SSTS: 170 FE sales vs. 3,032 in July 2025 (−94%). Revenue collapsed from $285K to $19K. The funnel is nearly offline — confirmed as intentional (SSTS replaced by WPSS at higher AOV).",
+    "SRSW July data pending — not captured in this pull. Was tracking $31K/month at $92 AOV in June."
+  ],
+  "cro_scorecard": {
+    "tests_launched": {
+      "goal": 7,
+      "actual": 5
+    },
+    "win_rate": {
+      "goal": "30%",
+      "actual": "33%",
+      "detail": "3W / 4L / 2F of 9 concluded"
+    },
+    "funnels_within_kpi": {
+      "kpi": "100% Net ROAS",
+      "rows": [
+        {
+          "funnel": "SF2",
+          "net_roas": "123%",
+          "within_kpi": true
+        },
+        {
+          "funnel": "357",
+          "net_roas": "116%",
+          "within_kpi": true
+        },
+        {
+          "funnel": "RS1",
+          "net_roas": "109%",
+          "within_kpi": true
+        },
+        {
+          "funnel": "WPSS",
+          "net_roas": "96%",
+          "within_kpi": false
+        },
+        {
+          "funnel": "SSTS",
+          "net_roas": "75%",
+          "within_kpi": false
+        },
+        {
+          "funnel": "OSSF",
+          "net_roas": "74%",
+          "within_kpi": false
+        }
+      ]
+    },
+    "pg1_shopify_trials": {
+      "value": "9,077",
+      "note": "Total PG1/SC trials started in July 2026 · Source: DOMO · Tier breakdown (Aug MTD reference): Plus 93 (2%) · Scratch 1,418 (25%) · Gifted 4,109 (73%)"
+    },
+    "pg1_coc_trials": {
+      "value": null,
+      "note": "357 funnel still on CoC — trial tracking impacted by dropshipper disruption in July. Migrating 357 to Shopify."
+    },
+    "estimated_test_impact": [
+      {
+        "test_id": "PG0028",
+        "name": "SF2 Tolstoy",
+        "outcome": "WIN",
+        "cvr_lift": "+22%",
+        "monthly_orders": 1696,
+        "aov": "$306",
+        "estimated_monthly_impact": "~$114K/mo"
+      },
+      {
+        "test_id": "PG0031",
+        "name": "RS1 PDP Help Me Choose",
+        "outcome": "WIN",
+        "cvr_lift": "+1%",
+        "monthly_orders": 1926,
+        "aov": "$408",
+        "estimated_monthly_impact": "~$8K/mo"
+      },
+      {
+        "test_id": "PG0022",
+        "name": "Shopify Checkout UVPs Above CTA",
+        "outcome": "WIN",
+        "cvr_lift": "+1%",
+        "monthly_orders": null,
+        "aov": null,
+        "estimated_monthly_impact": "Shopify-wide · est. pending"
+      }
+    ],
+    "top_funnel_cvr_aov": [
+      {
+        "funnel": "SF2",
+        "cvr": "1.46%",
+        "aov": "$306",
+        "cvr_note": "Paid CVR"
+      },
+      {
+        "funnel": "357",
+        "cvr": "1.12%",
+        "aov": "$262",
+        "cvr_note": "Paid CVR"
+      },
+      {
+        "funnel": "RS1",
+        "cvr": "0.99%",
+        "aov": "$408",
+        "cvr_note": "Paid CVR"
+      },
+      {
+        "funnel": "WPSS",
+        "cvr": "0.57%",
+        "aov": "$194",
+        "cvr_note": "Paid CVR"
+      },
+      {
+        "funnel": "OSSF",
+        "cvr": "0.62%",
+        "aov": "$103",
+        "cvr_note": "Paid CVR"
+      },
+      {
+        "funnel": "SSTS",
+        "cvr": "0.57%",
+        "aov": "$115",
+        "cvr_note": "Paid CVR"
+      }
+    ],
+    "rebuy_aov_contribution": {
+      "value": "+$4.64 (+2.05%)",
+      "note": "Rebuy Sales: $44,454 (2.01% of total) · Rebuy Orders: 259 of 9,587 (2.70%) · AOV $226.56 → $231.20 w/ Rebuy · Source: Rebuy dashboard, Jul 2026"
+    }
+  },
+  "goals": {
+    "tests_launched": 7,
+    "win_rate": "30%",
+    "coc_aov": "TBD",
+    "rebuy_aov": "TBD"
+  },
+  "actual": {
+    "tests_launched": 5,
+    "win_rate": "33% (3W / 4L / 2F)",
+    "coc_aov": "TBD",
+    "rebuy_aov": "+$4.64 (+2.05%)"
+  },
+  "tests_concluded": [
+    {
+      "id": "PG0028",
+      "name": "SF2 Tolstoy",
+      "outcome": "WIN",
+      "primary_metric": "CVR +22%",
+      "revenue_stat": "AOV $319 → $318 (−0%) · Jul 10 – Jul 27",
+      "stat_sig": "—"
+    },
+    {
+      "id": "PG0022",
+      "name": "Shopify Checkout UVPs Above CTA",
+      "outcome": "WIN",
+      "primary_metric": "CVR +1%",
+      "revenue_stat": "AOV $298 → $298 (flat) · Jun 29 – Jul 13",
+      "stat_sig": "—"
+    },
+    {
+      "id": "PG0031",
+      "name": "RS1 PDP Help Me Choose",
+      "outcome": "WIN",
+      "primary_metric": "CVR +1%",
+      "revenue_stat": "AOV $405 → $402 (−1%) · Jul 6 – Jul 21",
+      "stat_sig": "—"
+    },
+    {
+      "id": "PG0029",
+      "name": "357 Tolstoy",
+      "outcome": "LOSS",
+      "primary_metric": "CVR −4%",
+      "revenue_stat": "AOV $282 → $279 (−1%) · Jul 13 – Jul 22",
+      "stat_sig": "—"
+    },
+    {
+      "id": "PG0027A",
+      "name": "SF2 META LP to PDP (50/50)",
+      "outcome": "LOSS",
+      "primary_metric": "CVR −13%",
+      "revenue_stat": "AOV flat · PDP does not increase CVR for META audience · Jun 30 – Jul 6",
+      "stat_sig": "—"
+    },
+    {
+      "id": "EXP-0555",
+      "name": "357 Hybrid → Super 7-Wood Shopify PDP",
+      "outcome": "LOSS",
+      "primary_metric": "CVR −40% (1.16% → 0.70%)",
+      "revenue_stat": "Directionally negative on key and secondary KPIs · Convert test",
+      "stat_sig": "—"
+    },
+    {
+      "id": "0556",
+      "name": "357 Checkout Champ Test 0556",
+      "outcome": "LOSS",
+      "primary_metric": "CVR −100% (treatment broken)",
+      "revenue_stat": "Jul 14 – Jul 17 · Treatment had 0% CVR — technical failure",
+      "stat_sig": "—"
+    },
+    {
+      "id": "0494",
+      "name": "357 Checkout Champ Test 0494",
+      "outcome": "FLAT",
+      "primary_metric": "CVR flat",
+      "revenue_stat": "Long-running test Apr 25 – Jul 17 · No significant movement",
+      "stat_sig": "—"
+    },
+    {
+      "id": "0494b",
+      "name": "357 Checkout Champ Test 0494b",
+      "outcome": "FLAT",
+      "primary_metric": "CVR flat",
+      "revenue_stat": "Long-running test Apr 10 – Jul 3 · No significant movement",
+      "stat_sig": "—"
+    }
+  ],
+  "tests_in_progress": [
+    {
+      "id": "PG0030",
+      "name": "RS1 Tolstoy",
+      "key_kpi": "CVR (currently +3%)",
+      "next_steps": "Monitor — leading positive, conclusion pending"
+    },
+    {
+      "id": "PG0032",
+      "name": "Putter CLP to RS1 PDP",
+      "key_kpi": "CVR (currently +9%)",
+      "next_steps": "Monitor — leading positive, conclusion pending"
+    }
+  ],
+  "themes": [
+    {
+      "number": 1,
+      "title": "Second straight profitable month — efficiency compounding",
+      "outcome": "WIN",
+      "narrative": "Net ROAS reached 111% in July — up from 96% in June and a 41-point improvement over July 2025 (70%). Net revenue swung from −$990K to +$182K on half the spend. CPA fell to $148 (−4.5% YoY) and Net Loss/Trial flipped positive to +$20.09. The algorithm is running cleanly, the portfolio is profitable, and OSSF + SSTS are the remaining drag pulling the blended rate down.",
+      "takeaway": "Getting OSSF and SSTS above 100% Net ROAS would make the entire top 6 profitable. That's the next CRO priority."
+    },
+    {
+      "number": 2,
+      "title": "Tolstoy on PDPs — the biggest CVR lever confirmed",
+      "outcome": "WIN",
+      "narrative": "PG0028 (SF2 Tolstoy) won with CVR +22% — the largest single CVR lift of the year. PG0031 (RS1 Help Me Choose) also won at +1%. PG0030 (RS1 Tolstoy) is currently running and leading at +3%. Three consecutive tests confirm that video and interactive content on product pages converts meaningfully higher. Notably, 357 Tolstoy (PG0029) lost (CVR −4%) — the format works, but 357's audience may respond differently.",
+      "takeaway": "Roll Tolstoy out systematically to remaining high-volume funnels, starting with OSSF. Treat 357 as a separate test — the same creative won on SF2 but not on 357."
+    },
+    {
+      "number": 3,
+      "title": "Dropshipper disruption exposed a structural gap on 357 CoC",
+      "outcome": "MIXED",
+      "narrative": "A dropshipper operation targeted 357 CoC in July, causing the VAMP score to spike and creating noise in performance data. Fast action from Omer (flagging orders), Katherine (fraud profiling with Claude), and Kevin (refunds and blocking) contained the damage. But the root cause remains: no automated fraud detection on CoC orders, no dev communication protocol for VAMP-triggering events, and a 3–4 day delay in identifying and escalating the issue.",
+      "takeaway": "Build a VAMP score threshold alert and a fraud escalation protocol before it recurs. 357 is the highest-volume physical funnel — exposure here is high."
+    }
+  ],
+  "triumphs": [
+    "SF2 Tolstoy (PG0028) won at CVR +22% — the single largest CVR lift of the year. Tolstoy is now live on SF2 and being extended to RS1 (PG0030 currently running +3%).",
+    "Identified a new top-of-funnel test opportunity using 'Love Your Game' framing — another way to reach the audience at the next biggest miss.",
+    "Fast team response to VAMP score crisis: Omer flagged dropshipper orders, Katherine built fraud profiles with Claude, Kevin proactively refunded and blocked bad orders. Crisis contained."
+  ],
+  "challenges": [
+    "Dropshippers targeted 357 CoC, causing VAMP score to skyrocket. Lack of dev communication when EMS Mid email was triggered delayed the response. Root cause detection took too long.",
+    "Different page templates across Shopify PDPs make cross-funnel testing difficult — a test that wins on SF2 may not be deployable on RS1 or 357 without a full rebuild.",
+    "No dedicated product owner on key funnels — makes it harder to prioritize tests, get fast approvals, and ship winning variants."
+  ],
+  "generated_at": "2026-08-11T00:00:00Z",
+  "data_source": "DOMO (Orders with Acq Spend 2.0) + ClickUp + Rebuy"
+}

@@ -3,9 +3,11 @@ import type { MbrData, FunnelRow, Theme, TestResult, KpiCard, PricingModelVersio
 import { CroKpiGrid } from "@/components/cro-kpi-grid";
 
 import jun2026 from "@/data/mbr/2026-06.json";
+import jul2026 from "@/data/mbr/2026-07.json";
 
 const DATA_MAP: Record<string, MbrData> = {
   "2026-06": jun2026 as MbrData,
+  "2026-07": jul2026 as MbrData,
 };
 
 export async function generateStaticParams() {
