@@ -93,6 +93,7 @@ export default async function CoverPage() {
   ];
 
   const strategy: Tile[] = [
+    { href: "/opportunities", title: "Opportunity Analysis", subtitle: "Ranked by contribution profit" },
     { href: "/q3-problem-statements", title: "Q3 Problem Statements", subtitle: "RS1 · SF2 · 357 · PG1 · SSP · Little Legends" },
   ];
 
@@ -148,7 +149,7 @@ export default async function CoverPage() {
 
       {/* Q3 Strategy section */}
       <section>
-        <SectionHeader label="Q3 Strategy" />
+        <SectionHeader label="Strategy" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {strategy.map((t) => (
             <TileCard key={t.href} t={t} />
