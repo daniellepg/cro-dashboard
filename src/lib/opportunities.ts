@@ -38,7 +38,7 @@ export const BASELINE: OpportunityBaseline = {
   orders: 71_382,
   window: "TTM 2025-09-21 → 2026-09-21",
   source: "Domo · PGZ | Shopify | ORDERS (b19daeb1)",
-  builtOn: "2026-09-29",
+  builtOn: "2026-09-29 (rev 2)",
 };
 
 export const OPPORTUNITIES: Opportunity[] = [
@@ -46,30 +46,30 @@ export const OPPORTUNITIES: Opportunity[] = [
     id: "LEADCAP",
     name: 'Lead capture — expand "Love Your Game" pop-up to paid',
     owner: "CRO + Paid Media",
-    confidence: "medium",
-    confidenceLabel: "Medium — downstream lead value unmeasured",
+    confidence: "low",
+    confidenceLabel: "Low — conditional on redemption holding",
     effort: "Low",
     investment: 12_000,
     investmentNote: "~40h build/QA + exclusion rules + Klaviyo flows",
-    cp: { low: 275_000, base: 546_732, high: 1_008_000 },
-    breakeven: "~3,400 coded orders/yr, or 9% of the modelled paid redemption",
+    cp: { low: 1_076_266, base: 2_030_177, high: 2_984_088 },
+    breakeven: "~100 coded orders/mo — 7% of the modelled redemption",
     why:
-      "Measured, not assumed: 150K sessions produce 2,560 leads (1.707% capture) and 444 coded orders " +
-      "(17.34% of leads) at $268.99 net sales each. Paid is a further 750K sessions seeing none of it. " +
-      "Capture scales with sessions (12,800 leads/mo); redemption scales with conversion, so 388 coded " +
-      "orders/mo. 691 of 695 coded buyers are FIRST-TIME customers — this acquires, it does not " +
-      "discount the repeat base.",
+      "Measured on non-paid: 150,000 sessions produce ~2,500 leads (1.6% capture) and ~12% of leads " +
+      "redeem the code. Applied to the 750,000 paid sessions the pop-up never sees: 12,000 leads/mo and " +
+      "1,440 coded orders/mo (17,280/yr) at $268.99 net sales each — $4.65M net sales. Base case takes " +
+      "75% of that as incremental, which the customer mix supports: 691 of 695 coded buyers to date are " +
+      "FIRST-TIME customers, so this acquires rather than discounting the repeat base.",
     risk:
-      "Redemption does not travel with the pop-up — it belongs to the traffic. Non-paid converts 2.417%, " +
-      "paid 0.422%, so per-lead value drops from $20.38 to $3.56. Applying non-paid stats directly to " +
-      "paid implies 70% of every paid order carrying the code, which is impossible. Unresolved: 244 of " +
-      "434 coded orders already book to Media Buys — if the pop-up already fires on some paid traffic, " +
-      "part of this is double-counted and the base halves.",
+      "Size of the claim is the risk. 1,440 coded orders on top of today's 3,167 paid orders moves paid " +
+      "CVR from 0.422% to 0.614% — a +45% lift — with 31% of all paid orders carrying the code, and adds " +
+      "+28% to company top line from one pop-up placement. Nothing here is arithmetically wrong; it is " +
+      "simply a large claim resting on one untested number. Redemption is assumed to travel from warm " +
+      "non-paid traffic to cold paid traffic unchanged.",
     needs: [
-      "Does the pop-up fire on paid landing pages? Check the trigger rule — page targeting, UTM exclusions, audience conditions. This is the difference between $275K and $547K",
-      "Klaviyo revenue per subscriber per year — 153,600 leads/yr of downstream value sits OUTSIDE the base case and is the whole high-case argument",
-      "Overlap between paid visitors and the existing list",
-      "Exclusion rules for existing subscribers and mid-funnel returning buyers",
+      "RUN THE TEST: pop-up on one paid campaign for two weeks. That measures the real paid redemption rate and replaces the only assumption holding up this number — costs ~$0 and settles a $1.9M range",
+      "Does the pop-up already fire on paid? 244 of 434 coded orders book to Media Buys today — if some of this is already happening, the increment is smaller",
+      "Exclusion rules for existing subscribers and mid-funnel returning buyers, so redemption does not run hot on buyers already converting",
+      "Klaviyo revenue per subscriber per year — downstream value on 144,000 leads/yr is NOT in this number",
     ],
   },
   {
@@ -230,7 +230,7 @@ export const NOTES: string[] = [
   "**Source disagreement, Shop Campaigns.** Your Shopify screenshot reports 1,199 orders / $364,698 since Mar 17. Domo channel `3890849` reports 1,431 orders / $426,315 for the same window — a 19% gap explained by non-campaign Shop App orders inside the Domo channel. Use Shopify for campaign performance, Domo for total Shop App.",
   "**Love Your Game — reconciled.** On the same 30-day window Domo and Shopify agree within 3%: 550 vs 565 orders, $25,864 vs $26,521 discount, $159,444 vs $156,796 sales. Both sources are good here.",
   "**PG0019 \u2014 measured on sessions and leads.** Launched 2026-08-10; week 2 spiked to 29.9 orders/day then settled at ~14.6/day. Last 30 days: 150,000 sessions \u2192 2,560 leads (1.707%) \u2192 444 coded orders (17.34% of leads), $119,431 net sales. Shopify 444 vs Domo 439 \u2014 agreement within 1.1%. Since launch, 691 of 695 coded orders are first-time customers.",
-  "**Do not sum blindly.** Lead capture and owned-channel expansion overlap heavily — lead capture feeds the list that owned channel monetises. Counting both at base case double-counts roughly $150K. Sub-$50 threshold work also partly overlaps with SPI eligibility.",
+  "**Do not sum blindly \u2014 and lead capture now dominates.** At $2.03M it is 73% of the sized total, so the board total is really one bet plus rounding. It also overlaps heavily with owned-channel expansion, which monetises the same list; counting both at base case double-counts materially. Sub-$50 threshold work partly overlaps with SPI eligibility.",
   "**Cannibalization is the shared risk.** SPI (payment mix shift), Shop Campaigns lapsed audiences (paying for buyers email would win free), and lead capture (discounting buyers who would convert anyway) all fail the same way: volume that looks incremental but isn't. Every base case already discounts for it.",
 ];
 
