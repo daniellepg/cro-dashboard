@@ -94,6 +94,7 @@ export default async function CoverPage() {
 
   const strategy: Tile[] = [
     { href: "/opportunities", title: "Opportunity Analysis", subtitle: "Ranked by contribution profit" },
+    { href: "/shop-pay-installments", title: "Shop Pay Installments", subtitle: "Decision memo · pros & cons" },
     { href: "/q3-problem-statements", title: "Q3 Problem Statements", subtitle: "RS1 · SF2 · 357 · PG1 · SSP · Little Legends" },
   ];
 
