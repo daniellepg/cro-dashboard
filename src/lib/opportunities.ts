@@ -38,7 +38,7 @@ export const BASELINE: OpportunityBaseline = {
   orders: 71_382,
   window: "TTM 2025-09-21 → 2026-09-21",
   source: "Domo · PGZ | Shopify | ORDERS (b19daeb1)",
-  builtOn: "2026-09-22",
+  builtOn: "2026-09-29",
 };
 
 export const OPPORTUNITIES: Opportunity[] = [
@@ -49,23 +49,24 @@ export const OPPORTUNITIES: Opportunity[] = [
     confidence: "medium",
     confidenceLabel: "Medium — capture value assumed",
     effort: "Low",
-    investment: 8_000,
-    investmentNote: "~40h build/QA/exclusion rules + Klaviyo flows",
-    cp: { low: 180_000, base: 545_974, high: 1_150_000 },
-    breakeven: "~1,000 net-new captures, or 3% of the non-paid run rate replicated on paid",
+    investment: 12_000,
+    investmentNote: "~40h build/QA + exclusion rules + Klaviyo flows",
+    cp: { low: 326_859, base: 776_605, high: 1_341_101 },
+    breakeven: "~3,000 net-new captures, or 1.5% of the paid pool converting at today's rate",
     why:
-      "PG0019 launched 2026-08-10 and has settled at $3,771/day — a $1.38M/yr run rate on non-paid " +
-      "traffic alone, at a $290 AOV, the best of any code you run. Paid sees none of it. Two value " +
-      "streams: direct sales (~$285K) and downstream capture value (~$261K).",
+      "The pop-up serves 150K sessions/mo and produces 444 coded orders ($119,431 net sales). Paid is " +
+      "another 750K sessions/mo — a 5x larger pool — and sees none of it. Two streams: direct code sales " +
+      "(~$345K) scale with paid's converting sessions; email/SMS capture (~$432K) scales with all 750K.",
     risk:
-      "The wk2 spike (29.9 orders/day) decayed to 12.8 — a trailing-30-day view contains that spike and " +
-      "reads ~56% hot vs. steady state. Base case uses steady state. Separately, 35% of code orders are " +
-      "assumed non-incremental: that discount is pure margin loss.",
+      "Paid converts at 0.320% vs non-paid's 2.366% — 7.4x worse — so the direct-sales half only scales " +
+      "0.68x despite the 5x pool. And paid is colder and more price-sensitive: if code redemption runs " +
+      "above non-paid's 12.5%, the margin given to buyers who'd have converted anyway climbs from $59K/yr " +
+      "to $141K/yr at 30% redemption. The capture half is the upside and the least verified number here.",
     needs: [
-      "What changed in week 2 (Aug 24–30)? Wider rollout, or an email push? Decides whether 29.9/day is repeatable or a one-off",
-      "Scope of the 1M clicks/mo — Shopify only, or CC funnels too?",
-      "Current pop-up capture rate % and sessions served",
-      "Klaviyo list size + revenue per subscriber per year",
+      "Klaviyo list size + revenue per subscriber per year — sets the $4.00/sub in the capture stream, the single biggest swing factor",
+      "Expected pop-up capture rate on cold paid traffic (base assumes 2.0% vs the ~3% typical of warm traffic)",
+      "Overlap between paid visitors and the existing list (base assumes 40%)",
+      "Exclusion rules: suppress for existing subscribers and mid-funnel returning buyers, or redemption runs hot",
     ],
   },
   {
@@ -225,7 +226,7 @@ export const NOTES: string[] = [
   "**The 2.9% payment fee is an assumption, not your data.** The ORDERS dataset has no gateway column, so your real blended rate and current Shop Pay share are unverified. Confirm both in Shopify admin — they move the SPI case more than any other input.",
   "**Source disagreement, Shop Campaigns.** Your Shopify screenshot reports 1,199 orders / $364,698 since Mar 17. Domo channel `3890849` reports 1,431 orders / $426,315 for the same window — a 19% gap explained by non-campaign Shop App orders inside the Domo channel. Use Shopify for campaign performance, Domo for total Shop App.",
   "**Love Your Game — reconciled.** On the same 30-day window Domo and Shopify agree within 3%: 550 vs 565 orders, $25,864 vs $26,521 discount, $159,444 vs $156,796 sales. Both sources are good here.",
-  "**PG0019 spiked, then decayed — use steady state.** Launched 2026-08-10. Week 2 (Aug 24–30) ran 29.9 orders/day, then 20.3 → 13.6 → 12.4, settling at 12.8 orders/day ($3,771/day) over the last 14 full days. A trailing-30-day view contains that spike and reads ~56% hot.",
+  "**PG0019 — decayed to steady state, now measured against sessions.** Launched 2026-08-10; week 2 (Aug 24\u201330) spiked to 29.9 orders/day then settled at ~14.6/day. Current 30 days: Shopify reports 444 coded orders / $142,443 gross / $119,431 net sales; Domo reports 439 orders \u2014 agreement within 1.1%. The pop-up serves 150K sessions/mo; paid is a further 750K it never sees.",
   "**Do not sum blindly.** Lead capture and owned-channel expansion overlap heavily — lead capture feeds the list that owned channel monetises. Counting both at base case double-counts roughly $150K. Sub-$50 threshold work also partly overlaps with SPI eligibility.",
   "**Cannibalization is the shared risk.** SPI (payment mix shift), Shop Campaigns lapsed audiences (paying for buyers email would win free), and lead capture (discounting buyers who would convert anyway) all fail the same way: volume that looks incremental but isn't. Every base case already discounts for it.",
 ];
