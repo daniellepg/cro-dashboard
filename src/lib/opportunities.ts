@@ -38,36 +38,41 @@ export const BASELINE: OpportunityBaseline = {
   orders: 71_382,
   window: "TTM 2025-09-21 → 2026-09-21",
   source: "Domo · PGZ | Shopify | ORDERS (b19daeb1)",
-  builtOn: "2026-09-29 (rev 2)",
+  builtOn: "2026-10-28 (rev 3 · lead capture on Oct MTD)",
 };
 
 export const OPPORTUNITIES: Opportunity[] = [
   {
     id: "LEADCAP",
-    name: 'Lead capture — expand "Love Your Game" pop-up to paid',
+    name: 'Lead capture — expand "Love Your Game" + quiz codes to paid',
     owner: "CRO + Paid Media",
     confidence: "low",
-    confidenceLabel: "Low — conditional on redemption holding",
+    confidenceLabel: "Low — conditional on paid redemption rising",
     effort: "Low",
     investment: 12_000,
     investmentNote: "~40h build/QA + exclusion rules + Klaviyo flows",
-    cp: { low: 1_076_266, base: 2_030_177, high: 2_984_088 },
-    breakeven: "~100 coded orders/mo — 7% of the modelled redemption",
+    cp: { low: 194_505, base: 469_813, high: 1_350_796 },
+    breakeven: "~84 incremental coded orders/yr (~7/mo)",
     why:
-      "Measured on non-paid: 150,000 sessions produce ~2,500 leads (1.6% capture) and ~12% of leads " +
-      "redeem the code. Applied to the 750,000 paid sessions the pop-up never sees: 12,000 leads/mo and " +
-      "1,440 coded orders/mo (17,280/yr) at $268.99 net sales each — $4.65M net sales. Base case takes " +
-      "75% of that as incremental, which the customer mix supports: 691 of 695 coded buyers to date are " +
-      "FIRST-TIME customers, so this acquires rather than discounting the repeat base.",
+      "Sized on October MTD actuals (Oct 1–27, Domo) for both lead-capture codes, LOVEYOURGAME15 + " +
+      "PGQUIZ15: 320 coded orders, $100,610 net sales, $66,784 contribution after each order's own COGS " +
+      "and 2.9% fees — $208.70 contribution and $53.44 discount per order. Paid already redeems: 184 coded " +
+      "orders carry a cpc/paid UTM against 2,845 Media Buys orders, a 6.47% paid redemption rate. The row " +
+      "values only orders ABOVE that rate. Annualized paid volume is 38,460 orders. Each incremental order " +
+      "is worth $143.16: 75% treated as new buyers at full contribution, 25% as buyers who'd have converted " +
+      "anyway, costing the discount. Low / base / high = paid redemption rising to 10% / 15% / 31% " +
+      "(+1,359 / +3,282 / +9,435 orders/yr). 31% is the rate the earlier lead-funnel math required.",
     risk:
-      "Size of the claim is the risk. 1,440 coded orders on top of today's 3,167 paid orders moves paid " +
-      "CVR from 0.422% to 0.614% — a +45% lift — with 31% of all paid orders carrying the code, and adds " +
-      "+28% to company top line from one pop-up placement. Nothing here is arithmetically wrong; it is " +
-      "simply a large claim resting on one untested number. Redemption is assumed to travel from warm " +
-      "non-paid traffic to cold paid traffic unchanged.",
+      "Paid redemption is moving the wrong way: 7.9% in Sep 1–27, 6.47% in Oct 1–27. LOVEYOURGAME15 fell " +
+      "from 383 to 243 orders while PGQUIZ15 rose from 76 to 77, so the pop-up is fading and the quiz " +
+      "code is holding. The 15% base case is a judgment call, not a measurement. October gross margin also " +
+      "jumped ~5 pts across every channel, which may be a COGS data artifact; at September's per-order " +
+      "economics the base case is ~$372K, not $470K.",
     needs: [
-      "RUN THE TEST: pop-up on one paid campaign for two weeks. That measures the real paid redemption rate and replaces the only assumption holding up this number — costs ~$0 and settles a $1.9M range",
-      "Does the pop-up already fire on paid? 244 of 434 coded orders book to Media Buys today — if some of this is already happening, the increment is smaller",
+      "RUN THE TEST: pop-up on one paid campaign for two weeks. That measures the real paid redemption rate and replaces the 15% base-case judgment",
+      "Check the pop-up's Klaviyo targeting: 58% of coded orders already carry a paid UTM. Retargeting returns, or does the pop-up already render on paid landing pages?",
+      "Why LOVEYOURGAME15 fell 37% Sep → Oct: targeting, placement, or traffic mix change",
+      "Confirm October COGS with the data team before quoting the base case",
       "Exclusion rules for existing subscribers and mid-funnel returning buyers, so redemption does not run hot on buyers already converting",
       "Klaviyo revenue per subscriber per year — downstream value on 144,000 leads/yr is NOT in this number",
     ],
@@ -229,8 +234,8 @@ export const NOTES: string[] = [
   "**The 2.9% payment fee is an assumption, not your data.** The ORDERS dataset has no gateway column, so your real blended rate and current Shop Pay share are unverified. Confirm both in Shopify admin — they move the SPI case more than any other input.",
   "**Source disagreement, Shop Campaigns.** Your Shopify screenshot reports 1,199 orders / $364,698 since Mar 17. Domo channel `3890849` reports 1,431 orders / $426,315 for the same window — a 19% gap explained by non-campaign Shop App orders inside the Domo channel. Use Shopify for campaign performance, Domo for total Shop App.",
   "**Love Your Game — reconciled.** On the same 30-day window Domo and Shopify agree within 3%: 550 vs 565 orders, $25,864 vs $26,521 discount, $159,444 vs $156,796 sales. Both sources are good here.",
-  "**PG0019 \u2014 measured on sessions and leads.** Launched 2026-08-10; week 2 spiked to 29.9 orders/day then settled at ~14.6/day. Last 30 days: 150,000 sessions \u2192 2,560 leads (1.707%) \u2192 444 coded orders (17.34% of leads), $119,431 net sales. Shopify 444 vs Domo 439 \u2014 agreement within 1.1%. Since launch, 691 of 695 coded orders are first-time customers.",
-  "**Do not sum blindly \u2014 and lead capture now dominates.** At $2.03M it is 73% of the sized total, so the board total is really one bet plus rounding. It also overlaps heavily with owned-channel expansion, which monetises the same list; counting both at base case double-counts materially. Sub-$50 threshold work partly overlaps with SPI eligibility.",
+  "**Lead capture \u2014 rev 3, October MTD, both codes.** LOVEYOURGAME15 (PG0019 pop-up, launched 2026-08-10) and PGQUIZ15 (first order 2026-08-12). Oct 1\u201327: 243 + 77 = 320 coded orders, $100,610 net sales, $66,784 contribution; 184 (58%) carry a paid UTM. Sep 1\u201327 was 383 + 76 = 459 orders, $76,685 contribution. Since launch: 1,149 orders, $327,702 net sales, $203,688 contribution. No order used both codes.",
+  "**Do not sum blindly.** Lead capture is 38% of the sized total at base case. It overlaps heavily with owned-channel expansion, which monetises the same list; counting both at base case double-counts materially. Sub-$50 threshold work partly overlaps with SPI eligibility.",
   "**Cannibalization is the shared risk.** SPI (payment mix shift), Shop Campaigns lapsed audiences (paying for buyers email would win free), and lead capture (discounting buyers who would convert anyway) all fail the same way: volume that looks incremental but isn't. Every base case already discounts for it.",
 ];
 
