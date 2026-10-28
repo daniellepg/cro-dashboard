@@ -67,15 +67,37 @@ export const MTD = {
     aov: 255.08,
     aovWithout: 250.19,
     aovLiftPct: 1.96, // as reported; recomputing from the rounded AOVs gives 1.95
+    contribution: 29_217.07, // Danielle's definition: Rebuy contribution = Rebuy sales
     storeSales: 1_521_824.09,
     storeOrders: 5_966,
   },
+  /** Win scorecard PG0056 (Intelligems, RS1 PDP). Monthly projection, not realized October revenue. */
+  tests: [
+    {
+      id: "PG0056",
+      name: "RS1 Putter — Back In Stock urgency",
+      platform: "Intelligems (Shopify) · RS1 PDP",
+      window: "Test 9/29 – 10/9 · Win — Implement",
+      cvr: "1.76% → 2.11% (+19.7%)",
+      rpv: "$7.24 → $8.77 (+21.1%)",
+      incrementalOrdersMo: 494,
+      grossMo: { low: 61_000, base: 203_000, high: 358_000 },
+      // gross → net 0.944 (RS1 Oct net/gross) × (69.7% RS1 Sep gross margin − 2.9% fees)
+      contributionMo: { low: 38_467, base: 128_012, high: 225_755 },
+    },
+  ],
+  testsCaveat:
+    "**PG0056 is a monthly projection from the scorecard, not October revenue.** Scorecard value is gross revenue " +
+    "(141K visitors/mo × +0.35pt CVR × $411 AOV, inventory-dependent). Contribution converts it with RS1's " +
+    "net/gross ratio (0.944) and **September's** RS1 gross margin (69.7%) less 2.9% fees, because October COGS is " +
+    "unverified; at October's 74.0% it would be ~$136K/mo. Realized October impact depends on the rollout date.",
   caveat:
     "**Code contribution** = net sales − each order's own COGS − 2.9% payment fees (assumed). It counts every " +
     "coded order, including buyers who'd have purchased without the code. October COGS is unverified store-wide " +
     "(margin jumped ~5 pts), so treat code contribution as a few thousand high until the data team confirms. " +
     "**Rebuy figures come from the Rebuy app, not Domo**; its store totals ($1,521,824 / 5,966 orders) don't match " +
-    "Domo's, so don't add Rebuy to the code numbers.",
+    "Domo's, so don't add Rebuy to the code numbers. **Rebuy contribution = Rebuy sales** (your definition), " +
+    "so unlike the codes it is not net of COGS or fees.",
 };
 
 export const OPPORTUNITIES: Opportunity[] = [

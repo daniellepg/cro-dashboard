@@ -313,7 +313,12 @@ export default function OpportunitiesPage() {
         </div>
         <div className="text-[11px] text-[#5a6478] mt-2">{MTD.codesSource}</div>
         <div className="text-[10px] tracking-[0.18em] text-[#8b95a7] uppercase font-semibold mt-5 mb-2">Rebuy</div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+          <Stat
+            label="Rebuy Contribution"
+            value={usd(MTD.rebuy.contribution)}
+            note="= Rebuy sales (your definition)"
+          />
           <Stat
             label="Rebuy Sales"
             value={usd(MTD.rebuy.sales)}
@@ -330,6 +335,30 @@ export default function OpportunitiesPage() {
             value={`+${MTD.rebuy.aovLiftPct.toFixed(2)}%`}
             note={MTD.rebuy.source}
           />
+        </div>
+        <div className="text-[10px] tracking-[0.18em] text-[#8b95a7] uppercase font-semibold mt-5 mb-2">Tests shipped</div>
+        {MTD.tests.map((t) => (
+          <div key={t.id} className="rounded-lg border border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent p-4 grid sm:grid-cols-4 gap-4">
+            <div className="sm:col-span-2">
+              <div className="text-[10px] tracking-[0.18em] text-[#8b95a7] uppercase font-semibold">{t.id} · {t.platform}</div>
+              <div className="text-[15px] font-semibold mt-1">{t.name}</div>
+              <div className="text-[12px] text-[#8b95a7] mt-1">{t.window}</div>
+              <div className="text-[12px] text-[#cbd2dd] mt-2">CVR {t.cvr} · RPV {t.rpv}</div>
+            </div>
+            <div>
+              <div className="text-[10px] tracking-[0.18em] text-[#8b95a7] uppercase font-semibold">Est. gross / mo</div>
+              <div className="text-2xl font-semibold tracking-tight mt-1.5 tabular-nums">{usd(t.grossMo.base)}</div>
+              <div className="text-[11px] text-[#5a6478] mt-0.5">{usd(t.grossMo.low)} → {usd(t.grossMo.high)} · ~{t.incrementalOrdersMo} orders/mo</div>
+            </div>
+            <div>
+              <div className="text-[10px] tracking-[0.18em] text-[#8b95a7] uppercase font-semibold">Est. contribution / mo</div>
+              <div className="text-2xl font-semibold tracking-tight mt-1.5 tabular-nums">{usd(t.contributionMo.base)}</div>
+              <div className="text-[11px] text-[#5a6478] mt-0.5">{usd(t.contributionMo.low)} → {usd(t.contributionMo.high)}</div>
+            </div>
+          </div>
+        ))}
+        <div className="mt-3 rounded-lg border border-amber-400/25 bg-amber-400/[0.05] px-4 py-3 text-[13px] leading-relaxed text-[#cbd2dd]">
+          <Note text={MTD.testsCaveat} />
         </div>
         <div className="mt-3 rounded-lg border border-amber-400/25 bg-amber-400/[0.05] px-4 py-3 text-[13px] leading-relaxed text-[#cbd2dd]">
           <Note text={MTD.caveat} />
