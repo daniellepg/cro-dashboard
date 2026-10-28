@@ -41,6 +41,43 @@ export const BASELINE: OpportunityBaseline = {
   builtOn: "2026-10-28 (rev 3 · lead capture on Oct MTD)",
 };
 
+export type CodeMtd = {
+  code: string;
+  orders: number;
+  netSales: number;
+  contribution: number;
+  discount: number;
+  paidOrders: number;
+  priorContribution: number;
+};
+
+/** October MTD for the promo codes we created + Rebuy. */
+export const MTD = {
+  window: "Oct 1–27 · vs Sep 1–27",
+  codesSource: "Domo · PGZ | Shopify | ORDERS (b19daeb1), created_at (ET), test orders excluded",
+  codes: [
+    { code: "LOVEYOURGAME15", orders: 243, netSales: 77_415, contribution: 51_340, discount: 13_216, paidOrders: 146, priorContribution: 64_783 },
+    { code: "PGQUIZ15", orders: 77, netSales: 23_195, contribution: 15_445, discount: 3_884, paidOrders: 38, priorContribution: 11_902 },
+  ] as CodeMtd[],
+  /** Rebuy app's own report. Domo has no tag/app marker for Rebuy-attributed orders. */
+  rebuy: {
+    source: "Rebuy app report · 2026-10-01 → 2026-10-27",
+    sales: 29_217.07,
+    orders: 327,
+    aov: 255.08,
+    aovWithout: 250.19,
+    aovLiftPct: 1.96, // as reported; recomputing from the rounded AOVs gives 1.95
+    storeSales: 1_521_824.09,
+    storeOrders: 5_966,
+  },
+  caveat:
+    "**Code contribution** = net sales − each order's own COGS − 2.9% payment fees (assumed). It counts every " +
+    "coded order, including buyers who'd have purchased without the code. October COGS is unverified store-wide " +
+    "(margin jumped ~5 pts), so treat code contribution as a few thousand high until the data team confirms. " +
+    "**Rebuy figures come from the Rebuy app, not Domo**; its store totals ($1,521,824 / 5,966 orders) don't match " +
+    "Domo's, so don't add Rebuy to the code numbers.",
+};
+
 export const OPPORTUNITIES: Opportunity[] = [
   {
     id: "LEADCAP",

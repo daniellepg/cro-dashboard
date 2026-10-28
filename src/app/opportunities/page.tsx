@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
   BASELINE,
+  MTD,
   OPPORTUNITIES,
   NOTES,
   SEQUENCING,
@@ -254,6 +255,84 @@ export default function OpportunitiesPage() {
             note={`${BASELINE.orders.toLocaleString()} orders`}
           />
           <Stat label="Opportunities" value="9" note="8 sized · 1 blocked" />
+        </div>
+      </section>
+
+      <section className="mb-8">
+        <SectionHeader label={`October MTD · ${MTD.window}`} />
+        <div className="text-[10px] tracking-[0.18em] text-[#8b95a7] uppercase font-semibold mb-2">Promo codes</div>
+        <div className="rounded-lg border border-white/[0.08] overflow-x-auto">
+          <table className="w-full text-[13px] tabular-nums">
+            <thead>
+              <tr className="text-[10px] tracking-[0.14em] uppercase text-[#8b95a7] text-right">
+                <th className="text-left font-semibold px-4 py-2.5">Code</th>
+                <th className="font-semibold px-4 py-2.5">Orders</th>
+                <th className="font-semibold px-4 py-2.5">Net sales</th>
+                <th className="font-semibold px-4 py-2.5">Discount</th>
+                <th className="font-semibold px-4 py-2.5">Contribution</th>
+                <th className="font-semibold px-4 py-2.5">vs Sep</th>
+                <th className="font-semibold px-4 py-2.5">From paid</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ...MTD.codes,
+                MTD.codes.reduce(
+                  (t, c) => ({
+                    code: "Total",
+                    orders: t.orders + c.orders,
+                    netSales: t.netSales + c.netSales,
+                    contribution: t.contribution + c.contribution,
+                    discount: t.discount + c.discount,
+                    paidOrders: t.paidOrders + c.paidOrders,
+                    priorContribution: t.priorContribution + c.priorContribution,
+                  }),
+                  { code: "Total", orders: 0, netSales: 0, contribution: 0, discount: 0, paidOrders: 0, priorContribution: 0 }
+                ),
+              ].map((c) => {
+                const pct = ((c.contribution - c.priorContribution) / c.priorContribution) * 100;
+                const total = c.code === "Total";
+                return (
+                  <tr key={c.code} className={`border-t border-white/[0.06] text-right ${total ? "font-semibold text-[#f4f5f7]" : "text-[#cbd2dd]"}`}>
+                    <td className="text-left px-4 py-2.5">{c.code}</td>
+                    <td className="px-4 py-2.5">{c.orders.toLocaleString()}</td>
+                    <td className="px-4 py-2.5">{usd(c.netSales)}</td>
+                    <td className="px-4 py-2.5">{usd(c.discount)}</td>
+                    <td className="px-4 py-2.5">{usd(c.contribution)}</td>
+                    <td className={`px-4 py-2.5 ${pct >= 0 ? "text-emerald-400" : "text-[#FD3300]"}`}>
+                      {pct >= 0 ? "+" : ""}{pct.toFixed(1)}%
+                    </td>
+                    <td className="px-4 py-2.5">
+                      {c.paidOrders} ({Math.round((c.paidOrders / c.orders) * 100)}%)
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <div className="text-[11px] text-[#5a6478] mt-2">{MTD.codesSource}</div>
+        <div className="text-[10px] tracking-[0.18em] text-[#8b95a7] uppercase font-semibold mt-5 mb-2">Rebuy</div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <Stat
+            label="Rebuy Sales"
+            value={usd(MTD.rebuy.sales)}
+            note={`${((MTD.rebuy.sales / MTD.rebuy.storeSales) * 100).toFixed(2)}% of ${usd(MTD.rebuy.storeSales)} (Rebuy-reported)`}
+          />
+          <Stat
+            label="Rebuy Orders"
+            value={MTD.rebuy.orders.toLocaleString()}
+            note={`${((MTD.rebuy.orders / MTD.rebuy.storeOrders) * 100).toFixed(2)}% of ${MTD.rebuy.storeOrders.toLocaleString()} orders`}
+          />
+          <Stat label="Rebuy AOV" value={`$${MTD.rebuy.aov.toFixed(2)}`} note={`without Rebuy: $${MTD.rebuy.aovWithout.toFixed(2)}`} />
+          <Stat
+            label="Rebuy AOV Lift"
+            value={`+${MTD.rebuy.aovLiftPct.toFixed(2)}%`}
+            note={MTD.rebuy.source}
+          />
+        </div>
+        <div className="mt-3 rounded-lg border border-amber-400/25 bg-amber-400/[0.05] px-4 py-3 text-[13px] leading-relaxed text-[#cbd2dd]">
+          <Note text={MTD.caveat} />
         </div>
       </section>
 
