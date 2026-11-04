@@ -11,9 +11,13 @@ type ByFunnel = Record<FunnelCode | "OTHER", ClickUpTask[]>;
 const STATUS_COLORS: Record<string, string> = {
   backlog:      "bg-white/[0.06] text-[#8b95a7]",
   intake:       "bg-violet-500/15 text-violet-300",
+  initialized:  "bg-white/[0.10] text-[#f4f5f7]",
+  creative:     "bg-amber-500/15 text-amber-300",
+  copy:         "bg-amber-500/15 text-amber-300",
   "cro dev":    "bg-[#FD3300]/15 text-[#FD3300]",
   "dev sprint": "bg-[#FD3300]/15 text-[#FD3300]",
   qa:           "bg-sky-500/15 text-sky-300",
+  "ready to launch": "bg-emerald-500/15 text-emerald-300",
   analytics:    "bg-emerald-500/15 text-emerald-300",
 };
 
