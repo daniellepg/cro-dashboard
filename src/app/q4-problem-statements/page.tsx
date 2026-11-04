@@ -117,7 +117,7 @@ export default function Q3ProblemStatementsPage() {
         </div>
         <div className="flex items-end justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-semibold tracking-tight">Q3 Problem Statements</h1>
+            <h1 className="text-3xl font-semibold tracking-tight">Q4 Problem Statements</h1>
             <p className="text-sm text-[#8b95a7] mt-1.5">
               One problem statement per funnel — the foundation for Q3 test planning.
             </p>

@@ -260,6 +260,40 @@ export default function OpportunitiesPage() {
 
       <section className="mb-8">
         <SectionHeader label={`October MTD · ${MTD.window}`} />
+        {(() => {
+          const actuals =
+            MTD.codes.reduce((t, c) => t + c.contribution, 0) + MTD.rebuy.contribution;
+          const rs1 = MTD.tests.reduce((t, x) => t + x.contributionMo.base, 0);
+          const rs1Lo = MTD.tests.reduce((t, x) => t + x.contributionMo.low, 0);
+          const rs1Hi = MTD.tests.reduce((t, x) => t + x.contributionMo.high, 0);
+          const rows = [
+            ...MTD.codes.map((c) => ({ label: c.code, value: c.contribution })),
+            { label: "Rebuy", value: MTD.rebuy.contribution },
+            ...MTD.tests.map((t) => ({ label: `${t.id} RS1 (est. / mo)`, value: t.contributionMo.base })),
+          ];
+          return (
+            <div className="rounded-lg border border-[#FD3300]/25 bg-gradient-to-b from-[#FD3300]/[0.07] to-transparent p-6 mb-5">
+              <div className="text-[10px] tracking-[0.18em] text-[#8b95a7] uppercase font-semibold">CRO Contribution</div>
+              <div className="text-4xl font-semibold tracking-tight mt-2 tabular-nums text-[#FD3300]">
+                {usd(actuals + rs1)}
+              </div>
+              <div className="text-[12px] text-[#8b95a7] mt-1">
+                range {usd(actuals + rs1Lo)} → {usd(actuals + rs1Hi)} · ~{usd(actuals + (rs1 * 27) / 31)} with RS1 prorated to 27 days
+              </div>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
+                {rows.map((r) => (
+                  <div key={r.label}>
+                    <div className="text-[10px] tracking-[0.14em] text-[#8b95a7] uppercase font-semibold">{r.label}</div>
+                    <div className="text-lg font-semibold tabular-nums mt-0.5">{usd(r.value)}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="text-[11px] text-[#5a6478] mt-4">
+                Codes and RS1 are net of COGS and fees; Rebuy is sales. RS1 is a monthly projection. An order can appear in more than one row.
+              </div>
+            </div>
+          );
+        })()}
         <div className="text-[10px] tracking-[0.18em] text-[#8b95a7] uppercase font-semibold mb-2">Promo codes</div>
         <div className="rounded-lg border border-white/[0.08] overflow-x-auto">
           <table className="w-full text-[13px] tabular-nums">

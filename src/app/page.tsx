@@ -88,14 +88,11 @@ export default async function CoverPage() {
     { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board", note: "Work in progress" },
   ];
 
-  const reporting: Tile[] = [
-    { href: "/mbr", title: "Monthly Business Review", subtitle: "Paid media · funnels · experimentation" },
-  ];
-
   const strategy: Tile[] = [
+    { href: "/q4-wins", title: "Q4 Wins", subtitle: "Lead capture · quiz · testing · Re-Buy revenue" },
     { href: "/opportunities", title: "Opportunity Analysis", subtitle: "Ranked by contribution profit" },
     { href: "/shop-pay-installments", title: "Shop Pay Installments", subtitle: "Decision memo · pros & cons" },
-    { href: "/q3-problem-statements", title: "Q3 Problem Statements", subtitle: "RS1 · SF2 · 357 · PG1 · SSP · Little Legends" },
+    { href: "/q4-problem-statements", title: "Q4 Problem Statements", subtitle: "RS1 · SF2 · 357 · PG1 · SSP · Little Legends" },
   ];
 
   return (
@@ -138,17 +135,7 @@ export default async function CoverPage() {
         </div>
       </section>
 
-      {/* Reporting section */}
-      <section className="mb-10">
-        <SectionHeader label="Reporting" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {reporting.map((t) => (
-            <TileCard key={t.href} t={t} />
-          ))}
-        </div>
-      </section>
-
-      {/* Q3 Strategy section */}
+      {/* Q4 Strategy section */}
       <section>
         <SectionHeader label="Strategy" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
