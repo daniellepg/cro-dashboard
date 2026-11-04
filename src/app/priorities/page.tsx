@@ -37,7 +37,7 @@ export default async function PrioritiesPage() {
         </div>
         <h1 className="text-3xl font-semibold tracking-tight">Testing Priorities</h1>
         <p className="text-sm text-[#8b95a7] mt-1.5">
-          In progress · {PIPELINE_STATUSES.join(" · ")} · live from ClickUp · excludes intake, backlog, blocked &amp; live
+          {`In progress · ${PIPELINE_STATUSES.join(" · ")} · live from ClickUp · excludes intake, backlog, blocked & live`}
         </p>
       </div>
       {error ? (
