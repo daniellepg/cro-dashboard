@@ -13,6 +13,7 @@ type Tile = {
   note?: string;
   stat?: number | null;
   external?: boolean;
+  hideExternalLabel?: boolean; // still opens in a new tab, just no "↗ External" tag
 };
 
 function TileCard({ t }: { t: Tile }) {
@@ -28,7 +29,7 @@ function TileCard({ t }: { t: Tile }) {
             </span>
           )}
         </div>
-        {t.external && (
+        {t.external && !t.hideExternalLabel && (
           <span className="text-[10px] tracking-wider text-[#8b95a7] uppercase">↗ External</span>
         )}
       </div>
@@ -89,7 +90,7 @@ export default async function CoverPage() {
 
   const data: Tile[] = [
     { href: "/shopify-funnels", title: "Shopify Data", subtitle: "Funnel drop-off · 357 · SF2 · RS1" },
-    { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "CoC Data", subtitle: "357 & WPSS", note: "Under construction", external: true },
+    { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "CoC Data", subtitle: "357 & WPSS", note: "Under construction", external: true, hideExternalLabel: true },
   ];
 
   const strategy: Tile[] = [
