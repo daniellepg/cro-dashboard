@@ -38,6 +38,9 @@ function sum(rows: FunnelRow[], paths: string[], from: string, to: string, devic
 const pct = (n: number, d: number) => (d > 0 ? n / d : null);
 const fmtPct = (v: number | null, digits = 2) => (v === null ? "—" : `${(v * 100).toFixed(digits)}%`);
 const fmtNum = (v: number) => v.toLocaleString();
+const fmtDay = (iso: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+const fmtRange = (a: string, b: string) => `${fmtDay(a)} – ${fmtDay(b)}`;
 
 // Relative change vs prior period, e.g. +12.3%
 function Delta({ cur, prev, isRate }: { cur: number | null; prev: number | null; isRate?: boolean }) {
@@ -79,12 +82,12 @@ function Toggle<T extends string>({
 }
 
 // Horizontal drop-off bars: Sessions → ATC → Checkout → Purchase
-function DropoffBars({ t }: { t: Totals }) {
+function DropoffBars({ t, p }: { t: Totals; p: Totals | null }) {
   const steps = [
-    { label: "Sessions", v: t.sessions },
-    { label: "Added to cart", v: t.atc },
-    { label: "Reached checkout", v: t.checkout },
-    { label: "Purchased", v: t.purchases },
+    { label: "Sessions", v: t.sessions, pv: p?.sessions ?? null },
+    { label: "Added to cart", v: t.atc, pv: p?.atc ?? null },
+    { label: "Reached checkout", v: t.checkout, pv: p?.checkout ?? null },
+    { label: "Purchased", v: t.purchases, pv: p?.purchases ?? null },
   ];
   const max = Math.max(t.sessions, 1);
   return (
@@ -93,7 +96,7 @@ function DropoffBars({ t }: { t: Totals }) {
         const prev = i > 0 ? steps[i - 1].v : null;
         const stepRate = prev !== null ? pct(s.v, prev) : null;
         return (
-          <div key={s.label} className="grid grid-cols-[120px_1fr_150px] items-center gap-3 text-xs">
+          <div key={s.label} className="grid grid-cols-[120px_1fr_230px] items-center gap-3 text-xs">
             <div className="text-[#8b95a7]">{s.label}</div>
             <div className="h-5 rounded bg-white/[0.04] overflow-hidden">
               <div
@@ -103,6 +106,11 @@ function DropoffBars({ t }: { t: Totals }) {
             </div>
             <div className="tabular-nums text-right">
               <span className="font-semibold">{fmtNum(s.v)}</span>
+              {s.pv !== null && (
+                <span className="ml-1.5 text-[10px]" title={`Previous period: ${fmtNum(s.pv)}`}>
+                  <Delta cur={s.v} prev={s.pv} />
+                </span>
+              )}
               {stepRate !== null && (
                 <span className="text-[#5a6478] ml-2" title="Share of the previous step that made it here">
                   {fmtPct(stepRate, 1)} · drop {fmtPct(1 - (stepRate ?? 0), 1)}
@@ -347,8 +355,19 @@ export function ShopifyFunnelBoard({
           <span className={pulling ? "animate-spin inline-block" : "inline-block"}>↻</span>
           {pulling ? "Updating…" : "Update data"}
         </button>
-        <div className="text-[11px] text-[#5a6478]">
-          {hasPrior ? `▲▼ vs ${pFrom} – ${pTo}` : "No prior period loaded for comparison"}
+        <div
+          className={`rounded-md border px-3 py-1.5 text-[11px] ${
+            hasPrior ? "border-white/10 bg-white/[0.03] text-[#f4f5f7]" : "border-amber-400/30 text-amber-300"
+          }`}
+        >
+          {hasPrior ? (
+            <>
+              <span className="text-[#8b95a7] uppercase tracking-[0.12em] font-semibold mr-1.5">vs previous period</span>
+              {fmtRange(pFrom, pTo)}
+            </>
+          ) : (
+            "Previous period not loaded. Click Update data."
+          )}
         </div>
       </div>
 
@@ -366,6 +385,7 @@ export function ShopifyFunnelBoard({
       <div className="space-y-6">
         {cards.map(({ f, paths, lines }) => {
           const t = sum(rows, paths, from, to, device);
+          const pt = hasPrior ? sum(rows, paths, pFrom, pTo, device) : null;
           return (
             <section
               key={f.code}
@@ -379,9 +399,15 @@ export function ShopifyFunnelBoard({
                 <div className="text-right">
                   <div className="text-[10px] tracking-[0.18em] text-[#8b95a7] uppercase font-semibold">CVR</div>
                   <div className="text-2xl font-semibold tabular-nums">{fmtPct(pct(t.purchases, t.sessions))}</div>
+                  {pt && (
+                    <div className="text-[11px] text-[#8b95a7] tabular-nums">
+                      prev {fmtPct(pct(pt.purchases, pt.sessions))}{" "}
+                      <Delta cur={pct(t.purchases, t.sessions)} prev={pct(pt.purchases, pt.sessions)} isRate />
+                    </div>
+                  )}
                 </div>
               </div>
-              <DropoffBars t={t} />
+              <DropoffBars t={t} p={pt} />
               <div className="mt-5">
                 <MetricsTable
                   lines={lines}
