@@ -9,6 +9,9 @@ export function RefreshButton({ fetchedAt }: { fetchedAt: string }) {
     hour: "numeric",
     minute: "2-digit",
     second: "2-digit",
+    // Pin to Eastern so the server-rendered time (UTC on Vercel) matches the team's clock
+    timeZone: "America/New_York",
+    timeZoneName: "short",
   });
 
   return (
