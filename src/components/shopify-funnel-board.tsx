@@ -1,8 +1,7 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useMemo, useState } from "react";
 import type { FunnelDef, FunnelRow } from "@/lib/shopify-funnels";
-import { pullShopifyRange } from "@/app/actions/shopify";
 
 type DeviceFilter = "all" | "desktop" | "mobile";
 
@@ -218,62 +217,39 @@ const PRESETS = [
   { days: 90, label: "90D" },
 ] as const;
 
-function yesterdayEastern() {
-  const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" }); // YYYY-MM-DD
-  return addDays(today, -1);
+function fmtUpdated(iso: string) {
+  return new Date(iso).toLocaleString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "America/New_York",
+    timeZoneName: "short",
+  });
 }
 
 export function ShopifyFunnelBoard({
   funnels,
-  rows: initialRows,
-  firstDate: initialFirst,
+  rows,
+  firstDate,
   lastDate,
+  updatedAt,
 }: {
   funnels: FunnelDef[];
   rows: FunnelRow[];
   firstDate: string;
   lastDate: string;
+  updatedAt: string | null; // when the data was last pulled from Shopify (ISO)
 }) {
   const [device, setDevice] = useState<DeviceFilter>("all");
   const [to, setTo] = useState(lastDate);
   const [from, setFrom] = useState(addDays(lastDate, -6));
-  const [rows, setRows] = useState(initialRows);
-  const [firstDate, setFirstDate] = useState(initialFirst);
-  const [loadedLast, setLoadedLast] = useState(lastDate);
-  const [pulling, startPull] = useTransition();
-  const [status, setStatus] = useState<{ kind: "ok" | "error"; text: string } | null>(null);
 
   const span = daysBetween(from, to);
   const pTo = addDays(from, -1);
   const pFrom = addDays(pTo, -(span - 1));
   const hasPrior = pFrom >= firstDate;
-  // Dates can go up to yesterday; anything past the loaded data needs "Update data".
-  const maxDate = yesterdayEastern() > lastDate ? yesterdayEastern() : lastDate;
-
-  function updateData() {
-    setStatus(null);
-    startPull(async () => {
-      // Pull the selected range and the comparison period in one go.
-      const res = await pullShopifyRange(pFrom, to);
-      if (!res.ok) {
-        setStatus({ kind: "error", text: res.error });
-        return;
-      }
-      // Replace whatever we had for those dates with Shopify's fresh numbers.
-      setRows((old) => [...old.filter((r) => r.date < pFrom || r.date > to), ...res.rows]);
-      if (pFrom < firstDate) setFirstDate(pFrom);
-      if (to > loadedLast) setLoadedLast(to);
-      const at = new Date(res.pulledAt).toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        timeZone: "America/New_York",
-        timeZoneName: "short",
-      });
-      setStatus({ kind: "ok", text: `Pulled live from Shopify at ${at} (${from} – ${to} + comparison period).` });
-    });
-  }
-
-  const missingDates = to > loadedLast || (!hasPrior && span > 0);
 
   const activePreset = to === lastDate ? PRESETS.find((p) => addDays(lastDate, -(p.days - 1)) === from)?.days : undefined;
 
@@ -327,6 +303,7 @@ export function ShopifyFunnelBoard({
           <input
             type="date"
             value={from}
+            min={firstDate}
             max={to}
             onChange={(e) => e.target.value && setFrom(e.target.value)}
             className="bg-white/[0.03] border border-white/[0.08] rounded px-2 py-1.5 text-[#f4f5f7] [color-scheme:dark]"
@@ -336,25 +313,11 @@ export function ShopifyFunnelBoard({
             type="date"
             value={to}
             min={from}
-            max={maxDate}
+            max={lastDate}
             onChange={(e) => e.target.value && setTo(e.target.value)}
             className="bg-white/[0.03] border border-white/[0.08] rounded px-2 py-1.5 text-[#f4f5f7] [color-scheme:dark]"
           />
         </div>
-        <button
-          type="button"
-          onClick={updateData}
-          disabled={pulling}
-          title="Pull the selected dates live from Shopify"
-          className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-[0.12em] transition-colors disabled:opacity-60 disabled:cursor-wait ${
-            missingDates
-              ? "bg-[#FD3300] text-white hover:bg-[#e02d00]"
-              : "border border-white/10 bg-white/[0.03] text-[#f4f5f7] hover:border-[#FD3300]/50 hover:text-[#FD3300]"
-          }`}
-        >
-          <span className={pulling ? "animate-spin inline-block" : "inline-block"}>↻</span>
-          {pulling ? "Updating…" : "Update data"}
-        </button>
         <div
           className={`rounded-md border px-3 py-1.5 text-[11px] ${
             hasPrior ? "border-white/10 bg-white/[0.03] text-[#f4f5f7]" : "border-amber-400/30 text-amber-300"
@@ -366,21 +329,16 @@ export function ShopifyFunnelBoard({
               {fmtRange(pFrom, pTo)}
             </>
           ) : (
-            "Previous period not loaded. Click Update data."
+            `No comparison: data starts ${fmtDay(firstDate)}`
           )}
         </div>
       </div>
 
-      {(status || missingDates) && (
-        <div
-          className={`-mt-3 mb-5 text-[12px] ${
-            status?.kind === "ok" ? "text-emerald-400" : "text-amber-400"
-          }`}
-        >
-          {status?.text ??
-            `Some selected dates aren't loaded yet (data runs ${firstDate} – ${loadedLast}). Click Update data to pull them.`}
-        </div>
-      )}
+      <div className="-mt-3 mb-5 text-[11px] text-[#8b95a7]" suppressHydrationWarning>
+        <span className="uppercase tracking-[0.12em] font-semibold mr-1.5">Last updated</span>
+        {updatedAt ? fmtUpdated(updatedAt) : "—"}
+        <span className="text-[#5a6478]"> · data through {fmtDay(lastDate)} · refreshes weekday mornings</span>
+      </div>
 
       <div className="space-y-6">
         {cards.map(({ f, paths, lines }) => {

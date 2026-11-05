@@ -7,7 +7,9 @@
 //   1. LIVE  — if SHOPIFY_ADMIN_TOKEN is set, run ShopifyQL through the Admin
 //              GraphQL API (needs a custom app with the `read_reports` scope).
 //              The page revalidates daily, so this refreshes itself.
-//   2. SNAPSHOT — src/data/shopify-funnels/daily.json, pulled from Shopify admin.
+//   2. SNAPSHOT — src/data/shopify-funnels/daily.json. A scheduled Claude task
+//              refreshes it weekday mornings from Shopify admin in Chrome;
+//              see scripts/shopify-refresh/RUNBOOK.md.
 //
 // Important: Shopify attributes a session to the page it LANDED on. A session
 // that lands on the SF2 info page and then clicks through to the PDP is counted
@@ -63,6 +65,7 @@ export type FunnelData = {
   source: string;
   firstDate: string;
   lastDate: string;
+  updatedAt: string | null; // when the numbers were pulled from Shopify (ISO)
   note?: string;
 };
 
@@ -157,14 +160,15 @@ export async function fetchShopifyRange(token: string, from: string, to: string,
 }
 
 export async function getShopifyFunnelData(): Promise<FunnelData> {
-  const snap = snapshot as { source: string; firstDate: string; lastDate: string; rows: FunnelRow[] };
+  const snap = snapshot as { source: string; firstDate: string; lastDate: string; pulledAt?: string; rows: FunnelRow[] };
+  const snapUpdated = snap.pulledAt && snap.pulledAt.length > 10 ? snap.pulledAt : null;
   const token = process.env.SHOPIFY_ADMIN_TOKEN;
   if (token) {
     try {
       const rows = (await fetchShopifyRange(token, isoDaysAgo(120), isoDaysAgo(1))).filter((r) => r.date && r.page);
       if (rows.length) {
         const dates = rows.map((r) => r.date).sort();
-        return { rows, live: true, source: snap.source, firstDate: dates[0], lastDate: dates.at(-1)! };
+        return { rows, live: true, source: snap.source, firstDate: dates[0], lastDate: dates.at(-1)!, updatedAt: new Date().toISOString() };
       }
     } catch (e) {
       return {
@@ -173,9 +177,10 @@ export async function getShopifyFunnelData(): Promise<FunnelData> {
         source: snap.source,
         firstDate: snap.firstDate,
         lastDate: snap.lastDate,
+        updatedAt: snapUpdated,
         note: `Live Shopify pull failed, showing snapshot. ${(e as Error).message.slice(0, 200)}`,
       };
     }
   }
-  return { rows: snap.rows, live: false, source: snap.source, firstDate: snap.firstDate, lastDate: snap.lastDate };
+  return { rows: snap.rows, live: false, source: snap.source, firstDate: snap.firstDate, lastDate: snap.lastDate, updatedAt: snapUpdated };
 }

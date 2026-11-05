@@ -26,9 +26,6 @@ export default async function ShopifyFunnelsPage() {
       <div className="rounded-md border border-white/[0.08] bg-white/[0.02] px-4 py-3 mb-6 text-[12px] text-[#8b95a7] space-y-1">
         <div>
           <span className="text-[#f4f5f7] font-semibold">Source:</span> {data.source}.{" "}
-          <span className={data.live ? "text-emerald-400" : "text-amber-400"}>
-            {data.live ? "Live — refreshes daily." : `Snapshot pulled from Shopify admin, data through ${data.lastDate}.`}
-          </span>
         </div>
         <div>
           Sessions are credited to the page they <span className="text-[#f4f5f7]">landed on</span>. The three SF2
@@ -44,6 +41,7 @@ export default async function ShopifyFunnelsPage() {
         rows={data.rows}
         firstDate={data.firstDate}
         lastDate={data.lastDate}
+        updatedAt={data.updatedAt}
       />
     </div>
   );
