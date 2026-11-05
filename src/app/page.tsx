@@ -84,9 +84,9 @@ export default async function CoverPage() {
   ];
 
   const data: Tile[] = [
-    { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "WoW Data by Funnel", subtitle: "Week-over-week · from Domo", note: "Work in progress", external: true },
+    { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "CoC Data", subtitle: "Week-over-week · from Domo", note: "Work in progress", external: true },
+    { href: "/shopify-funnels", title: "Shopify Data", subtitle: "Funnel drop-off · 357 · SF2 · RS1" },
     { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board", note: "Work in progress" },
-    { href: "/shopify-funnels", title: "Shopify Funnel Drop-off", subtitle: "357 · SF2 · RS1 · desktop vs mobile" },
   ];
 
   const strategy: Tile[] = [
