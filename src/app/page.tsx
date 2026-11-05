@@ -89,7 +89,7 @@ export default async function CoverPage() {
 
   const data: Tile[] = [
     { href: "/shopify-funnels", title: "Shopify Data", subtitle: "Funnel drop-off · 357 · SF2 · RS1" },
-    { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "CoC Data", subtitle: "Week-over-week · from Domo", note: "Under construction", external: true },
+    { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "CoC Data", subtitle: "357 & WPSS", note: "Under construction", external: true },
     { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board", note: "Under construction" },
   ];
 

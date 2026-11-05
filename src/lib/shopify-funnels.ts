@@ -87,7 +87,7 @@ function normDevice(v: unknown): Device {
   return s === "desktop" || s === "mobile" || s === "tablet" ? s : "other";
 }
 
-async function runShopifyQL(token: string, ql: string) {
+async function runShopifyQL(token: string, ql: string, fresh = false) {
   const res = await fetch(`https://${SHOP_DOMAIN}/admin/api/${API_VERSION}/graphql.json`, {
     method: "POST",
     headers: { "Content-Type": "application/json", "X-Shopify-Access-Token": token },
@@ -95,7 +95,8 @@ async function runShopifyQL(token: string, ql: string) {
       query: `query($q: String!) { shopifyqlQuery(query: $q) { tableData { columns { name } rows } parseErrors } }`,
       variables: { q: ql },
     }),
-    next: { revalidate: 60 * 60 * 6 }, // 6h cache
+    // Button-triggered pulls skip the cache; page loads reuse it for 6h.
+    ...(fresh ? { cache: "no-store" as const } : { next: { revalidate: 60 * 60 * 6 } }),
   });
   if (!res.ok) throw new Error(`Shopify API ${res.status}: ${await res.text()}`);
   const json = await res.json();
@@ -111,12 +112,20 @@ async function runShopifyQL(token: string, ql: string) {
   );
 }
 
-async function fetchLive(token: string): Promise<FunnelRow[]> {
+function addDaysIso(iso: string, n: number) {
+  const d = new Date(`${iso}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
+// Pull any date range (inclusive) from Shopify. ShopifyQL caps rows per query,
+// so the range is split into 30-day windows (~15 rows/day × 30 = ~450 rows each).
+export async function fetchShopifyRange(token: string, from: string, to: string, fresh = false): Promise<FunnelRow[]> {
   const pathList = ALL_PATHS.map((p) => `'${p}'`).join(", ");
-  // ShopifyQL caps rows per query, so pull in 30-day windows.
   const windows: Array<[string, string]> = [];
-  for (let start = 120; start > 0; start -= 30) {
-    windows.push([isoDaysAgo(start), isoDaysAgo(Math.max(start - 29, 1))]);
+  for (let s = from; s <= to; s = addDaysIso(s, 30)) {
+    const e = addDaysIso(s, 29);
+    windows.push([s, e < to ? e : to]);
   }
   const results = await Promise.all(
     windows.map(([since, until]) =>
@@ -131,6 +140,7 @@ async function fetchLive(token: string): Promise<FunnelRow[]> {
           "ORDER BY day ASC",
           "LIMIT 1000",
         ].join(" "),
+        fresh,
       ),
     ),
   );
@@ -151,7 +161,7 @@ export async function getShopifyFunnelData(): Promise<FunnelData> {
   const token = process.env.SHOPIFY_ADMIN_TOKEN;
   if (token) {
     try {
-      const rows = (await fetchLive(token)).filter((r) => r.date && r.page);
+      const rows = (await fetchShopifyRange(token, isoDaysAgo(120), isoDaysAgo(1))).filter((r) => r.date && r.page);
       if (rows.length) {
         const dates = rows.map((r) => r.date).sort();
         return { rows, live: true, source: snap.source, firstDate: dates[0], lastDate: dates.at(-1)! };
