@@ -22,7 +22,11 @@ function TileCard({ t }: { t: Tile }) {
         <div>
           <div className="text-base font-medium">{t.title}</div>
           <div className="text-xs text-[#8b95a7] mt-0.5">{t.subtitle}</div>
-          {t.note && <div className="text-[10px] text-[#5a6478] mt-1.5 uppercase tracking-widest">⚠ {t.note}</div>}
+          {t.note && (
+            <span className="inline-flex items-center gap-1 mt-2 rounded border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-amber-300">
+              🚧 {t.note}
+            </span>
+          )}
         </div>
         {t.external && (
           <span className="text-[10px] tracking-wider text-[#8b95a7] uppercase">↗ External</span>
@@ -85,8 +89,8 @@ export default async function CoverPage() {
 
   const data: Tile[] = [
     { href: "/shopify-funnels", title: "Shopify Data", subtitle: "Funnel drop-off · 357 · SF2 · RS1" },
-    { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "CoC Data", subtitle: "Week-over-week · from Domo", note: "Work in progress", external: true },
-    { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board", note: "Work in progress" },
+    { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "CoC Data", subtitle: "Week-over-week · from Domo", note: "Under construction", external: true },
+    { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board", note: "Under construction" },
   ];
 
   const strategy: Tile[] = [
