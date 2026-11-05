@@ -23,7 +23,7 @@ function TileCard({ t }: { t: Tile }) {
           <div className="text-base font-medium">{t.title}</div>
           <div className="text-xs text-[#8b95a7] mt-0.5">{t.subtitle}</div>
           {t.note && (
-            <span className="inline-flex items-center gap-1 mt-2 rounded border border-amber-400/40 bg-amber-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-amber-300">
+            <span className="inline-flex items-center gap-1 mt-2 whitespace-nowrap rounded border border-amber-400/40 bg-amber-400/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-amber-300">
               🚧 {t.note}
             </span>
           )}
@@ -83,14 +83,13 @@ export default async function CoverPage() {
       stat: initializedCount,
     },
     { href: "/priorities", title: "Testing Priorities", subtitle: "Backlog by funnel" },
-    { href: "https://pg-domo-analytics-kg.vercel.app/testing/", title: "Scorecards", subtitle: "Per-test readouts", external: true },
+    { href: "https://pg-domo-analytics-kg.vercel.app/testing/", title: "Scorecards", subtitle: "Per-test readouts", note: "Under construction", external: true },
     { href: "/bandwidth", title: "Test Bandwidth", subtitle: "MDE & capacity by page" },
   ];
 
   const data: Tile[] = [
     { href: "/shopify-funnels", title: "Shopify Data", subtitle: "Funnel drop-off · 357 · SF2 · RS1" },
     { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "CoC Data", subtitle: "357 & WPSS", note: "Under construction", external: true },
-    { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board", note: "Under construction" },
   ];
 
   const strategy: Tile[] = [
@@ -98,6 +97,7 @@ export default async function CoverPage() {
     { href: "/opportunities", title: "Opportunity Analysis", subtitle: "Ranked by contribution profit" },
     { href: "/shop-pay-installments", title: "Shop Pay Installments", subtitle: "Decision memo · pros & cons" },
     { href: "/q4-problem-statements", title: "Q4 Problem Statements", subtitle: "RS1 · SF2 · 357 · PG1 · SSP · Little Legends" },
+    { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board", note: "Under construction" },
   ];
 
   return (
@@ -133,7 +133,7 @@ export default async function CoverPage() {
       {/* Data section */}
       <section className="mb-10">
         <SectionHeader label="Data" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {data.map((t) => (
             <TileCard key={t.href} t={t} />
           ))}
