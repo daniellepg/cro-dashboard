@@ -56,7 +56,7 @@ function emptyGrid(): Grid {
   return DEFAULT_GRID.map((row) => [...row]);
 }
 
-export default function Q3ProblemStatementsPage() {
+export default function Q4ProblemStatementsPage() {
   const [grid, setGrid] = useState<Grid>(emptyGrid);
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved">("idle");
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -113,13 +113,13 @@ export default function Q3ProblemStatementsPage() {
     <div>
       <div className="mb-8">
         <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold mb-2">
-          Q3 · Strategy
+          Q4 · Strategy
         </div>
         <div className="flex items-end justify-between gap-4">
           <div>
             <h1 className="text-3xl font-semibold tracking-tight">Q4 Problem Statements</h1>
             <p className="text-sm text-[#8b95a7] mt-1.5">
-              One problem statement per funnel — the foundation for Q3 test planning.
+              One problem statement per funnel — the foundation for Q4 test planning.
             </p>
           </div>
           <div className="flex items-center gap-4 pb-1">
