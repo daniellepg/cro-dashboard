@@ -1,4 +1,4 @@
-import type { ClickUpTask } from "@/lib/clickup";
+import { isTopLevel, type ClickUpTask } from "@/lib/clickup";
 import { funnelFromName } from "@/lib/funnels";
 
 function formatDate(ms?: string | null) {
@@ -9,7 +9,7 @@ function formatDate(ms?: string | null) {
 }
 
 export function TaskTable({ tasks }: { tasks: ClickUpTask[] }) {
-  const parents = tasks.filter((t) => !t.name.includes(" | "));
+  const parents = tasks.filter(isTopLevel);
 
   if (parents.length === 0) {
     return (

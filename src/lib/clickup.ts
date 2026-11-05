@@ -17,8 +17,20 @@ export type ClickUpTask = {
   assignees: Array<{ id: number; username: string; profilePicture?: string | null }>;
   priority?: { priority: string; color: string } | null;
   tags?: Array<{ name: string }>;
-  custom_fields?: Array<{ id: string; name: string; value?: unknown }>;
+  custom_fields?: Array<{
+    id: string;
+    name: string;
+    value?: unknown;
+    type_config?: { options?: Array<{ id: string; label?: string; name?: string }> };
+  }>;
+  parent?: string | null;
 };
+
+// A real top-level task (not a subtask). Uses ClickUp's parent link;
+// task names with " | " are NOT subtasks, so don't filter on the name.
+export function isTopLevel(t: ClickUpTask): boolean {
+  return !t.parent;
+}
 
 type TaskFetchOpts = {
   statuses?: string[];
@@ -67,7 +79,7 @@ export async function fetchTasks(opts: TaskFetchOpts = {}): Promise<ClickUpTask[
 export async function countTasksByStatus(status: string): Promise<number> {
   try {
     const tasks = await fetchTasks({ statuses: [status] });
-    return tasks.filter((t) => !t.name.includes(" | ")).length;
+    return tasks.filter(isTopLevel).length;
   } catch {
     return 0;
   }
@@ -86,7 +98,7 @@ export const PRE_LIVE_STATUSES = [
 export async function countPreLiveTasks(): Promise<number> {
   try {
     const tasks = await fetchTasks({ statuses: [...PRE_LIVE_STATUSES] });
-    return tasks.filter((t) => !t.name.includes(" | ")).length;
+    return tasks.filter(isTopLevel).length;
   } catch {
     return 0;
   }

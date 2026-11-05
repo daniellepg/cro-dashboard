@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useCallback } from "react";
 import type { ClickUpTask } from "@/lib/clickup";
-import { FUNNELS, type FunnelCode } from "@/lib/funnels";
+import { FUNNELS, BUCKET_LABELS, type Bucket } from "@/lib/funnels";
 import { CRITERIA, blankRow, scoreOf, MAX_SCORE, type PxlRow, type CriterionKey } from "@/lib/criteria";
 
-type ByFunnel = Record<FunnelCode | "OTHER", ClickUpTask[]>;
+type ByFunnel = Record<Bucket, ClickUpTask[]>;
 
 // ── Status pill ─────────────────────────────────────────────────────────────
 const STATUS_COLORS: Record<string, string> = {
@@ -112,8 +112,8 @@ function LeadershipCell({ value, onChange }: { value: boolean; onChange: (v: boo
 
 // ── Main board ───────────────────────────────────────────────────────────────
 export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
-  const allCodes: (FunnelCode | "OTHER" | "ALL")[] = ["ALL", ...FUNNELS.map((f) => f.code), "OTHER"];
-  const [selected, setSelected] = useState<FunnelCode | "OTHER" | "ALL">("ALL");
+  const allCodes: (Bucket | "ALL")[] = ["ALL", ...FUNNELS.map((f) => f.code), "CROSS", "OTHER"];
+  const [selected, setSelected] = useState<Bucket | "ALL">("ALL");
 
   // PXL scores keyed by task ID, stored in localStorage
   const [scores, setScores] = useState<Record<string, PxlRow>>({});
@@ -143,8 +143,8 @@ export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
 
   const visibleFunnels =
     selected === "ALL"
-      ? (Object.keys(byFunnel) as (FunnelCode | "OTHER")[]).filter((k) => byFunnel[k].length > 0)
-      : [selected as FunnelCode | "OTHER"];
+      ? (Object.keys(byFunnel) as Bucket[]).filter((k) => byFunnel[k].length > 0)
+      : [selected as Bucket];
 
   return (
     <div>
@@ -163,7 +163,7 @@ export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
                   : "bg-white/[0.03] text-[#8b95a7] border-white/10 hover:border-[#FD3300]/40 hover:text-[#f4f5f7]"
               }`}
             >
-              {code} <span className="opacity-60 ml-1">{n}</span>
+              {code === "ALL" ? "ALL" : BUCKET_LABELS[code]} <span className="opacity-60 ml-1">{n}</span>
             </button>
           );
         })}
@@ -195,7 +195,7 @@ export function PrioritiesBoard({ byFunnel }: { byFunnel: ByFunnel }) {
           return (
             <section key={code}>
               <h2 className="text-lg font-medium mb-3">
-                {code}
+                {BUCKET_LABELS[code]}
                 <span className="text-[#5a6478] text-sm ml-2">({tasks.length})</span>
               </h2>
 

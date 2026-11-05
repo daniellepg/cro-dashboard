@@ -1,5 +1,5 @@
-import { fetchTasks, PRE_LIVE_STATUSES } from "@/lib/clickup";
-import { FUNNELS, funnelFromName, type FunnelCode } from "@/lib/funnels";
+import { fetchTasks, isTopLevel, PRE_LIVE_STATUSES } from "@/lib/clickup";
+import { FUNNELS, bucketForTask, type Bucket } from "@/lib/funnels";
 import { PrioritiesBoard } from "@/components/priorities-board";
 
 export const dynamic = "force-dynamic";
@@ -17,17 +17,13 @@ export default async function PrioritiesPage() {
     error = e instanceof Error ? e.message : String(e);
   }
 
-  const parents = tasks.filter((t) => !t.name.includes(" | "));
+  const parents = tasks.filter(isTopLevel);
 
-  const byFunnel: Record<FunnelCode | "OTHER", typeof parents> = Object.fromEntries(
-    [...FUNNELS.map((f) => f.code), "OTHER"].map((c) => [c, [] as typeof parents]),
-  ) as Record<FunnelCode | "OTHER", typeof parents>;
+  const byFunnel: Record<Bucket, typeof parents> = Object.fromEntries(
+    [...FUNNELS.map((f) => f.code), "CROSS", "OTHER"].map((c) => [c, [] as typeof parents]),
+  ) as Record<Bucket, typeof parents>;
 
-  for (const t of parents) {
-    const code = funnelFromName(t.name);
-    if (code) byFunnel[code].push(t);
-    else byFunnel.OTHER.push(t);
-  }
+  for (const t of parents) byFunnel[bucketForTask(t)].push(t);
 
   return (
     <div>
