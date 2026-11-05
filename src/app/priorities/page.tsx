@@ -1,6 +1,7 @@
 import { fetchTasks, isTopLevel, PRE_LIVE_STATUSES } from "@/lib/clickup";
 import { FUNNELS, bucketForTask, type Bucket } from "@/lib/funnels";
 import { PrioritiesBoard } from "@/components/priorities-board";
+import { RefreshButton } from "@/components/refresh-button";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +18,7 @@ export default async function PrioritiesPage() {
     error = e instanceof Error ? e.message : String(e);
   }
 
+  const fetchedAt = new Date().toISOString();
   const parents = tasks.filter(isTopLevel);
 
   const byFunnel: Record<Bucket, typeof parents> = Object.fromEntries(
@@ -27,7 +29,8 @@ export default async function PrioritiesPage() {
 
   return (
     <div>
-      <div className="mb-8">
+      <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
         <div className="text-[10px] tracking-[0.3em] text-[#FD3300] uppercase font-semibold mb-2">
           06 · Backlog
         </div>
@@ -35,6 +38,8 @@ export default async function PrioritiesPage() {
         <p className="text-sm text-[#8b95a7] mt-1.5">
           {`In progress · ${PIPELINE_STATUSES.join(" · ")} · live from ClickUp · excludes intake, backlog, blocked & live`}
         </p>
+        </div>
+        <RefreshButton fetchedAt={fetchedAt} />
       </div>
       {error ? (
         <div className="rounded-lg border border-rose-500/40 bg-rose-500/10 p-4">

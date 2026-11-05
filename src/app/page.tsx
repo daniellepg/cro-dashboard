@@ -86,6 +86,7 @@ export default async function CoverPage() {
   const data: Tile[] = [
     { href: "https://pg-domo-analytics-kg.vercel.app/paid-media/", title: "WoW Data by Funnel", subtitle: "Week-over-week · from Domo", note: "Work in progress", external: true },
     { href: "/kpis", title: "CRO Key KPIs", subtitle: "Monthly KPI board", note: "Work in progress" },
+    { href: "/shopify-funnels", title: "Shopify Funnel Drop-off", subtitle: "357 · SF2 · RS1 · desktop vs mobile" },
   ];
 
   const strategy: Tile[] = [
@@ -128,7 +129,7 @@ export default async function CoverPage() {
       {/* Data section */}
       <section className="mb-10">
         <SectionHeader label="Data" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {data.map((t) => (
             <TileCard key={t.href} t={t} />
           ))}

@@ -5,6 +5,9 @@ const WORKSPACE_ID = "9014714949";
 const FOLDER_ID    = "90147276572"; // performancegolf.clickup.com/…/v/b/f/90147276572
 const API = "https://api.clickup.com/api/v2";
 
+// Tag on every ClickUp fetch so a Refresh button can clear the cache on demand
+export const CLICKUP_CACHE_TAG = "clickup";
+
 export type ClickUpTask = {
   id: string;
   name: string;
@@ -59,7 +62,7 @@ export async function fetchTasks(opts: TaskFetchOpts = {}): Promise<ClickUpTask[
     const url = `${API}/team/${WORKSPACE_ID}/task?${params.toString()}`;
     const res = await fetch(url, {
       headers: { Authorization: token, "Content-Type": "application/json" },
-      next: { revalidate: 60 }, // 1-minute cache
+      next: { revalidate: 60, tags: [CLICKUP_CACHE_TAG] }, // 1-minute cache, clearable via Refresh
     });
 
     if (!res.ok) {
